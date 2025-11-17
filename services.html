@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="#" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="#" role="menuitem">About Us</a>
+              <a href="#" role="menuitem">Services</a>
+              <a href="#" role="menuitem">Pricing</a>
+              <a href="#" role="menuitem">FAQs</a>
+              <a href="" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="#" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#">Request a Sample</a>
+        <a class="btn btn-primary" href="#">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQs</a>
+            <a href="#">Our Team</a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="#">Contact</a></div>
+        <div class="item"><a class="main-link" href="#">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="#" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="#" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+
+<section class="about-hero services-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">Services</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- GRID -->
+    <section class="services-grid" id="servicesGrid">
+
+      <!-- 1 -->
+      <article class="service-card" data-delay="0">
+        <div class="service-media">
+          <img src="assets/iamges/custom .webp" alt="Custom Packaging" />
+        </div>
+        <div class="service-body">
+  <h3 class="service-title">
+    <a href="custom-packaging-solutions.html">
+      Custom Packaging Solutions
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    Premium tailored packaging for every industry with strong sustainable materials.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 2 -->
+      <article class="service-card" data-delay="80">
+        <div class="service-media">
+          <img src="assets/iamges/corguted.webp" alt="Corrugated Boxes" />
+        </div>
+        <div class="service-body">
+  <h3 class="service-title">
+    <a href="corrugated-box-manufacturing.html">
+      Corrugated Box Manufacturing
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    3-ply, 5-ply, and 7-ply corrugated boxes crafted for high durability.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 3 -->
+      <article class="service-card" data-delay="160">
+        <div class="service-media">
+          <img src="assets/iamges/ecofriendly (1).webp" alt="Eco Paper Products" />
+        </div>
+        <div class="service-body">
+  <h3 class="service-title">
+    <a href="eco-friendly-paper-products.html">
+      Eco-Friendly Paper Products
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    Biodegradable and recyclable paper products made from sustainable fiber.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 4 -->
+      <article class="service-card" data-delay="240">
+        <div class="service-media">
+          <img src="assets/iamges/industrial (1).webp" alt="Industrial Packaging" />
+        </div>
+       <div class="service-body">
+  <h3 class="service-title">
+    <a href="industrial-packaging-supplies.html">
+      Industrial Packaging Supplies
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    Kraft rolls, liners, and heavy-duty sheets for factories and logistics.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 5 -->
+      <article class="service-card" data-delay="320">
+        <div class="service-media">
+          <img src="assets/iamges/printed.webp" alt="Printed Packaging" />
+        </div>
+        <div class="service-body">
+  <h3 class="service-title">
+    <a href="printed-packaging-branding.html">
+      Printed Packaging & Branding
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    High-quality printing with professional designs that enhance brand identity.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 6 -->
+      <article class="service-card" data-delay="400">
+        <div class="service-media">
+          <img src="assets/iamges/cardboard box.webp" alt="Rigid Boxes" />
+        </div>
+       <div class="service-body">
+  <h3 class="service-title">
+    <a href="paperboard-cartons-rigid-boxes.html">
+      Paperboard Cartons & Rigid Boxes
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    Premium folding cartons for retail, luxury, and gifting industries.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 7 -->
+      <article class="service-card" data-delay="480">
+        <div class="service-media">
+          <img src="assets/iamges/protective.webp" alt="Protective Packaging" />
+        </div>
+      <div class="service-body">
+  <h3 class="service-title">
+    <a href="protective-packaging.html">Protective Packaging Solutions</a>
+  </h3>
+  <p class="service-desc">Honeycomb boards, cushioning materials, and edge guards for fragile products.</p>
+</div>
+
+      </article>
+
+      <!-- 8 -->
+      <article class="service-card" data-delay="560">
+        <div class="service-media">
+          <img src="assets/iamges/package research.webp" alt="R&D Packaging" />
+        </div>
+       <div class="service-body">
+  <h3 class="service-title">
+    <a href="packaging-research-development.html">Packaging Research & Development</a>
+  </h3>
+  <p class="service-desc">
+    Material testing and innovation to create future-ready packaging systems.
+  </p>
+</div>
+
+      </article>
+
+      <!-- 9 -->
+      <article class="service-card" data-delay="640">
+        <div class="service-media">
+          <img src="assets/iamges/supply.webp" alt="Supply Chain Optimization" />
+        </div>
+        <div class="service-body">
+  <h3 class="service-title">
+    <a href="supply-chain-packaging-optimization.html">
+      Supply Chain & Packaging Optimization
+    </a>
+  </h3>
+
+  <p class="service-desc">
+    Reduce costs, eliminate waste, and boost efficiency across your logistics workflow.
+  </p>
+</div>
+
+      </article>
+
+    </section>
+  </div>
+
+<!-- JS: IntersectionObserver to add .inview when stats scroll into view -->
+<script>
+  (function() {
+    const stats = document.querySelectorAll('#about-stats .stat');
+    if (!('IntersectionObserver' in window)) {
+      // fallback: reveal immediately
+      stats.forEach(s => s.classList.add('inview'));
+      return;
+    }
+
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('inview');
+          // small stagger
+          setTimeout(()=> {
+            // reveal next siblings nearby for stagger effect
+            const next = entry.target.nextElementSibling;
+            if (next && next.classList.contains('stat')) next.classList.add('inview');
+          }, 60);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    stats.forEach(s => io.observe(s));
+  })();
+</script>
+
+
+<div class="logo-marquee">
+  <div class="logo-track">
+    <img src="assets/iamges/marque1.webp" alt="">
+    <img src="assets/iamges/marque2.webp" alt="">
+    <img src="assets/iamges/marque3.webp" alt="">
+    <img src="assets/iamges/marque4.webp" alt="">
+    <img src="assets/iamges/marque5.webp" alt="">
+    <img src="assets/iamges/marque6.webp" alt="">
+    <img src="assets/iamges/marque7.webp" alt="">
+    <img src="assets/iamges/marque8.webp" alt="">
+    <img src="assets/iamges/marque9.webp" alt="">
+    <img src="assets/iamges/marque10.webp" alt="">
+
+    <!-- Duplicate for infinite smooth loop -->
+    <img src="assets/iamges/marque1.webp" alt="">
+    <img src="assets/iamges/marque2.webp" alt="">
+    <img src="assets/iamges/marque3.webp" alt="">
+    <img src="assets/iamges/marque4.webp" alt="">
+    <img src="assets/iamges/marque5.webp" alt="">
+    <img src="assets/iamges/marque6.webp" alt="">
+    <img src="assets/iamges/marque7.webp" alt="">
+    <img src="assets/iamges/marque8.webp" alt="">
+    <img src="assets/iamges/marque9.webp" alt="">
+    <img src="assets/iamges/marque10.webp" alt="">
+  </div>
+</div>
+
+
+
+
+
+<section class="testimonial-section">
+  <div class="testimonial-container">
+    <div class="testimonial-header">
+      <a href="#" class="view-more">See all case studies →</a>
+    </div>
+
+    <div class="testimonial-viewport" id="testimonialViewport">
+      <div class="testimonial-track" id="testimonialTrack">
+        <!-- Slide 1 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminals2.webp" alt="Testimonial 1">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Cosmetics & Personal Care</span>
+            <p class="quote">“Artwork Flow is a fantastic product with an amazing team behind it to support.”</p>
+            <h4 class="name">Leo Smirnov</h4>
+            <p class="role">Creative Director, stackly Healthcare Group</p>
+          </div>
+        </article>
+
+        <!-- Slide 2 (female) -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testimonails.webp" alt="Testimonial 2">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: FMCG</span>
+            <p class="quote">“Helped us speed up design approvals by 40%.”</p>
+            <h4 class="name">Riya Sharma</h4>
+            <p class="role">Brand Manager, Stackly India</p>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminals4.webp" alt="Testimonial 3">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Manufacturing</span>
+            <p class="quote">“Great workflow system and excellent service.”</p>
+            <h4 class="name">Amit Verma</h4>
+            <p class="role">Operations Head, stackly Solutions</p>
+          </div>
+        </article>
+
+        <!-- Slide 4 (female) -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testimonails3.webp" alt="Testimonial 4">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Retail</span>
+            <p class="quote">“Very reliable, smooth, and easy for teams.”</p>
+            <h4 class="name">Neha Kulkarni</h4>
+            <p class="role">Retail Director, stackly</p>
+          </div>
+        </article>
+
+        <!-- Slide 5 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminal5.webp" alt="Testimonial 5">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Logistics</span>
+            <p class="quote">“Boosted our packaging consistency massively.”</p>
+            <h4 class="name">Karan Singh</h4>
+            <p class="role">Logistics Lead, stackly</p>
+          </div>
+        </article>
+
+        <!-- Slide 6 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminal6.webp" alt="Testimonial 6">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Food & Beverages</span>
+            <p class="quote">“Fantastic results and seamless workflow.”</p>
+            <h4 class="name">Arjun Reddy</h4>
+            <p class="role">Production Lead, stackly</p>
+          </div>
+        </article>
+
+        <!-- the script will duplicate the first slide to create an infinite loop seamlessly -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+  
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="#home"     role="link">Home</a>
+        <a href="#about"    role="link">About Us</a>
+        <a href="#services" role="link">Services</a>
+        <a href="#work"     role="link">Work</a>
+        <a href="#contact"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <small>Request a bespoke quote for packaging, bulk or prototype runs.</small>
+        <button class="quote-btn" id="ppQuoteBtn">Get a Quote</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="#privacy" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Quote button focus behavior (customizable)
+  document.getElementById('ppQuoteBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    // if you have a modal or contact form, open it here; demo fallback:
+    const contactAnchor = document.querySelector('a[href="#contact"]');
+    if(contactAnchor) contactAnchor.click();
+    else alert('Open contact form or modal here.');
+  });
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+

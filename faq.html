@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="#" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="#" role="menuitem">About Us</a>
+              <a href="#" role="menuitem">Services</a>
+              <a href="#" role="menuitem">Pricing</a>
+              <a href="#" role="menuitem">FAQs</a>
+              <a href="" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="#" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#">Request a Sample</a>
+        <a class="btn btn-primary" href="#">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQs</a>
+            <a href="#">Our Team</a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="#">Contact</a></div>
+        <div class="item"><a class="main-link" href="#">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="#" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="#" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+
+<section class="about-hero faqs-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">Faq</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FAQ Accordion (Stackly dark + neon) -->
+<section class="faq-section" aria-labelledby="faq-title">
+  <div class="faq-wrap">
+    <h2 id="faq-title" class="faq-heading">FAQ — Coated SBS 350 GSM</h2>
+
+    <div class="faq-list">
+
+      <div class="faq-item" data-index="1">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">
+          <span>What is Coated SBS 350 GSM used for?</span>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </button>
+        <div id="faq-1" role="region" aria-labelledby="faq-q-1" class="faq-a" hidden>
+          <p>Coated SBS 350 GSM is ideal for premium packaging — cosmetics, luxury retail boxes, pharma cartons, and high-quality point-of-sale displays where print finish and stiffness matter.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-index="2">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">
+          <span>Is 350 GSM SBS suitable for printing?</span>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </button>
+        <div id="faq-2" role="region" aria-labelledby="faq-q-2" class="faq-a" hidden>
+          <p>Yes — SBS provides an excellent printing surface with sharp colours and consistent ink hold. It’s compatible with CMYK, spot colours, and premium finishing like UV and foil.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-index="3">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">
+          <span>Does 350 GSM SBS support finishing like foil or embossing?</span>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </button>
+        <div id="faq-3" role="region" aria-labelledby="faq-q-3" class="faq-a" hidden>
+          <p>Absolutely — foil stamping, embossing/debossing, soft-touch lamination, and spot UV are all supported on 350 GSM SBS. We recommend prototyping to confirm desired effects.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-index="4">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">
+          <span>Is SBS 350 GSM eco-friendly?</span>
+          <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+        </button>
+        <div id="faq-4" role="region" aria-labelledby="faq-q-4" class="faq-a" hidden>
+          <p>SBS is virgin-fiber board but it is recyclable and can be used with responsible sourcing. For higher recycled content, consider recycled duplex alternatives — we can advise on trade-offs between print finish and recycled content.</p>
+        </div>
+      </div>
+
+
+      <div class="faq-item" data-index="5">
+  <button class="faq-q" aria-expanded="false" aria-controls="faq-5" id="faq-q-5">
+    <span>What makes Coated SBS 350 GSM better than Duplex or Art Board?</span>
+    <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+    </svg>
+  </button>
+  <div id="faq-5" role="region" aria-labelledby="faq-q-5" class="faq-a" hidden>
+    <p>Coated SBS provides premium whiteness, smoothness, stiffness, and the best print quality compared to Duplex or Art Board — ideal for luxury and FMCG packaging.</p>
+  </div>
+</div>
+
+
+
+<div class="faq-item" data-index="6">
+  <button class="faq-q" aria-expanded="false" aria-controls="faq-6" id="faq-q-6">
+    <span>Can 350 GSM SBS handle rigid or heavy-duty packaging?</span>
+    <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+    </svg>
+  </button>
+  <div id="faq-6" role="region" aria-labelledby="faq-q-6" class="faq-a" hidden>
+    <p>Yes. Its structural strength supports premium cartons, rigid-style sleeves, and printed boxes. Add lamination or UV for increased durability.</p>
+  </div>
+</div>
+
+
+
+
+<div class="faq-item" data-index="7">
+  <button class="faq-q" aria-expanded="false" aria-controls="faq-7" id="faq-q-7">
+    <span>Is Coated SBS 350 GSM food-safe?</span>
+    <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+    </svg>
+  </button>
+  <div id="faq-7" role="region" aria-labelledby="faq-q-7" class="faq-a" hidden>
+    <p>Yes, when supplied with a food-safe or PE coating. It is commonly used for bakery, confectionery, pharma and dry food packaging.</p>
+  </div>
+</div>
+
+
+
+<div class="faq-item" data-index="8">
+  <button class="faq-q" aria-expanded="false" aria-controls="faq-8" id="faq-q-8">
+    <span>Which finishing options work best on 350 GSM SBS?</span>
+    <svg class="chev" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/>
+    </svg>
+  </button>
+  <div id="faq-8" role="region" aria-labelledby="faq-q-8" class="faq-a" hidden>
+    <p>It supports premium finishes including foil, emboss/deboss, matte or soft-touch lamination, and spot UV — thanks to its smooth coated surface.</p>
+  </div>
+</div>
+
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="contact-section" aria-labelledby="contact-title">
+  <div class="contact-wrap">
+    <h2 id="contact-title" class="contact-title">Let’s connect</h2>
+    <p class="contact-lead">Tell us about your project — size, quantity, finish, and timeline. We’ll reply within 1 business day.</p>
+
+    <!-- Change action to your API endpoint, e.g. /api/contact. If you don't have one, leave as "#" and the JS will use mailto fallback. -->
+    <form id="contactForm " class="contact-form neon-border" method="post" action="/contact" novalidate>
+      <div class="row">
+        <label for="name">Full name<span aria-hidden="true">*</span></label>
+        <input id="name" name="name" type="text" inputmode="text" required autocomplete="name" />
+        <small class="error" id="err-name" aria-live="polite"></small>
+      </div>
+
+      <div class="row">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" autocomplete="organization" />
+        <small class="error" id="err-company" aria-live="polite"></small>
+      </div>
+
+      <div class="row">
+        <label for="email">Email<span aria-hidden="true">*</span></label>
+        <input id="email" name="email" type="email" inputmode="email" required autocomplete="email" />
+        <small class="error" id="err-email" aria-live="polite"></small>
+      </div>
+
+      <div class="row">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" inputmode="tel" />
+        <small class="error" id="err-phone" aria-live="polite"></small>
+      </div>
+
+      <div class="row">
+        <label for="project">Project details (dimensions, qty, finish)</label>
+        <textarea id="project" name="project" rows="5" placeholder="e.g. 200 × 150 × 80 mm, 1000 pcs, CMYK + soft-touch"></textarea>
+        <small class="error" id="err-project" aria-live="polite"></small>
+      </div>
+
+      <div class="row two-col">
+        <div>
+          <label for="budget">Estimated budget</label>
+          <input id="budget" name="budget" type="text" placeholder="₹ / unit or total" />
+        </div>
+        <div>
+          <label for="date">Desired delivery</label>
+          <input id="date" name="date" type="date" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="checkbox">
+          <input id="consent" name="consent" type="checkbox" checked />
+          <span>Allow Stackly to contact me about this inquiry</span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn submit">Send inquiry</button>
+        <button type="button" id="mailtoBtn" class="btn ghost">Open email client</button>
+      </div>
+
+      <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
+
+
+
+<section class="testimonial-section">
+  <div class="testimonial-container">
+    <div class="testimonial-header">
+      <a href="#" class="view-more">See all case studies →</a>
+    </div>
+
+    <div class="testimonial-viewport" id="testimonialViewport">
+      <div class="testimonial-track" id="testimonialTrack">
+        <!-- Slide 1 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminals2.webp" alt="Testimonial 1">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Cosmetics & Personal Care</span>
+            <p class="quote">“Artwork Flow is a fantastic product with an amazing team behind it to support.”</p>
+            <h4 class="name">Leo Smirnov</h4>
+            <p class="role">Creative Director, stackly Healthcare Group</p>
+          </div>
+        </article>
+
+        <!-- Slide 2 (female) -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testimonails.webp" alt="Testimonial 2">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: FMCG</span>
+            <p class="quote">“Helped us speed up design approvals by 40%.”</p>
+            <h4 class="name">Riya Sharma</h4>
+            <p class="role">Brand Manager, Stackly India</p>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminals4.webp" alt="Testimonial 3">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Manufacturing</span>
+            <p class="quote">“Great workflow system and excellent service.”</p>
+            <h4 class="name">Amit Verma</h4>
+            <p class="role">Operations Head, stackly Solutions</p>
+          </div>
+        </article>
+
+        <!-- Slide 4 (female) -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testimonails3.webp" alt="Testimonial 4">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Retail</span>
+            <p class="quote">“Very reliable, smooth, and easy for teams.”</p>
+            <h4 class="name">Neha Kulkarni</h4>
+            <p class="role">Retail Director, stackly</p>
+          </div>
+        </article>
+
+        <!-- Slide 5 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminal5.webp" alt="Testimonial 5">
+              
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Logistics</span>
+            <p class="quote">“Boosted our packaging consistency massively.”</p>
+            <h4 class="name">Karan Singh</h4>
+            <p class="role">Logistics Lead, stackly</p>
+          </div>
+        </article>
+
+        <!-- Slide 6 -->
+        <article class="testimonial-card">
+          <div class="left">
+            <div class="photo-wrap">
+              <img src="assets/iamges/testiminal6.webp" alt="Testimonial 6">
+             
+              <div class="quote-mark">“</div>
+            </div>
+          </div>
+          <div class="right">
+            <span class="industry">Industry: Food & Beverages</span>
+            <p class="quote">“Fantastic results and seamless workflow.”</p>
+            <h4 class="name">Arjun Reddy</h4>
+            <p class="role">Production Lead, stackly</p>
+          </div>
+        </article>
+
+        <!-- the script will duplicate the first slide to create an infinite loop seamlessly -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+  
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="#home"     role="link">Home</a>
+        <a href="#about"    role="link">About Us</a>
+        <a href="#services" role="link">Services</a>
+        <a href="#work"     role="link">Work</a>
+        <a href="#contact"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <small>Request a bespoke quote for packaging, bulk or prototype runs.</small>
+        <button class="quote-btn" id="ppQuoteBtn">Get a Quote</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="#privacy" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Quote button focus behavior (customizable)
+  document.getElementById('ppQuoteBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    // if you have a modal or contact form, open it here; demo fallback:
+    const contactAnchor = document.querySelector('a[href="#contact"]');
+    if(contactAnchor) contactAnchor.click();
+    else alert('Open contact form or modal here.');
+  });
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+<script>
+
+    
+// FAQ Accordion: smooth height animation + accessible toggles
+(function(){
+  const list = document.querySelectorAll('.faq-item');
+  if(!list.length) return;
+
+  // Set to true if you want only one open at a time
+  const singleOpen = false;
+
+  list.forEach(item => {
+    const btn = item.querySelector('.faq-q');
+    const panel = item.querySelector('.faq-a');
+
+    // ensure panel has aria attributes correctly (hidden initially)
+    panel.hidden = true;
+
+    // click handler
+    btn.addEventListener('click', () => toggle(item, btn, panel));
+    // keyboard (Enter/Space)
+    btn.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle(item, btn, panel);
+      }
+    });
+  });
+
+  function toggle(item, btn, panel) {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+
+    if (isOpen) {
+      close(panel, btn);
+    } else {
+      if(singleOpen) {
+        // close others
+        document.querySelectorAll('.faq-item .faq-q[aria-expanded="true"]').forEach(openBtn=>{
+          const parent = openBtn.closest('.faq-item');
+          const openPanel = parent.querySelector('.faq-a');
+          close(openPanel, openBtn);
+        });
+      }
+      open(panel, btn);
+    }
+  }
+
+  function open(panel, btn) {
+    // prepare
+    panel.hidden = false;
+    const height = panel.scrollHeight;
+    panel.style.height = '0px';
+    panel.style.opacity = '0';
+    panel.classList.add('showing');
+
+    // force reflow before animating
+    requestAnimationFrame(() => {
+      panel.style.transition = 'height 320ms cubic-bezier(.22,.9,.3,1), opacity 220ms ease';
+      panel.style.height = height + 'px';
+      panel.style.opacity = '1';
+    });
+
+    // cleanup after animation
+    const tidy = () => {
+      panel.style.height = 'auto';
+      panel.style.transition = '';
+      panel.classList.remove('showing');
+      panel.removeEventListener('transitionend', tidy);
+    };
+    panel.addEventListener('transitionend', tidy);
+
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function close(panel, btn) {
+    // set fixed height then animate to 0
+    const height = panel.scrollHeight;
+    panel.style.height = height + 'px';
+    panel.style.opacity = '1';
+
+    requestAnimationFrame(() => {
+      panel.style.transition = 'height 260ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease';
+      panel.style.height = '0px';
+      panel.style.opacity = '0';
+    });
+
+    const tidy = () => {
+      panel.hidden = true;
+      panel.style.transition = '';
+      panel.style.height = '';
+      panel.style.opacity = '';
+      panel.removeEventListener('transitionend', tidy);
+    };
+    panel.addEventListener('transitionend', tidy);
+
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  // optional: reveal items on scroll with IntersectionObserver
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((e, i) => {
+      if(e.isIntersecting) {
+        e.target.style.transition = `opacity 420ms ease ${ (parseInt(e.target.dataset.index||0) * 60) }ms, transform 420ms cubic-bezier(.2,.9,.3,1) ${ (parseInt(e.target.dataset.index||0) * 60) }ms`;
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.faq-item').forEach((it, idx) => {
+    it.style.opacity = '0';
+    it.style.transform = 'translateY(8px)';
+    it.dataset.index = idx;
+    observer.observe(it);
+  });
+
+  // Respect reduced motion preference
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches) {
+    document.querySelectorAll('.faq-item').forEach(it => {
+      it.style.transition = 'none';
+      it.style.opacity = '1';
+      it.style.transform = 'none';
+    });
+  }
+
+})();
+
+
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+  
+  
+  <!-- team-grid section -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="#" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="aboutus.html" role="menuitem">About Us</a>
+              <a href="services.html" role="menuitem">Services</a>
+              <a href="pricing.html" role="menuitem">Pricing</a>
+              <a href="#" role="menuitem">FAQs</a>
+              <a href="" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="works.html" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="blog.html" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="blogdetails.html" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#">Request a Sample</a>
+        <a class="btn btn-primary" href="#">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQs</a>
+             <a href="#">Our Team </a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="#">Contact</a></div>
+        <div class="item"><a class="main-link" href="#">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="#" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="#" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+<section class="about-hero team-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">Our Team</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="team-section" aria-label="Our team">
+  <div class="team-grid">
+
+    <!-- 1 -->
+    <article class="team-card" aria-label="Rahul Sharma - Packaging Technologist">
+      <div class="team-img">
+        <img src="assets/iamges/team1 (1).webp" alt="Rahul Sharma">
+      </div>
+      <h4 class="team-name">Rahul Sharma</h4>
+      <div class="team-role">Packaging Technologist</div>
+      <div class="team-social">
+        <a href="#" aria-label="Rahul LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Rahul Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Rahul Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="team-card" aria-label="Aditi Verma - Product Design Lead">
+      <div class="team-img">
+        <img src="assets/iamges/team3.webp" alt="Aditi Verma">
+      </div>
+      <h4 class="team-name">Aditi Verma</h4>
+      <div class="team-role">Product Design Lead</div>
+      <div class="team-social">
+        <a href="#" aria-label="Aditi LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Aditi Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Aditi Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="team-card" aria-label="Sameer Khan - Material Innovation Expert">
+      <div class="team-img">
+        <img src="assets/iamges/team2.webp" alt="Sameer Khan">
+      </div>
+      <h4 class="team-name">Sameer Khan</h4>
+      <div class="team-role">Material Innovation Expert</div>
+      <div class="team-social">
+        <a href="#" aria-label="Sameer LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Sameer Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Sameer Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="team-card" aria-label="Priya Nair - Quality Control Head">
+      <div class="team-img">
+        <img src="assets/iamges/team4.webp" alt="Priya Nair">
+      </div>
+      <h4 class="team-name">Priya Nair</h4>
+      <div class="team-role">Quality Control Head</div>
+      <div class="team-social">
+        <a href="#" aria-label="Priya LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Priya Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Priya Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="team-card" aria-label="Anil Kumar - Production Manager">
+      <div class="team-img">
+        <img src="assets/iamges/team5.webp" alt="Anil Kumar">
+      </div>
+      <h4 class="team-name">Anil Kumar</h4>
+      <div class="team-role">Production Manager</div>
+      <div class="team-social">
+        <a href="#" aria-label="Anil LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Anil Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Anil Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="team-card" aria-label="Sneha Patil - Client Relations">
+      <div class="team-img">
+        <img src="assets/iamges/team6.webp" alt="Sneha Patil">
+      </div>
+      <h4 class="team-name">Sneha Patil</h4>
+      <div class="team-role">Client Relations</div>
+      <div class="team-social">
+        <a href="#" aria-label="Sneha LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Sneha Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Sneha Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="team-card" aria-label="Santosh Gavade - Supply Chain Lead">
+      <div class="team-img">
+        <img src="assets/iamges/team8.webp" alt="Santosh Gavade">
+      </div>
+      <h4 class="team-name">Santosh Gavade</h4>
+      <div class="team-role">Supply Chain Lead</div>
+      <div class="team-social">
+        <a href="#" aria-label="Santosh LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Santosh Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Santosh Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="team-card" aria-label="Meera Iyer - Brand Strategy">
+      <div class="team-img">
+        <img src="assets/iamges/team10.webp" alt="Meera Iyer">
+      </div>
+      <h4 class="team-name">Meera Iyer</h4>
+      <div class="team-role">Brand Strategy</div>
+      <div class="team-social">
+        <a href="#" aria-label="Meera LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Meera Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Meera Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="team-card" aria-label="Vikas Deshmukh - Packaging R&D Engineer">
+      <div class="team-img">
+        <img src="assets/iamges/team7.webp" alt="Vikas Deshmukh">
+      </div>
+      <h4 class="team-name">Vikas Deshmukh</h4>
+      <div class="team-role">Packaging R&amp;D Engineer</div>
+      <div class="team-social">
+        <a href="#" aria-label="Vikas LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Vikas Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Vikas Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<section class="why-team" aria-labelledby="why-team-title">
+  <div class="wrap">
+    <header class="why-header">
+      <h2 id="why-team-title">Why Our Team Stands Apart</h2>
+      <p class="lead">
+        At Stackly, our team blends decades of packaging experience with a relentless focus on sustainability, performance and client success. We design solutions that reduce cost, improve shelf impact and meet strict regulatory & environmental standards.
+      </p>
+    </header>
+
+    <div class="why-grid" role="list">
+      <article class="why-card" role="listitem" aria-label="Proven track record">
+        <div class="icon" aria-hidden="true">
+          <!-- Trophy SVG -->
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 2h8v2H8z" fill="#ffffff" opacity="0.06"/>
+            <path d="M7 6a1 1 0 0 0-1 1c0 2.2 1.7 4 3.8 4H8a1 1 0 0 0-1 1v3.2C7 16.8 8.2 18 9.6 18H14c1.4 0 2.6-1.2 2.6-2.8V15a1 1 0 0 0-1-1h-1.8C17.3 11 19 9.2 19 7a1 1 0 0 0-1-1H7z" fill="#0b1b2b"/>
+          </svg>
+        </div>
+        <h3>Proven Track Record</h3>
+        <p class="desc">Delivered 1,200+ custom packaging projects for FMCG, luxury & industrial brands — consistently meeting timelines and targets.</p>
+      </article>
+
+      <article class="why-card" role="listitem" aria-label="Sustainability-first design">
+        <div class="icon" aria-hidden="true">
+          <!-- Leaf SVG -->
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2c5 0 9 4 9 9 0 5-4 9-9 9s-9-4-9-9c0-5 4-9 9-9z" fill="#e9f6ef"/>
+            <path d="M7.6 12.8c1.7-2 4.3-3.8 7.2-4.1-.2 2.9-2.1 5.6-4.7 7.1-1.2-.9-2.5-1.7-2.5-3z" fill="#0b6036"/>
+          </svg>
+        </div>
+        <h3>Sustainability-first</h3>
+        <p class="desc">We prioritize recycled fibers and recyclable formats — reducing material use while maintaining structural integrity and premium finish.</p>
+      </article>
+
+      <article class="why-card" role="listitem" aria-label="Cross-disciplinary experts">
+        <div class="icon" aria-hidden="true">
+          <!-- Gear + people SVG -->
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="4" fill="#f2f7fb"/>
+            <path d="M9 9a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 9 9zm6 0a1.6 1.6 0 1 0 0-3.2A1.6 1.6 0 0 0 15 9z" fill="#0b1b2b"/>
+            <path d="M6 16c1.5-1.6 4-2.6 8-2.6s6.5 1 8 2.6v1H6v-1z" fill="#0b1b2b"/>
+          </svg>
+        </div>
+        <h3>Cross-disciplinary Experts</h3>
+        <p class="desc">R&D engineers, material scientists, structural designers and brand strategists collaborate on every brief — so design and manufacturability align from day one.</p>
+      </article>
+
+      <article class="why-card" role="listitem" aria-label="Measured performance">
+        <div class="icon" aria-hidden="true">
+          <!-- Chart SVG -->
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="4" fill="#eef6ff"/>
+            <path d="M6 16v-4h2v4H6zM10 16v-7h2v7h-2zM14 16V9h2v7h-2z" fill="#0b3a72"/>
+          </svg>
+        </div>
+        <h3>Measured Performance</h3>
+        <p class="desc">We validate strength, transit and shelf-life through lab testing and pilot runs — delivering predictable results at scale.</p>
+      </article>
+    </div>
+
+    <div class="why-cta">
+      <p class="small">Ready to reduce cost and boost shelf impact?</p>
+      <a class="btn-contact" href="/contact" role="button">Contact Our Experts</a>
+    </div>
+  </div>
+</section>
+<section class="achievements dark-theme">
+  <div class="ach-container">
+
+    <div class="ach-title-box">
+      <h2>Achievements & Milestones</h2>
+      <p>We take pride in measurable performance, sustained innovation, and long-term partnerships.</p>
+    </div>
+
+    <div class="ach-grid">
+
+      <div class="ach-card">
+        <div class="ach-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <h3 class="ach-number">1200+</h3>
+        <p class="ach-label">Projects Delivered</p>
+        <p class="ach-desc">Complete packaging solutions built end-to-end.</p>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-icon"><i class="fa-solid fa-building"></i></div>
+        <h3 class="ach-number">50+</h3>
+        <p class="ach-label">Brands Served</p>
+        <p class="ach-desc">Trusted by leading FMCG and manufacturing brands.</p>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-icon"><i class="fa-solid fa-recycle"></i></div>
+        <h3 class="ach-number">42%</h3>
+        <p class="ach-label">Recycled Materials</p>
+        <p class="ach-desc">Increasing sustainability across product lines.</p>
+      </div>
+
+      <div class="ach-card">
+        <div class="ach-icon"><i class="fa-solid fa-trophy"></i></div>
+        <h3 class="ach-number">7 Awards</h3>
+        <p class="ach-label">Industry Recognition</p>
+        <p class="ach-desc">Awarded for innovation, design & performance.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+<div class="logo-marquee">
+  <div class="logo-track">
+    <img src="assets/iamges/marque1.webp" alt="">
+    <img src="assets/iamges/marque2.webp" alt="">
+    <img src="assets/iamges/marque3.webp" alt="">
+    <img src="assets/iamges/marque4.webp" alt="">
+    <img src="assets/iamges/marque5.webp" alt="">
+    <img src="assets/iamges/marque6.webp" alt="">
+    <img src="assets/iamges/marque7.webp" alt="">
+    <img src="assets/iamges/marque8.webp" alt="">
+    <img src="assets/iamges/marque9.webp" alt="">
+    <img src="assets/iamges/marque10.webp" alt="">
+
+    <!-- Duplicate for infinite smooth loop -->
+    <img src="assets/iamges/marque1.webp" alt="">
+    <img src="assets/iamges/marque2.webp" alt="">
+    <img src="assets/iamges/marque3.webp" alt="">
+    <img src="assets/iamges/marque4.webp" alt="">
+    <img src="assets/iamges/marque5.webp" alt="">
+    <img src="assets/iamges/marque6.webp" alt="">
+    <img src="assets/iamges/marque7.webp" alt="">
+    <img src="assets/iamges/marque8.webp" alt="">
+    <img src="assets/iamges/marque9.webp" alt="">
+    <img src="assets/iamges/marque10.webp" alt="">
+  </div>
+</div>
+
+
+
+  
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="#home"     role="link">Home</a>
+        <a href="#about"    role="link">About Us</a>
+        <a href="#services" role="link">Services</a>
+        <a href="#work"     role="link">Work</a>
+        <a href="#contact"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <small>Request a bespoke quote for packaging, bulk or prototype runs.</small>
+        <button class="quote-btn" id="ppQuoteBtn">Get a Quote</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="#privacy" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Quote button focus behavior (customizable)
+  document.getElementById('ppQuoteBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    // if you have a modal or contact form, open it here; demo fallback:
+    const contactAnchor = document.querySelector('a[href="#contact"]');
+    if(contactAnchor) contactAnchor.click();
+    else alert('Open contact form or modal here.');
+  });
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+

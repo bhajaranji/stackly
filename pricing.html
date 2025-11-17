@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="#" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="#" role="menuitem">About Us</a>
+              <a href="#" role="menuitem">Services</a>
+              <a href="#" role="menuitem">Pricing</a>
+              <a href="#" role="menuitem">FAQs</a>
+              <a href="" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="#" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="#">Request a Sample</a>
+        <a class="btn btn-primary" href="#">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQs</a>
+            <a href="#">Our Team</a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="#" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="#">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="#">Contact</a></div>
+        <div class="item"><a class="main-link" href="#">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="#" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="#" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+
+<section class="about-hero pricing-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">Pricing</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+<section class="pricing dark-pricing">
+  <div class="pricing-wrap">
+    <h2>Pricing — Typical Tiers</h2>
+    <p class="sub">Transparent starting prices. Contact us for exact project-based quotes.</p>
+
+    <div class="pricing-grid">
+
+      <div class="tier">
+        <h3>Starter</h3>
+        <div class="price">₹55 <span>/ unit</span></div>
+        <ul>
+          <li>MOQ: 500</li>
+          <li>Kraft / 1-color print</li>
+          <li>No finishing</li>
+          <li>Lead time: 10–14 days</li>
+        </ul>
+        <a class="btn" href="/contact">Request Quote</a>
+      </div>
+
+      <div class="tier popular">
+        <h3>Business</h3>
+        <div class="price">₹45 <span>/ unit</span></div>
+        <ul>
+          <li>MOQ: 1,000</li>
+          <li>Recycled board / 2-color print</li>
+          <li>Lamination available</li>
+          <li>Lead time: 14–18 days</li>
+        </ul>
+        <a class="btn" href="/contact">Request Quote</a>
+      </div>
+
+      <div class="tier">
+        <h3>Premium</h3>
+        <div class="price">₹38 <span>/ unit</span></div>
+        <ul>
+          <li>MOQ: 5,000</li>
+          <li>Premium board / CMYK</li>
+          <li>Foil, soft-touch, emboss</li>
+          <li>Lead time: 18–25 days</li>
+        </ul>
+        <a class="btn" href="/contact">Request Quote</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+  <main class="container">
+    <section class="products" aria-labelledby="products-title">
+      <h2 id="products-title" class="section-title">Our Products</h2>
+
+      <div class="product-grid" role="list">
+
+        <!-- Repeat this .product-card for each product (9 items below) -->
+        <article class="product-card neon-border" role="listitem" aria-label="Kraft Paper - 300 GSM">
+          <div class="media">
+            <img src="assets/iamges/kraftpaper.webp" alt="Kraft Paper - 300 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Kraft Paper — 300 GSM</h3>
+            <p class="prod-meta">Strong, recyclable kraft — ideal for boxes & bags.</p>
+            <div class="prod-bottom">
+              <div class="price">₹45 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Kraft Paper to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Recycled Duplex — 250 GSM">
+          <div class="media">
+            <img src="assets/iamges/recycleacrdboard.webp" alt="Recycled Duplex — 250 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Recycled Duplex — 250 GSM</h3>
+            <p class="prod-meta">High-quality recycled board for printed packaging.</p>
+            <div class="prod-bottom">
+              <div class="price">₹58 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Recycled Duplex to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Coated SBS — 350 GSM">
+          <div class="media">
+            <img src="assets/iamges/coated (1).webp" alt="Coated SBS — 350 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Coated SBS — 350 GSM</h3>
+            <p class="prod-meta">Premium white board for luxury print finishes.</p>
+            <div class="prod-bottom">
+              <div class="price">₹92 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Coated SBS to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Kraft Liner — 200 GSM">
+          <div class="media">
+            <img src="assets/iamges/linaerpaper (1).webp" alt="Kraft Liner — 200 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Kraft Liner — 200 GSM</h3>
+            <p class="prod-meta">Good strength for inner layers and protective wraps.</p>
+            <div class="prod-bottom">
+              <div class="price">₹36 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Kraft Liner to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Greaseproof Paper">
+          <div class="media">
+            <img src="assets/iamges/gresea (1).webp" alt="Greaseproof Paper">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Greaseproof Paper</h3>
+            <p class="prod-meta">Food-safe barrier paper — bakery & FMCG use.</p>
+            <div class="prod-bottom">
+              <div class="price">₹28 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Greaseproof Paper to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Corrugated Flute C">
+          <div class="media">
+            <img src="assets/iamges/corugated.webp" alt="Corrugated Flute C">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Corrugated Flute C</h3>
+            <p class="prod-meta">Medium cushioning for retail shipments.</p>
+            <div class="prod-bottom">
+              <div class="price">₹62 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Corrugated Flute to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Coated Art Board — 300 GSM">
+          <div class="media">
+            <img src="assets/iamges/corguted.webp" alt="Coated Art Board — 300 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Coated Art Board — 300 GSM</h3>
+            <p class="prod-meta">High-gloss printing for POS and sleeves.</p>
+            <div class="prod-bottom">
+              <div class="price">₹105 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Coated Art Board to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Embossed Kraft — 320 GSM">
+          <div class="media">
+            <img src="assets/iamges/embrossed (1).webp" alt="Embossed Kraft — 320 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Embossed Kraft — 320 GSM</h3>
+            <p class="prod-meta">Textured finish for premium packaging appeal.</p>
+            <div class="prod-bottom">
+              <div class="price">₹128 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Embossed Kraft to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="product-card neon-border" role="listitem" aria-label="Seeded Paper — 180 GSM">
+          <div class="media">
+            <img src="assets/iamges/plantseeding.webp" alt="Seeded Paper — 180 GSM">
+          </div>
+          <div class="card-body">
+            <h3 class="prod-name">Seeded Paper — 180 GSM</h3>
+            <p class="prod-meta">Plantable seeded paper for sustainable branding.</p>
+            <div class="prod-bottom">
+              <div class="price">₹72 / unit</div>
+              <a class="btn add" href="/404" aria-label="Add Seeded Paper to cart">Add to cart</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+
+
+
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="#home"     role="link">Home</a>
+        <a href="#about"    role="link">About Us</a>
+        <a href="#services" role="link">Services</a>
+        <a href="#work"     role="link">Work</a>
+        <a href="#contact"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <small>Request a bespoke quote for packaging, bulk or prototype runs.</small>
+        <button class="quote-btn" id="ppQuoteBtn">Get a Quote</button>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="#" aria-label="Twitter">T</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+          <a href="#" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="#privacy" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Quote button focus behavior (customizable)
+  document.getElementById('ppQuoteBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    // if you have a modal or contact form, open it here; demo fallback:
+    const contactAnchor = document.querySelector('a[href="#contact"]');
+    if(contactAnchor) contactAnchor.click();
+    else alert('Open contact form or modal here.');
+  });
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
