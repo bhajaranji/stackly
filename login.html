@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Login / Signup</title>
+  <style>
+    :root{--bg:#faf7ff;--card:#ffffff;--muted:#6b6280;--accent:#6a00ff;--accent-2:#b26bff;--danger:#ef4444}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial;
+      background:linear-gradient(160deg,#0b0b0b,#0f1a0f,#0b0b0b);
+      color:#ffffff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+      padding:0;
+    }
+    .center{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
+
+    .auth-wrap{display:grid;grid-template-columns:420px 360px;gap:28px;align-items:center}
+    .brand-panel{
+        background:linear-gradient(145deg,#0a0a0a,#131313);
+        border-radius:14px;
+        padding:28px;
+        display:flex;
+        flex-direction:column;
+        gap:18px;
+        align-items:center;
+        box-shadow:0 12px 32px rgba(199,244,100,0.15);
+        color:#ffffff;
+        border:1px solid rgba(199,244,100,0.25);
+    }
+    .brand-panel img.logo{width:84px;height:84px;object-fit:contain;border-radius:12px}
+    .brand-panel h1{margin:0;font-size:20px}
+    .brand-panel p{margin:0;color:#e8ffcb}
+    .benefits{margin-top:6px;width:100%}
+    .benefits li{
+  color:#e8ffcb;
+  margin:8px 0;
+  padding-left:18px;
+  position:relative;
+}
+
+
+    .benefits li:before{content:'•';position:absolute;left:0;color:var(--accent-2);font-weight:800}
+
+    .card{
+  background:linear-gradient(145deg,#0a0a0a,#131313);
+  border-radius:14px;
+  padding:24px;
+  border:1px solid rgba(199,244,100,0.25);
+  box-shadow:0 12px 32px rgba(199,244,100,0.25);
+  width:100%;
+  max-width:420px;
+  color:#ffffff;
+}
+
+    .tabs{display:flex;gap:8px;margin-bottom:14px}
+    .tab{flex:1;padding:10px;border-radius:10px;text-align:center;cursor:pointer;font-weight:700;background:#f8faf8;border:1px solid rgba(15,23,42,0.04)}
+    .tab.active{
+      background:rgba(199,244,100,0.15);
+      border-color:rgba(199,244,100,0.35);
+      color:#ccff99;
+    }
+
+    form{display:flex;flex-direction:column;gap:12px}
+    label{font-size:13px;color:var(--muted)}
+    .input{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.18);
+      background:#0f0f0f;
+      color:#ffffff;
+      font-size:15px;
+    }
+    .input:focus{
+      outline:none;
+      box-shadow:0 0 12px rgba(199,244,100,0.45);
+      border-color:rgba(199,244,100,0.65);
+    }
+
+    .row{display:flex;gap:10px}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer}
+    .btn.ghost{background:#fff;color:var(--accent);border:1px solid rgba(15,23,42,0.06)}
+
+    .muted{color:var(--muted);font-size:13px}
+    .actions{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+    .link{color:var(--accent);cursor:pointer;font-weight:600}
+
+    .error{color:var(--danger);font-size:13px;margin-top:4px}
+    .hint{font-size:13px;color:#0f5132}
+
+    .pwd-strength{height:8px;border-radius:8px;background:#f1f5f9;overflow:hidden}
+    .pwd-strength > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#f97316,#16a34a);transition:width .28s}
+
+    /* modal (simple) */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:120}
+    .modal{background:#fff;padding:18px;border-radius:12px;max-width:480px;width:100%;box-shadow:0 20px 60px rgba(2,6,23,0.3)}
+
+    .social-btn {
+  display:block;
+  width:50%;
+  padding:12px 16px;
+  border-radius:20px;
+  background:black;
+  color:yellowgreen;
+  font-weight:600;
+  text-align:center;
+  text-decoration:none;
+  border:1px solid #ccc;
+  transition:0.25s ease;
+}
+
+.social-btn:hover {
+    color:yellowgreen;
+    background: black;
+  transform:translateY(-3px);
+  box-shadow:0 6px 16px rgba(0,0,0,0.15);
+}
+
+
+.tab {
+  padding: 10px 18px;
+  background: black;
+  color: yellowgreen;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* Active tab */
+.tab.active {
+  background: yellowgreen;
+  color: black;
+}
+
+
+    /* responsive */
+    @media (max-width:980px){
+      .auth-wrap{grid-template-columns:1fr;max-width:520px;width:100%}
+      .brand-panel{order:2}
+    }
+
+    /* small niceties */
+    .or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px}
+    .or:before,.or:after{content:'';height:1px;background:rgba(15,23,42,0.04);flex:1}
+
+    .socials{display:flex;gap:8px}
+    .socials button{flex:1;padding:9px 10px;border-radius:10px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* success toast */
+    .toast{position:fixed;right:18px;bottom:18px;background:#0f5132;color:#fff;padding:12px 14px;border-radius:10px;box-shadow:0 8px 30px rgba(15,23,42,0.12);display:none}
+
+  </style>
+</head>
+<body>
+
+  <div class="center">
+    <div class="auth-wrap" role="main">
+
+      <aside class="brand-panel" aria-hidden="false">
+        <img src="assets/iamges/logo4.jpg" alt="Stackly logo" class="logo" />
+        <h1>Stackly</h1>
+        <p class="muted">Paper & Packaging — secure admin access</p>
+
+        <ul class="benefits" aria-hidden>
+          <li>Fast & secure sign in</li>
+          <li>Manage orders, production & inventory</li>
+          <li>Simple team access controls</li>
+        </ul>
+
+        <div style="margin-top:auto;font-size:13px;color:var(--muted)">Need help? contact@stackly.example</div>
+      </aside>
+
+      <section class="card" aria-labelledby="authTitle">
+        <div class="tabs" role="tablist">
+          <div class="tab active" role="tab" aria-selected="true" id="tabLogin">Login</div>
+          <div class="tab" role="tab" id="tabSignup">Sign up</div>
+        </div>
+
+        <h2 id="authTitle" style="margin:0 0 6px">Access your account</h2>
+        <p class="muted" id="authSub">Securely sign in to manage Stackly operations</p>
+
+        <!-- LOGIN -->
+        <form id="formLogin" novalidate>
+          <div>
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" name="email" type="email" class="input" placeholder="you@company.com" required aria-required="true" />
+            <div id="loginEmailErr" class="error" aria-live="polite"></div>
+          </div>
+
+          <div>
+            <label for="loginPwd">Password</label>
+            <input id="loginPwd" name="password" type="password" class="input" placeholder="••••••••" required aria-required="true" />
+            <div id="loginPwdErr" class="error" aria-live="polite"></div>
+          </div>
+
+          <div class="actions">
+            <label style="display:flex;align-items:center;gap:8px"><input type="checkbox" id="remember" /> <span class="muted">Remember me</span></label>
+            <button type="button" class="link" id="openForgot">Forgot?</button>
+          </div>
+
+          <button class="btn" id="loginBtn" type="submit">Sign in</button>
+
+          <div class="or" style="margin-top:6px">or</div>
+
+         <div class="socials" aria-hidden>
+  <a href="404page.html" class="social-btn">Continue with Google</a>
+  <a href="404page.html" class="social-btn">Continue with GitHub</a>
+</div>
+
+
+          <p class="small" style="margin-top:8px">Don't have an account? <span class="link" id="toSignup">Create one</span></p>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="formSignup" novalidate style="display:none">
+          <div>
+            <label for="suName">Full name</label>
+            <input id="suName" name="name" type="text" class="input" placeholder="Jane Doe" required aria-required="true" />
+            <div id="suNameErr" class="error" aria-live="polite"></div>
+          </div>
+
+          <div>
+            <label for="suEmail">Email</label>
+            <input id="suEmail" name="email" type="email" class="input" placeholder="you@company.com" required aria-required="true" />
+            <div id="suEmailErr" class="error" aria-live="polite"></div>
+          </div>
+
+          <div class="row">
+            <div style="flex:1">
+              <label for="suPwd">Password</label>
+              <input id="suPwd" name="password" type="password" class="input" placeholder="Minimum 8 characters" required aria-required="true" />
+              <div class="pwd-strength" aria-hidden><i id="pwdBar"></i></div>
+              <div id="suPwdErr" class="error" aria-live="polite"></div>
+            </div>
+
+            <div style="flex:1">
+              <label for="suPwd2">Confirm</label>
+              <input id="suPwd2" name="confirm" type="password" class="input" placeholder="Repeat password" required aria-required="true" />
+              <div id="suPwd2Err" class="error" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div>
+            <label for="suPhone">Phone (optional)</label>
+            <input id="suPhone" name="phone" type="tel" class="input" placeholder="+91 98765 43210" />
+            <div id="suPhoneErr" class="error" aria-live="polite"></div>
+          </div>
+
+          <label style="display:flex;gap:8px;align-items:center"><input id="agreeTos" type="checkbox" /> <span class="muted">I agree to the Terms & Privacy</span></label>
+          <div id="agreeErr" class="error" aria-live="polite"></div>
+
+          <button class="btn" id="signupBtn" type="submit">Create account</button>
+
+          <p class="small" style="margin-top:8px">Already have an account? <span class="link" id="toLogin">Sign in</span></p>
+        </form>
+
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Forgot password modal -->
+  <div class="modal-backdrop" id="modalForgot" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <h3 style="margin:0 0 8px">Forgot password</h3>
+      <p class="muted" style="margin:0 0 12px">Enter your account email and we'll send a secure reset link.</p>
+      <form id="formForgot" novalidate>
+        <label for="fpEmail">Email</label>
+        <input id="fpEmail" name="email" type="email" class="input" placeholder="you@company.com" required aria-required="true" />
+        <div id="fpEmailErr" class="error" aria-live="polite"></div>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+          <button type="button" class="btn ghost" id="closeForgot">Cancel</button>
+          <button type="submit" class="btn">Send reset</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      // elements
+      const tabLogin = document.getElementById('tabLogin');
+      const tabSignup = document.getElementById('tabSignup');
+      const formLogin = document.getElementById('formLogin');
+      const formSignup = document.getElementById('formSignup');
+      const toSignup = document.getElementById('toSignup');
+      const toLogin = document.getElementById('toLogin');
+
+      const loginEmail = document.getElementById('loginEmail');
+      const loginPwd = document.getElementById('loginPwd');
+      const loginEmailErr = document.getElementById('loginEmailErr');
+      const loginPwdErr = document.getElementById('loginPwdErr');
+
+      const suName = document.getElementById('suName');
+      const suEmail = document.getElementById('suEmail');
+      const suPwd = document.getElementById('suPwd');
+      const suPwd2 = document.getElementById('suPwd2');
+      const suPhone = document.getElementById('suPhone');
+      const agreeTos = document.getElementById('agreeTos');
+
+      const suNameErr = document.getElementById('suNameErr');
+      const suEmailErr = document.getElementById('suEmailErr');
+      const suPwdErr = document.getElementById('suPwdErr');
+      const suPwd2Err = document.getElementById('suPwd2Err');
+      const suPhoneErr = document.getElementById('suPhoneErr');
+      const agreeErr = document.getElementById('agreeErr');
+
+      const pwdBar = document.getElementById('pwdBar');
+
+      const modalForgot = document.getElementById('modalForgot');
+      const openForgot = document.getElementById('openForgot');
+      const closeForgot = document.getElementById('closeForgot');
+      const formForgot = document.getElementById('formForgot');
+      const fpEmail = document.getElementById('fpEmail');
+      const fpEmailErr = document.getElementById('fpEmailErr');
+
+      const toast = document.getElementById('toast');
+
+      // utils
+      function showToast(msg){ toast.textContent = msg; toast.style.display = 'block'; setTimeout(()=>toast.style.display='none', 3200); }
+
+      function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+      function isPhone(v){ return /^\+?[0-9 \-]{7,20}$/.test(v); }
+
+      function passwordScore(p){
+        let score = 0;
+        if (p.length >= 8) score += 1;
+        if (/[A-Z]/.test(p)) score += 1;
+        if (/[0-9]/.test(p)) score += 1;
+        if (/[^A-Za-z0-9]/.test(p)) score += 1;
+        return Math.min(4, score);
+      }
+
+      function setPwdBar(score){ const pct = (score/4)*100 + '%'; pwdBar.style.width = pct; }
+
+      // tab switching
+      function showLogin(){ tabLogin.classList.add('active'); tabSignup.classList.remove('active'); formLogin.style.display='block'; formSignup.style.display='none'; }
+      function showSignup(){ tabSignup.classList.add('active'); tabLogin.classList.remove('active'); formSignup.style.display='block'; formLogin.style.display='none'; }
+
+      tabLogin.addEventListener('click', showLogin);
+      tabSignup.addEventListener('click', showSignup);
+      toSignup.addEventListener('click', showSignup);
+      toLogin.addEventListener('click', showLogin);
+
+      // live password strength
+      suPwd.addEventListener('input', ()=>{ const s = passwordScore(suPwd.value); setPwdBar(s); });
+
+      // LOGIN validation
+      formLogin.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        let ok = true;
+        loginEmailErr.textContent = '';
+        loginPwdErr.textContent = '';
+
+        if (!isEmail(loginEmail.value.trim())){ loginEmailErr.textContent = 'Please enter a valid email'; ok = false; }
+        if (loginPwd.value.trim().length < 6){ loginPwdErr.textContent = 'Password required (min 6)'; ok = false; }
+
+        if (!ok) return;
+
+        // NOTE: Replace with real API call
+        showToast('Signed in (demo) — redirecting...');
+        setTimeout(()=>{ console.log('LOGIN OK — send to server'); }, 600);
+      });
+
+      // SIGNUP validation
+      formSignup.addEventListener('submit', (e)=>{
+        e.preventDefault();
+        let ok = true;
+        suNameErr.textContent = '';
+        suEmailErr.textContent = '';
+        suPwdErr.textContent = '';
+        suPwd2Err.textContent = '';
+        suPhoneErr.textContent = '';
+        agreeErr.textContent = '';
+
+        if (!suName.value.trim() || suName.value.trim().length < 2){ suNameErr.textContent = 'Enter your full name'; ok = false; }
+        if (!isEmail(suEmail.value.trim())){ suEmailErr.textContent = 'Enter a valid email'; ok = false; }
+
+        const pwd = suPwd.value || '';
+        const pwd2 = suPwd2.value || '';
+        if (pwd.length < 8){ suPwdErr.textContent = 'Password must be at least 8 characters'; ok = false; }
+        if (pwd !== pwd2){ suPwd2Err.textContent = 'Passwords do not match'; ok = false; }
+
+        if (suPhone.value.trim() && !isPhone(suPhone.value.trim())){ suPhoneErr.textContent = 'Enter a valid phone number'; ok = false; }
+        if (!agreeTos.checked){ agreeErr.textContent = 'You must accept terms'; ok = false; }
+
+        if (!ok) return;
+
+        // NOTE: Replace with real API call
+        showToast('Account created (demo) — check email to verify.');
+        setTimeout(()=>{ console.log('SIGNUP OK — send to server'); }, 600);
+      });
+
+      // FORGOT modal
+      openForgot.addEventListener('click', ()=>{ modalForgot.style.display='flex'; modalForgot.setAttribute('aria-hidden','false'); fpEmail.focus(); });
+      closeForgot.addEventListener('click', ()=>{ modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value=''; fpEmailErr.textContent=''; });
+      modalForgot.addEventListener('click', (ev)=>{ if (ev.target === modalForgot) { modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); } });
+
+      formForgot.addEventListener('submit', (e)=>{
+        e.preventDefault(); fpEmailErr.textContent='';
+        if (!isEmail(fpEmail.value.trim())){ fpEmailErr.textContent = 'Enter a valid email'; return; }
+        // simulate sending
+        showToast('Password reset link sent (demo)');
+        modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value='';
+      });
+
+      // small accessibility: press Enter on elements with role=tab
+      [tabLogin, tabSignup].forEach(t=> t.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') t.click(); }));
+
+      // initial state
+      showLogin();
+
+    })();
+  </script>
+</body>
+</html>

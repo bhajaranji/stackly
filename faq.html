@@ -20,45 +20,45 @@
       <nav class="nav-desktop" aria-label="Primary navigation">
         <ul>
           <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <a href="index.html" aria-haspopup="true" aria-expanded="false">Home ▾</a>
             <div class="dropdown" role="menu" aria-label="Home submenu">
-              <a href="#" role="menuitem">Home 1</a>
+              <a href="home1.html" role="menuitem">Home 1</a>
             </div>
           </li>
 
           <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <a href="index.html" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
             <div class="dropdown" role="menu" aria-label="Pages submenu">
-              <a href="#" role="menuitem">About Us</a>
-              <a href="#" role="menuitem">Services</a>
-              <a href="#" role="menuitem">Pricing</a>
-              <a href="#" role="menuitem">FAQs</a>
-              <a href="" role="menuitem">Our Team</a>
+              <a href="aboutus.html" role="menuitem">About Us</a>
+              <a href="services.html" role="menuitem">Services</a>
+              <a href="pricing.html" role="menuitem">Pricing</a>
+              <a href="faq.html" role="menuitem">FAQs</a>
+              <a href="ourteam.html" role="menuitem">Our Team</a>
             </div>
           </li>
 
           <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Works </a>
+            <a href="works.html" aria-haspopup="true" aria-expanded="false">Works </a>
            
           </li>
 
           <li class="has-dropdown">
-            <a href="#" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <a href="blog.html" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
             <div class="dropdown" role="menu" aria-label="Blogs submenu">
-              <a href="#" role="menuitem">Blog Detail</a>
+              <a href="blogdetails.html" role="menuitem">Blog Detail</a>
               
             </div>
           </li>
 
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Dashboard</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
         </ul>
       </nav>
 
       <!-- Right-side actions -->
       <div class="nav-actions">
-        <a class="btn btn-ghost" href="#">Request a Sample</a>
-        <a class="btn btn-primary" href="#">Get Started</a>
+        <a class="btn btn-ghost" href="404page.html">Request a Sample</a>
+        <a class="btn btn-primary" href="login.html">Get Started</a>
       </div>
 
       <!-- Centered hamburger (mobile) -->
@@ -83,7 +83,7 @@
             <span class="chev">▾</span>
           </a>
           <div class="submenu">
-            <a href="#">Home 1</a>
+            <a href="home1.html">Home 1</a>
           </div>
         </div>
 
@@ -94,11 +94,11 @@
             <span class="chev">▾</span>
           </a>
           <div class="submenu">
-            <a href="#">About Us</a>
-            <a href="#">Services</a>
-            <a href="#">Pricing</a>
-            <a href="#">FAQs</a>
-            <a href="#">Our Team</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="faq.html">FAQs</a>
+            <a href="ourteam.html">Our Team</a>
           </div>
         </div>
 
@@ -113,29 +113,28 @@
 
         <!-- Blogs -->
         <div class="item">
-          <a class="main-link" href="#" data-toggle>
+          <a class="main-link" href="blog.html" data-toggle>
             <span>Blogs</span>
             <span class="chev">▾</span>
           </a>
           <div class="submenu">
-            <a href="#">Blog Detail</a>
+            <a href="blogdetails.html">Blog Detail</a>
             
           </div>
         </div>
 
         <!-- Contact & Dashboard single -->
-        <div class="item"><a class="main-link" href="#">Contact</a></div>
-        <div class="item"><a class="main-link" href="#">Dashboard</a></div>
+        <div class="item"><a class="main-link" href="contact.html">Contact</a></div>
+        <div class="item"><a class="main-link" href="dashboard.html">Dashboard</a></div>
 
         <!-- CTA -->
         <div style="margin-top:18px; display:flex; gap:10px;">
-          <a class="btn btn-ghost" href="#" style="flex:1; justify-content:center;">Request a Sample</a>
-          <a class="btn btn-primary" href="#" style="flex:1; justify-content:center;">Get Started</a>
+          <a class="btn btn-ghost" href="404page.html" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="login.html" style="flex:1; justify-content:center;">Get Started</a>
         </div>
       </nav>
     </div>
   </div>
-
 
 
 <section class="about-hero faqs-bg">
@@ -255,74 +254,6 @@
 
 
     </div>
-  </div>
-</section>
-
-
-
-
-<section class="contact-section" aria-labelledby="contact-title">
-  <div class="contact-wrap">
-    <h2 id="contact-title" class="contact-title">Let’s connect</h2>
-    <p class="contact-lead">Tell us about your project — size, quantity, finish, and timeline. We’ll reply within 1 business day.</p>
-
-    <!-- Change action to your API endpoint, e.g. /api/contact. If you don't have one, leave as "#" and the JS will use mailto fallback. -->
-    <form id="contactForm " class="contact-form neon-border" method="post" action="/contact" novalidate>
-      <div class="row">
-        <label for="name">Full name<span aria-hidden="true">*</span></label>
-        <input id="name" name="name" type="text" inputmode="text" required autocomplete="name" />
-        <small class="error" id="err-name" aria-live="polite"></small>
-      </div>
-
-      <div class="row">
-        <label for="company">Company</label>
-        <input id="company" name="company" type="text" autocomplete="organization" />
-        <small class="error" id="err-company" aria-live="polite"></small>
-      </div>
-
-      <div class="row">
-        <label for="email">Email<span aria-hidden="true">*</span></label>
-        <input id="email" name="email" type="email" inputmode="email" required autocomplete="email" />
-        <small class="error" id="err-email" aria-live="polite"></small>
-      </div>
-
-      <div class="row">
-        <label for="phone">Phone</label>
-        <input id="phone" name="phone" type="tel" inputmode="tel" />
-        <small class="error" id="err-phone" aria-live="polite"></small>
-      </div>
-
-      <div class="row">
-        <label for="project">Project details (dimensions, qty, finish)</label>
-        <textarea id="project" name="project" rows="5" placeholder="e.g. 200 × 150 × 80 mm, 1000 pcs, CMYK + soft-touch"></textarea>
-        <small class="error" id="err-project" aria-live="polite"></small>
-      </div>
-
-      <div class="row two-col">
-        <div>
-          <label for="budget">Estimated budget</label>
-          <input id="budget" name="budget" type="text" placeholder="₹ / unit or total" />
-        </div>
-        <div>
-          <label for="date">Desired delivery</label>
-          <input id="date" name="date" type="date" />
-        </div>
-      </div>
-
-      <div class="row">
-        <label class="checkbox">
-          <input id="consent" name="consent" type="checkbox" checked />
-          <span>Allow Stackly to contact me about this inquiry</span>
-        </label>
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" class="btn submit">Send inquiry</button>
-        <button type="button" id="mailtoBtn" class="btn ghost">Open email client</button>
-      </div>
-
-      <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
-    </form>
   </div>
 </section>
 
@@ -450,9 +381,7 @@
 
 
 
-
-
-
+  
   
 <footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
   <div class="pp-footer-inner pp-animate" id="ppFooterInner">
@@ -462,11 +391,11 @@
       <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
 
       <nav class="pp-nav" aria-label="Footer primary">
-        <a href="#home"     role="link">Home</a>
-        <a href="#about"    role="link">About Us</a>
-        <a href="#services" role="link">Services</a>
-        <a href="#work"     role="link">Work</a>
-        <a href="#contact"  role="link">Contact</a>
+        <a href="index.html"     role="link">Home</a>
+        <a href="aboutus.html"    role="link">About Us</a>
+        <a href="services.html" role="link">Services</a>
+        <a href="works.html"     role="link">Work</a>
+        <a href="contact.html"  role="link">Contact</a>
       </nav>
     </div>
 
@@ -476,8 +405,9 @@
         <small>Mon–Fri • 9:00–18:00 IST</small>
       </div>
       <div>
-        <small>Request a bespoke quote for packaging, bulk or prototype runs.</small>
-        <button class="quote-btn" id="ppQuoteBtn">Get a Quote</button>
+       <h4>Request a bespoke quote for packaging, bulk or prototype runs.</h4>
+       <a href="404page.html" class="quote-btn" id="ppQuoteBtn">Get a Quote</a>
+
       </div>
 
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
@@ -487,9 +417,9 @@
         </div>
 
         <div class="pp-social" aria-hidden="false">
-          <a href="#" aria-label="Twitter">T</a>
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="Instagram">IG</a>
+          <a href="404page.html" aria-label="Twitter">T</a>
+          <a href="404page.html" aria-label="LinkedIn">in</a>
+          <a href="404page.html" aria-label="Instagram">IG</a>
         </div>
       </div>
     </aside>
@@ -506,6 +436,8 @@
   <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
 </footer>
 
+
+
 <script>
   // set year
   document.getElementById('ppYear').textContent = new Date().getFullYear();
@@ -518,14 +450,7 @@
   });
   topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 
-  // Quote button focus behavior (customizable)
-  document.getElementById('ppQuoteBtn').addEventListener('click', (e) => {
-    e.preventDefault();
-    // if you have a modal or contact form, open it here; demo fallback:
-    const contactAnchor = document.querySelector('a[href="#contact"]');
-    if(contactAnchor) contactAnchor.click();
-    else alert('Open contact form or modal here.');
-  });
+ 
 
   // IntersectionObserver for in-view entrance animations
   (function(){
@@ -536,138 +461,6 @@
     }, {threshold: 0.12});
     document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
   })();
-</script>
-
-<script>
-
-    
-// FAQ Accordion: smooth height animation + accessible toggles
-(function(){
-  const list = document.querySelectorAll('.faq-item');
-  if(!list.length) return;
-
-  // Set to true if you want only one open at a time
-  const singleOpen = false;
-
-  list.forEach(item => {
-    const btn = item.querySelector('.faq-q');
-    const panel = item.querySelector('.faq-a');
-
-    // ensure panel has aria attributes correctly (hidden initially)
-    panel.hidden = true;
-
-    // click handler
-    btn.addEventListener('click', () => toggle(item, btn, panel));
-    // keyboard (Enter/Space)
-    btn.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle(item, btn, panel);
-      }
-    });
-  });
-
-  function toggle(item, btn, panel) {
-    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-    if (isOpen) {
-      close(panel, btn);
-    } else {
-      if(singleOpen) {
-        // close others
-        document.querySelectorAll('.faq-item .faq-q[aria-expanded="true"]').forEach(openBtn=>{
-          const parent = openBtn.closest('.faq-item');
-          const openPanel = parent.querySelector('.faq-a');
-          close(openPanel, openBtn);
-        });
-      }
-      open(panel, btn);
-    }
-  }
-
-  function open(panel, btn) {
-    // prepare
-    panel.hidden = false;
-    const height = panel.scrollHeight;
-    panel.style.height = '0px';
-    panel.style.opacity = '0';
-    panel.classList.add('showing');
-
-    // force reflow before animating
-    requestAnimationFrame(() => {
-      panel.style.transition = 'height 320ms cubic-bezier(.22,.9,.3,1), opacity 220ms ease';
-      panel.style.height = height + 'px';
-      panel.style.opacity = '1';
-    });
-
-    // cleanup after animation
-    const tidy = () => {
-      panel.style.height = 'auto';
-      panel.style.transition = '';
-      panel.classList.remove('showing');
-      panel.removeEventListener('transitionend', tidy);
-    };
-    panel.addEventListener('transitionend', tidy);
-
-    btn.setAttribute('aria-expanded', 'true');
-  }
-
-  function close(panel, btn) {
-    // set fixed height then animate to 0
-    const height = panel.scrollHeight;
-    panel.style.height = height + 'px';
-    panel.style.opacity = '1';
-
-    requestAnimationFrame(() => {
-      panel.style.transition = 'height 260ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease';
-      panel.style.height = '0px';
-      panel.style.opacity = '0';
-    });
-
-    const tidy = () => {
-      panel.hidden = true;
-      panel.style.transition = '';
-      panel.style.height = '';
-      panel.style.opacity = '';
-      panel.removeEventListener('transitionend', tidy);
-    };
-    panel.addEventListener('transitionend', tidy);
-
-    btn.setAttribute('aria-expanded', 'false');
-  }
-
-  // optional: reveal items on scroll with IntersectionObserver
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((e, i) => {
-      if(e.isIntersecting) {
-        e.target.style.transition = `opacity 420ms ease ${ (parseInt(e.target.dataset.index||0) * 60) }ms, transform 420ms cubic-bezier(.2,.9,.3,1) ${ (parseInt(e.target.dataset.index||0) * 60) }ms`;
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.faq-item').forEach((it, idx) => {
-    it.style.opacity = '0';
-    it.style.transform = 'translateY(8px)';
-    it.dataset.index = idx;
-    observer.observe(it);
-  });
-
-  // Respect reduced motion preference
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches) {
-    document.querySelectorAll('.faq-item').forEach(it => {
-      it.style.transition = 'none';
-      it.style.opacity = '1';
-      it.style.transform = 'none';
-    });
-  }
-
-})();
-
-
 </script>
 
   <script src="app.js"></script>

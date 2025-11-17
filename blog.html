@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="index.html" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="home1.html" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="index.html" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="aboutus.html" role="menuitem">About Us</a>
+              <a href="services.html" role="menuitem">Services</a>
+              <a href="pricing.html" role="menuitem">Pricing</a>
+              <a href="faq.html" role="menuitem">FAQs</a>
+              <a href="ourteam.html" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="works.html" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="blog.html" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="blogdetails.html" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="404page.html">Request a Sample</a>
+        <a class="btn btn-primary" href="login.html">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="index.html" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="home1.html">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="index.html" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="aboutus.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="faq.html">FAQs</a>
+            <a href="ourteam.html">Our Team</a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="works.html" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="blog.html" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="blogdetails.html">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="contact.html">Contact</a></div>
+        <div class="item"><a class="main-link" href="dashboard.html">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="404page.html" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="login.html" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+
+<section class="about-hero blogs-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">Blogs</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- BLOG HERO -->
+<section class="blog-hero" aria-label="Blog hero">
+  <div class="blog-hero-inner">
+    <h1 class="blog-hero-title">Stackly Insights</h1>
+    <p class="blog-hero-sub">
+      Stories, case studies and practical guides from paper & packaging design — sustainability, materials, and manufacturing tips you can use today.
+    </p>
+    <p class="blog-hero-cta">
+      <a href="404page.html" class="blog-cta">See all posts</a>
+      <a href="404page.html" class="blog-cta ghost">Subscribe</a>
+    </p>
+  </div>
+</section>
+
+
+
+
+<!-- BLOG CARDS GRID -->
+<section id="blogGrid" class="blog-grid" aria-live="polite" aria-label="Blog list">
+  <!-- Card 1 -->
+  <article class="blog-card" data-cat="sustainability">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog1.webp" alt="Sustainable packaging example" />
+      <div class="card-body">
+        <h3 class="card-title">How sustainable paper reduces cost and waste</h3>
+        <p class="card-meta">Nov 10, 2025 • 6 min read • Sustainability</p>
+        <p class="card-excerpt">A practical guide to switching to recycled paper without compromising performance or aesthetics.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 2 -->
+  <article class="blog-card" data-cat="materials">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog2.webp" alt="Kraft paper closeup" />
+      <div class="card-body">
+        <h3 class="card-title">Kraft vs coated: choosing the right stock</h3>
+        <p class="card-meta">Oct 26, 2025 • 5 min read • Materials</p>
+        <p class="card-excerpt">Quick rules of thumb to match paper stock to product requirements and run sizes.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 3 -->
+  <article class="blog-card" data-cat="design">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog4.webp" alt="Packaging design mockup" />
+      <div class="card-body">
+        <h3 class="card-title">Design principles that sell: shelf presence 101</h3>
+        <p class="card-meta">Sep 15, 2025 • 7 min read • Design</p>
+        <p class="card-excerpt">Improve shelf visibility with simple contrast, scale, and tactile finishes.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 4 -->
+  <article class="blog-card" data-cat="manufacturing">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog6.webp" alt="Packaging manufacturing line" />
+      <div class="card-body">
+        <h3 class="card-title">5 production tips to cut wastage on press</h3>
+        <p class="card-meta">Aug 04, 2025 • 4 min read • Manufacturing</p>
+        <p class="card-excerpt">Practical adjustments on tooling and imposition that reduce scrap and speed up runs.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 5 -->
+  <article class="blog-card" data-cat="sustainability">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog8.webp" alt="Recycled paper rolls" />
+      <div class="card-body">
+        <h3 class="card-title">How to test recycled stock for strength</h3>
+        <p class="card-meta">Jul 20, 2025 • 5 min read • Materials</p>
+        <p class="card-excerpt">A short checklist for lab and in-line tests to ensure your recycled stock performs.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 6 -->
+  <article class="blog-card" data-cat="design">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/blog10.webp" alt="Unboxing experience" />
+      <div class="card-body">
+        <h3 class="card-title">Unboxing experiences that build loyalty</h3>
+        <p class="card-meta">Jun 01, 2025 • 6 min read • Design</p>
+        <p class="card-excerpt">Clean rituals and tactile cues that make customers remember your brand.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- More cards can be added here; those after the first 6 will be hidden initially by JS -->
+  <!-- Card 7 (hidden) -->
+  <article class="blog-card extra" data-cat="materials" style="display:none;">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/snackas.webp" alt="Extra post" />
+      <div class="card-body">
+        <h3 class="card-title">Extra post title</h3>
+        <p class="card-meta">May 05, 2025</p>
+        <p class="card-excerpt">Short excerpt for extra post.</p>
+      </div>
+    </a>
+  </article>
+
+  <!-- Card 8 (hidden) -->
+  <article class="blog-card extra" data-cat="sustainability" style="display:none;">
+    <a class="card-link" href="blogdetails.html">
+      <img loading="lazy" src="assets/iamges/fronzen.webp" alt="Extra post 2" />
+      <div class="card-body">
+        <h3 class="card-title">Extra post 2</h3>
+        <p class="card-meta">Apr 12, 2025</p>
+        <p class="card-excerpt">Short excerpt for extra 2.</p>
+      </div>
+    </a>
+  </article>
+
+</section>
+
+
+
+<!-- LOAD MORE -->
+<div class="blog-actions" aria-hidden="false">
+  <button id="loadMoreBtn" class="btn-load" aria-label="Load more posts">Load more posts</button>
+</div>
+
+
+<script>
+
+    // LOAD MORE JS
+document.addEventListener('DOMContentLoaded', function () {
+  const grid = document.getElementById('blogGrid');
+  if(!grid) return;
+
+  const allCards = Array.from(grid.querySelectorAll('.blog-card'));
+  const loadBtn = document.getElementById('loadMoreBtn');
+
+  // Show up to N initially
+  const visibleCount = 6;
+
+  function init() {
+    allCards.forEach((card, i) => {
+      if(i < visibleCount) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    if(allCards.length <= visibleCount && loadBtn) loadBtn.style.display = 'none';
+  }
+
+  init();
+
+  if(loadBtn){
+    loadBtn.addEventListener('click', () => {
+      allCards.forEach(c => c.style.display = '');
+      loadBtn.style.display = 'none';
+      // optional: smooth scroll to newly revealed content
+      const firstHidden = grid.querySelector('.blog-card.extra, .blog-card[style*="display:none"]');
+      if(firstHidden) firstHidden.scrollIntoView({behavior: 'smooth'});
+    });
+  }
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="#home"     role="link">Home</a>
+        <a href="#about"    role="link">About Us</a>
+        <a href="#services" role="link">Services</a>
+        <a href="#work"     role="link">Work</a>
+        <a href="#contact"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <h4>Request a bespoke quote for packaging, bulk or prototype runs.</h4>
+       <a href="404page.html" class="quote-btn" id="ppQuoteBtn">Get a Quote</a>
+
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="404page.html" aria-label="Twitter">T</a>
+          <a href="404page.html" aria-label="LinkedIn">in</a>
+          <a href="404page.html" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="#privacy" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+

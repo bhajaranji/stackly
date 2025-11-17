@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stackly — Paper & Packaging Technology</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a class="logo" href="index.html">
+        <!-- put your Stackly logo here -->
+        <img src="assets/iamges/logo2.webp" alt="Stackly logo" />
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="nav-desktop" aria-label="Primary navigation">
+        <ul>
+          <li class="has-dropdown">
+            <a href="index.html" aria-haspopup="true" aria-expanded="false">Home ▾</a>
+            <div class="dropdown" role="menu" aria-label="Home submenu">
+              <a href="home1.html" role="menuitem">Home 1</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="#" aria-haspopup="true" aria-expanded="false">Pages ▾</a>
+            <div class="dropdown" role="menu" aria-label="Pages submenu">
+              <a href="aboutus.html" role="menuitem">About Us</a>
+              <a href="services.html" role="menuitem">Services</a>
+              <a href="pricing.html" role="menuitem">Pricing</a>
+              <a href="faq.html" role="menuitem">FAQs</a>
+              <a href="ourteam.html" role="menuitem">Our Team</a>
+            </div>
+          </li>
+
+          <li class="has-dropdown">
+            <a href="works.html" aria-haspopup="true" aria-expanded="false">Works </a>
+           
+          </li>
+
+          <li class="has-dropdown">
+            <a href="blog.html" aria-haspopup="true" aria-expanded="false">Blogs ▾</a>
+            <div class="dropdown" role="menu" aria-label="Blogs submenu">
+              <a href="blogdetails.html" role="menuitem">Blog Detail</a>
+              
+            </div>
+          </li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right-side actions -->
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="404page.html">Request a Sample</a>
+        <a class="btn btn-primary" href="login.html">Get Started</a>
+      </div>
+
+      <!-- Centered hamburger (mobile) -->
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileOverlay">
+        <span class="lines" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile overlay panel -->
+  <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
+    <div class="panel" role="document" aria-modal="true">
+      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+
+      <nav class="mobile-menu" aria-label="Mobile primary">
+        <!-- Home -->
+        <div class="item">
+          <a class="main-link" href="index.html" data-toggle>
+            <span>Home</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="home1.html">Home 1</a>
+          </div>
+        </div>
+
+        <!-- Pages -->
+        <div class="item">
+          <a class="main-link" href="index.html" data-toggle>
+            <span>Pages</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="aboutus.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="pricing.html">Pricing</a>
+            <a href="faq.html">FAQs</a>
+            <a href="ourteam.html">Our Team</a>
+          </div>
+        </div>
+
+        <!-- Works -->
+        <div class="item">
+          <a class="main-link" href="works.html" data-toggle>
+            <span>Works</span>
+           
+          </a>
+          
+        </div>
+
+        <!-- Blogs -->
+        <div class="item">
+          <a class="main-link" href="blog.html" data-toggle>
+            <span>Blogs</span>
+            <span class="chev">▾</span>
+          </a>
+          <div class="submenu">
+            <a href="blogdetails.html">Blog Detail</a>
+            
+          </div>
+        </div>
+
+        <!-- Contact & Dashboard single -->
+        <div class="item"><a class="main-link" href="contact.html">Contact</a></div>
+        <div class="item"><a class="main-link" href="dashboard.html">Dashboard</a></div>
+
+        <!-- CTA -->
+        <div style="margin-top:18px; display:flex; gap:10px;">
+          <a class="btn btn-ghost" href="404page.html" style="flex:1; justify-content:center;">Request a Sample</a>
+          <a class="btn btn-primary" href="login.html" style="flex:1; justify-content:center;">Get Started</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+
+
+<section class="about-hero BlogDetails-bg">
+  <div class="about-inner">
+    <div class="about-title">
+      <span class="about-box">BlogDetails</span>
+      <span class="arrow-down">→</span>
+      <span class="about-us">Stackly</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- BLOG DETAILS HERO -->
+<section class="post-hero">
+
+  <div class="post-hero-image">
+    <img src="assets/iamges/blogdetails4.webp" alt="Packaging blog hero image" />
+  </div>
+
+  <div class="post-hero-meta">
+    <h1 class="post-title">How sustainable paper reduces cost and waste</h1>
+
+    <div class="post-byline">
+      <span class="author">By <strong>Stackly Team</strong></span>
+      <span class="dot">•</span>
+      <time datetime="2025-11-10">Nov 10, 2025</time>
+      <span class="dot">•</span>
+      <span>6 min read</span>
+    </div>
+
+    <div class="post-tags">
+      <a href="404page.html" class="tag">Sustainability</a>
+      <a href="404page.html" class="tag">Materials</a>
+    </div>
+  </div>
+
+</section>
+
+
+
+<section class="article-section">
+
+  <p class="article-lede">
+    Recycled paper is not only sustainable — it can reduce total packaging cost when engineered correctly.
+  </p>
+
+  <h2>Why recycled paper is a smart long-term choice</h2>
+  <p>
+    When you calculate the complete lifecycle cost — material optimization, finishing, wastage,
+    and press efficiency — recycled paper can outperform virgin stock in many applications.
+  </p>
+
+  <h3>Case Study: Artisan Chocolates</h3>
+  <p>The challenge was to maintain a premium brand identity while improving sustainability and reducing cost.</p>
+
+  <ul class="article-list">
+    <li>Optimised dieline (saved 10–12% material)</li>
+    <li>Switched to 350 GSM recycled kraft board</li>
+    <li>Used aqueous varnish instead of foil for recyclability</li>
+  </ul>
+
+  <div class="article-image-box">
+    <img src="assets/iamges/chololate.webp" alt="Artisan chocolate box sample" />
+    <p class="img-caption">Lightweight dieline redesign — premium look with reduced waste.</p>
+  </div>
+
+  <h3>Checklist for choosing recycled stock</h3>
+  <ul class="article-list">
+    <li>Confirm barrier needs (food-grade vs dry goods)</li>
+    <li>Do a 5k pilot before large runs</li>
+    <li>Prefer varnish over lamination for recyclability</li>
+  </ul>
+
+  <h3>Results</h3>
+  <p>
+    The redesign improved shelf appearance, enhanced recyclability, and reduced cost — proving that sustainable materials
+    can be both premium and efficient.
+  </p>
+
+  <hr>
+
+  <div class="article-cta-row">
+    <a href="blog.html" class="article-btn-back">← Back to Blog</a>
+    <a href="404page.html" class="article-btn-sample">Request a Sample</a>
+  </div>
+
+</section>
+
+
+<section class="article-section">
+
+  <p class="article-lede">
+    Modern eco-materials are no longer weaker alternatives — many now outperform traditional substrates in strength and finish.
+  </p>
+
+  <h2>Eco-friendly materials with real performance</h2>
+  <p>
+    With improvements in fiber treatment and coating technology, sustainable substrates deliver premium feel, strong rigidity,
+    and high print clarity without increasing cost.
+  </p>
+
+  <h3>Case Study: Premium Tea Boxes</h3>
+  <p>
+    A luxury tea brand wanted fully recyclable packaging but feared losing the premium matte finish and firmness.
+  </p>
+
+  <ul class="article-list">
+    <li>Used 100% recycled duplex board (300–350 GSM)</li>
+    <li>Added micro-textured aqueous matte coating</li>
+    <li>Strengthened sidewalls with double-lock flaps</li>
+  </ul>
+
+  <div class="article-image-box">
+    <img src="assets/iamges/ecofriendly (1).webp" alt="Eco-friendly tea box" />
+    <p class="img-caption">Premium matte recycled board — same luxury feel, reduced environmental impact.</p>
+  </div>
+
+  <h3>Checklist for eco-friendly material selection</h3>
+  <ul class="article-list">
+    <li>Match GSM and coating with your product weight</li>
+    <li>Choose water-based varnish over lamination</li>
+    <li>Check printability on short-run digital setups</li>
+  </ul>
+
+  <h3>Results</h3>
+  <p>
+    The final pack achieved the brand's premium look, increased rigidity by 8%, and reduced plastic usage entirely.
+  </p>
+
+  <hr>
+
+  <div class="article-cta-row">
+    <a href="blog.html" class="article-btn-back">← Back to Blog</a>
+    <a href="404page.html" class="article-btn-sample">Request a Sample</a>
+  </div>
+
+</section>
+
+
+
+
+<section class="article-section">
+
+  <p class="article-lede">
+    Small dieline adjustments can reduce paper wastage by 5–15% without changing your pack’s shape or branding.
+  </p>
+
+  <h2>How smart dielines save material</h2>
+  <p>
+    Many packaging layouts include unnecessary overlaps, long flaps, or inefficient panel spacing. Correcting these areas
+    generates savings at scale.
+  </p>
+
+  <h3>Case Study: Cosmetic Carton Redesign</h3>
+  <p>
+    A skincare brand wanted to keep the same visual style but reduce cost on high-volume runs.
+  </p>
+
+  <ul class="article-list">
+    <li>Shortened side flaps by 3mm to reduce over-fold</li>
+    <li>Aligned panels for tighter sheet imposition</li>
+    <li>Removed a hidden internal tab saving 6–8% material</li>
+  </ul>
+
+  <div class="article-image-box">
+    <img src="assets/iamges/beauty.webp" alt="Optimized cosmetic carton" />
+    <p class="img-caption">Re-engineered dieline — same design, less waste, better efficiency.</p>
+  </div>
+
+  <h3>Checklist for dieline optimisation</h3>
+  <ul class="article-list">
+    <li>Check flap lengths & unnecessary internal tabs</li>
+    <li>Review imposition layout with printer</li>
+    <li>Test fold strength after reducing overlaps</li>
+  </ul>
+
+  <h3>Results</h3>
+  <p>
+    Material usage dropped by 7–9%, production time improved, and tooling costs stayed the same — a win across all stages.
+  </p>
+
+  <hr>
+
+  <div class="article-cta-row">
+    <a href="blog.html" class="article-btn-back">← Back to Blog</a>
+    <a href="404page.html" class="article-btn-sample">Request a Sample</a>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<footer class="pp-footer" id="ppFooter" aria-labelledby="footerHeading">
+  <div class="pp-footer-inner pp-animate" id="ppFooterInner">
+    <div class="pp-brand">
+     <h3 id="footerHeading">Stackly</h3>
+
+      <p>Eco-friendly paper & packaging solutions — custom designs, smart logistics and recycled materials. Trusted by e-commerce, food brands & logistics partners.</p>
+
+      <nav class="pp-nav" aria-label="Footer primary">
+        <a href="index.html"     role="link">Home</a>
+        <a href="aboutus.html"    role="link">About Us</a>
+        <a href="services.html" role="link">Services</a>
+        <a href="works.html"     role="link">Work</a>
+        <a href="contact.html"  role="link">Contact</a>
+      </nav>
+    </div>
+
+    <aside class="pp-cta" aria-label="Contact call to action">
+      <div>
+        <div class="phone">+91 98765 43210</div>
+        <small>Mon–Fri • 9:00–18:00 IST</small>
+      </div>
+      <div>
+        <h4>Request a bespoke quote for packaging, bulk or prototype runs.</h4>
+        <a href="404page.html" class="quote-btn" id="ppQuoteBtn">Get a Quote</a>
+
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+        <div style="display:flex;flex-direction:column">
+          <small style="color:yellowgreen">Visit</small>
+          <div style="font-weight:700,  ">Bengluru, IN</div>
+        </div>
+
+        <div class="pp-social" aria-hidden="false">
+          <a href="404page.html" aria-label="Twitter">T</a>
+          <a href="404page.html" aria-label="LinkedIn">in</a>
+          <a href="404page.html" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="pp-bottom pp-animate" id="ppBottom">
+    <div class="pp-copy">© <span id="ppYear"></span> PaperPack — All rights reserved</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <small style="opacity:.9">Made with ♻️ in India</small>
+      <a href="404page.html" style="color:y; text-decoration:underline; font-size:13px">Privacy</a>
+    </div>
+  </div>
+
+  <button class="pp-top" id="ppTop" aria-label="Back to top">↑</button>
+</footer>
+
+<script>
+  // set year
+  document.getElementById('ppYear').textContent = new Date().getFullYear();
+
+  // Back to top behavior and show/hide
+  const topBtn = document.getElementById('ppTop');
+  window.addEventListener('scroll', () => {
+    if(window.scrollY > 360) topBtn.classList.add('show');
+    else topBtn.classList.remove('show');
+  });
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+
+  // IntersectionObserver for in-view entrance animations
+  (function(){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if(e.isIntersecting) e.target.classList.add('inview');
+      });
+    }, {threshold: 0.12});
+    document.querySelectorAll('.pp-animate').forEach(el => io.observe(el));
+  })();
+</script>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+

@@ -423,133 +423,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
-// FAQ Accordion: smooth height animation + accessible toggles
-(function(){
-  const list = document.querySelectorAll('.faq-item');
-  if(!list.length) return;
-
-  // Set to true if you want only one open at a time
-  const singleOpen = false;
-
-  list.forEach(item => {
-    const btn = item.querySelector('.faq-q');
-    const panel = item.querySelector('.faq-a');
-
-    // ensure panel has aria attributes correctly (hidden initially)
-    panel.hidden = true;
-
-    // click handler
-    btn.addEventListener('click', () => toggle(item, btn, panel));
-    // keyboard (Enter/Space)
-    btn.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle(item, btn, panel);
-      }
-    });
-  });
-
-  function toggle(item, btn, panel) {
-    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-    if (isOpen) {
-      close(panel, btn);
-    } else {
-      if(singleOpen) {
-        // close others
-        document.querySelectorAll('.faq-item .faq-q[aria-expanded="true"]').forEach(openBtn=>{
-          const parent = openBtn.closest('.faq-item');
-          const openPanel = parent.querySelector('.faq-a');
-          close(openPanel, openBtn);
-        });
-      }
-      open(panel, btn);
-    }
-  }
-
-  function open(panel, btn) {
-    // prepare
-    panel.hidden = false;
-    const height = panel.scrollHeight;
-    panel.style.height = '0px';
-    panel.style.opacity = '0';
-    panel.classList.add('showing');
-
-    // force reflow before animating
-    requestAnimationFrame(() => {
-      panel.style.transition = 'height 320ms cubic-bezier(.22,.9,.3,1), opacity 220ms ease';
-      panel.style.height = height + 'px';
-      panel.style.opacity = '1';
-    });
-
-    // cleanup after animation
-    const tidy = () => {
-      panel.style.height = 'auto';
-      panel.style.transition = '';
-      panel.classList.remove('showing');
-      panel.removeEventListener('transitionend', tidy);
-    };
-    panel.addEventListener('transitionend', tidy);
-
-    btn.setAttribute('aria-expanded', 'true');
-  }
-
-  function close(panel, btn) {
-    // set fixed height then animate to 0
-    const height = panel.scrollHeight;
-    panel.style.height = height + 'px';
-    panel.style.opacity = '1';
-
-    requestAnimationFrame(() => {
-      panel.style.transition = 'height 260ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease';
-      panel.style.height = '0px';
-      panel.style.opacity = '0';
-    });
-
-    const tidy = () => {
-      panel.hidden = true;
-      panel.style.transition = '';
-      panel.style.height = '';
-      panel.style.opacity = '';
-      panel.removeEventListener('transitionend', tidy);
-    };
-    panel.addEventListener('transitionend', tidy);
-
-    btn.setAttribute('aria-expanded', 'false');
-  }
-
-  // optional: reveal items on scroll with IntersectionObserver
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((e, i) => {
-      if(e.isIntersecting) {
-        e.target.style.transition = `opacity 420ms ease ${ (parseInt(e.target.dataset.index||0) * 60) }ms, transform 420ms cubic-bezier(.2,.9,.3,1) ${ (parseInt(e.target.dataset.index||0) * 60) }ms`;
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        obs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.faq-item').forEach((it, idx) => {
-    it.style.opacity = '0';
-    it.style.transform = 'translateY(8px)';
-    it.dataset.index = idx;
-    observer.observe(it);
-  });
-
-  // Respect reduced motion preference
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches) {
-    document.querySelectorAll('.faq-item').forEach(it => {
-      it.style.transition = 'none';
-      it.style.opacity = '1';
-      it.style.transform = 'none';
-    });
-  }
-
-})();
-
-
 
 // Contact form client-side behavior
 document.addEventListener('DOMContentLoaded', () => {
@@ -641,3 +514,366 @@ document.addEventListener('DOMContentLoaded', () => {
     formMessage.textContent = msg;
   }
 });
+
+
+
+
+
+ // HERO SECTION JS
+(function(){
+  const light = document.querySelector('.hero-light');
+  const hero = document.querySelector('.hero-section');
+
+  // PARALLAX ONLY ON DESKTOP
+  const isTouch = ('ontouchstart' in window);
+  if(!isTouch && hero && light){
+    hero.addEventListener('mousemove', (e)=>{
+      const r = hero.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width;
+      const py = (e.clientY - r.top) / r.height;
+
+      const tx = (px - 0.5) * 40;
+      const ty = (py - 0.5) * 30;
+
+      light.style.transform = `translate(${tx}px, ${ty}px)`;
+    });
+
+    hero.addEventListener('mouseleave', ()=>{
+      light.style.transform = `translate(0,0)`;
+    });
+  }
+
+  // BUTTON ACTIONS
+  const viewBtn = document.getElementById('heroViewProjects');
+  const sampleBtn = document.getElementById('heroRequestSample');
+
+  // Scroll to projects
+  if(viewBtn){
+    viewBtn.addEventListener('click', ()=>{
+      const section = document.getElementById('projects');
+      if(section){
+        section.scrollIntoView({behavior:"smooth"});
+      }
+    });
+  }
+
+  // Note: DO NOT use the fragile single-line open here.
+  // The robust sample-panel controller below will wire heroRequestSample automatically.
+})();
+
+// Robust Sample / Quote slide-in panel controller
+(function(){
+  if (window.__stacklySamplePanelInit) return;
+  window.__stacklySamplePanelInit = true;
+
+  const panel = document.getElementById('sample-panel');
+  if (!panel) return;
+
+  const openClass = 'open';
+  const inner = panel.querySelector('.sample-inner');
+  const closeBtn = document.getElementById('sample-close');
+  const cancelBtn = document.getElementById('sample-cancel');
+  const form = document.getElementById('sample-form');
+  const feedback = document.getElementById('sample-feedback');
+  let lastActive = null;
+
+  // lock / unlock body scroll
+  function lockScroll(){ document.documentElement.style.overflow = 'hidden'; document.body.style.overflow = 'hidden'; }
+  function unlockScroll(){ document.documentElement.style.overflow = ''; document.body.style.overflow = ''; }
+
+  // focusable selector for simple focus trap
+  const FOCUS_SELECTORS = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+  function trapFocus(e) {
+    if (!panel.classList.contains(openClass)) return;
+    const focusable = Array.from(panel.querySelectorAll(FOCUS_SELECTORS)).filter(el => el.offsetParent !== null);
+    if (!focusable.length) return;
+    if (!panel.contains(document.activeElement)) {
+      focusable[0].focus();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const idx = focusable.indexOf(document.activeElement);
+      if (e.shiftKey && idx === 0) {
+        e.preventDefault();
+        focusable[focusable.length -1].focus();
+      } else if (!e.shiftKey && idx === focusable.length -1) {
+        e.preventDefault();
+        focusable[0].focus();
+      }
+    }
+  }
+
+  function openSample() {
+    if (panel.classList.contains(openClass)) return;
+    lastActive = document.activeElement;
+    panel.classList.add(openClass);
+    panel.setAttribute('aria-hidden', 'false');
+    lockScroll();
+    setTimeout(()=> {
+      const first = panel.querySelector(FOCUS_SELECTORS);
+      if (first) first.focus();
+    }, 120);
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('focus', onDocumentFocus, true);
+  }
+
+  function closeSample() {
+    if (!panel.classList.contains(openClass)) return;
+    panel.classList.remove(openClass);
+    panel.setAttribute('aria-hidden', 'true');
+    unlockScroll();
+    if (lastActive && lastActive.focus) lastActive.focus();
+    document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener('focus', onDocumentFocus, true);
+  }
+
+  function onKeyDown(e) {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeSample();
+      return;
+    }
+    if (e.key === 'Tab') trapFocus(e);
+  }
+
+  function onDocumentFocus(e){
+    if (!panel.classList.contains(openClass)) return;
+    if (!panel.contains(e.target)) {
+      e.stopPropagation();
+      const first = panel.querySelector(FOCUS_SELECTORS);
+      if (first) first.focus();
+    }
+  }
+
+  // close when clicking on overlay background only
+  panel.addEventListener('click', function(e){
+    if (e.target === panel) {
+      if (e._sampleHandled) return;
+      closeSample();
+    }
+  });
+
+  // stop inner clicks from bubbling
+  if (inner) inner.addEventListener('click', (e)=> e.stopPropagation());
+
+  // close buttons
+  if (closeBtn) closeBtn.addEventListener('click', (e)=> { e.preventDefault(); closeSample(); });
+  if (cancelBtn) cancelBtn.addEventListener('click', (e)=> { e.preventDefault(); closeSample(); });
+
+  // wire any [data-open-sample] buttons and legacy heroRequestSample
+  document.querySelectorAll('[data-open-sample]').forEach(el=>{
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      openSample();
+    });
+  });
+  const legacyOpen = document.getElementById('heroRequestSample');
+  if (legacyOpen) legacyOpen.addEventListener('click', (e)=> { e.preventDefault(); openSample(); });
+
+  // handle form submit safely (no navigation)
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const formData = new FormData(form);
+      const name = (formData.get('name') || '').toString().trim();
+      const email = (formData.get('email') || '').toString().trim();
+      if (!name || !email) {
+        if (feedback) { feedback.textContent = 'Please fill name and email.'; feedback.style.color = '#ffb4b4'; }
+        return;
+      }
+      if (feedback) { feedback.textContent = 'Request sent — we will contact you shortly.'; feedback.style.color = '#c7f464'; }
+      setTimeout(()=> {
+        form.reset();
+        closeSample();
+      }, 900);
+    });
+  }
+
+  // MutationObserver: protect panel from accidental aria-hidden toggles by other scripts
+  const mo = new MutationObserver(muts => {
+    muts.forEach(m => {
+      if (m.type === 'attributes' && m.attributeName === 'aria-hidden') {
+        const attr = panel.getAttribute('aria-hidden');
+        if (panel.classList.contains(openClass) && attr === 'true') {
+          panel.setAttribute('aria-hidden','false');
+        }
+      }
+    });
+  });
+  mo.observe(panel, { attributes: true });
+
+  // expose API for debugging/programmatic control
+  window.stacklySample = { open: openSample, close: closeSample, panel };
+
+})();
+
+
+
+
+
+
+
+
+/* Robust single-run FAQ accordion.
+   Replace the old inline script with this. Make sure the same code is NOT also in app.js. */
+(function(){
+  // guard to avoid double initialization if this file accidentally loads twice
+  if (window.__stacklyFaqInit) return;
+  window.__stacklyFaqInit = true;
+
+  const items = document.querySelectorAll('.faq-item');
+  if (!items.length) return;
+
+  const singleOpen = false;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  items.forEach((item, idx) => {
+    const btn = item.querySelector('.faq-q');
+    const panel = item.querySelector('.faq-a');
+
+    // defensive checks
+    if (!btn || !panel) return;
+
+    // ensure ids and aria-controls are present
+    if (!panel.id) panel.id = `faq-panel-${idx}`;
+    if (!btn.id) btn.id = `faq-btn-${idx}`;
+    btn.setAttribute('aria-controls', panel.id);
+
+    // initial attributes
+    if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+    panel.hidden = true;
+    panel.style.overflow = 'hidden'; // important for height animation
+
+    // prevent double-binding (in case script runs twice)
+    if (btn.dataset.faqInit === '1') return;
+    btn.dataset.faqInit = '1';
+
+    // click
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggle(item, btn, panel);
+    });
+
+    // keyboard: Enter or Space
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        toggle(item, btn, panel);
+      }
+    });
+
+    // prepare reveal-on-scroll visuals (optional)
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(8px)';
+    item.dataset.index = idx;
+  });
+
+  function toggle(item, btn, panel) {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    if (isOpen) return close(panel, btn);
+    if (singleOpen) {
+      document.querySelectorAll('.faq-q[aria-expanded="true"]').forEach(openBtn => {
+        const parent = openBtn.closest('.faq-item');
+        const openPanel = parent && parent.querySelector('.faq-a');
+        if (openPanel && openBtn !== btn) close(openPanel, openBtn);
+      });
+    }
+    open(panel, btn);
+  }
+
+  function open(panel, btn) {
+    if (reduced) { // instant mode
+      panel.hidden = false;
+      panel.style.height = 'auto';
+      panel.style.opacity = '';
+      panel.style.overflow = '';
+      btn.setAttribute('aria-expanded', 'true');
+      return;
+    }
+
+    panel.hidden = false;               // make visible so scrollHeight works
+    panel.style.overflow = 'hidden';
+    panel.style.height = '0px';
+    panel.style.opacity = '0';
+
+    // read natural height after visible
+    const full = panel.scrollHeight;
+
+    // animate to full height
+    requestAnimationFrame(() => {
+      panel.style.transition = 'height 320ms cubic-bezier(.22,.9,.3,1), opacity 220ms ease';
+      panel.style.height = full + 'px';
+      panel.style.opacity = '1';
+    });
+
+    // tidy only once, and only when the height transition ends
+    const tidy = (ev) => {
+      if (ev && ev.propertyName && ev.propertyName !== 'height') return;
+      panel.style.height = 'auto';
+      panel.style.transition = '';
+      panel.style.overflow = '';
+    };
+    panel.addEventListener('transitionend', tidy, { once: true });
+
+    btn.setAttribute('aria-expanded', 'true');
+  }
+
+  function close(panel, btn) {
+    if (reduced) {
+      panel.hidden = true;
+      panel.style.height = '';
+      panel.style.opacity = '';
+      panel.style.overflow = '';
+      btn.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    // lock height then animate to zero
+    const full = panel.scrollHeight;
+    panel.style.height = full + 'px';
+    panel.style.opacity = '1';
+    panel.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      panel.style.transition = 'height 260ms cubic-bezier(.2,.9,.3,1), opacity 200ms ease';
+      panel.style.height = '0px';
+      panel.style.opacity = '0';
+    });
+
+    const tidy = (ev) => {
+      if (ev && ev.propertyName && ev.propertyName !== 'height') return;
+      panel.hidden = true;
+      panel.style.transition = '';
+      panel.style.height = '';
+      panel.style.opacity = '';
+      panel.style.overflow = '';
+    };
+    panel.addEventListener('transitionend', tidy, { once: true });
+
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  // reveal-on-scroll (optional)
+  if ('IntersectionObserver' in window && !reduced) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const delay = (parseInt(e.target.dataset.index || 0) * 60);
+          e.target.style.transition = `opacity 420ms ease ${delay}ms, transform 420ms cubic-bezier(.2,.9,.3,1) ${delay}ms`;
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.faq-item').forEach(it => observer.observe(it));
+  } else {
+    document.querySelectorAll('.faq-item').forEach(it => {
+      it.style.opacity = '1';
+      it.style.transform = 'none';
+    });
+  }
+})();
