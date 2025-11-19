@@ -75,7 +75,7 @@
   <!-- Mobile overlay panel -->
   <div class="overlay" id="mobileOverlay" aria-hidden="true" role="dialog" aria-label="Mobile menu">
     <div class="panel" role="document" aria-modal="true">
-      <button class="close" id="mobileClose" aria-label="Close menu">&times;</button>
+      <button class="close" id="mobileClose" aria-label="Close menu"></button>
 
       <nav class="mobile-menu" aria-label="Mobile primary">
         <!-- Home -->
@@ -106,7 +106,7 @@
 
         <!-- Works -->
         <div class="item">
-          <a class="main-link" href="works.html" data-toggle>
+          <a class="main-link" href="works.html" >
             <span>Works</span>
            
           </a>
@@ -222,7 +222,6 @@
   </div>
 
 </section>
-
 <script>
 (function(){
   const $ = (sel, root=document) => root.querySelector(sel);
@@ -231,11 +230,24 @@
   const form = $('#contactForm');
   if (!form) return;
   const submitBtn = $('#submitBtn');
-  const statusEl = $('#formStatus'); // we won't use this for persistent messages
+  const statusEl = $('#formStatus'); // optional status area
 
-  // simple helper to set/clear inline error text
+  // helper to set inline error text (creates element if missing)
   function setError(fieldName, message) {
-    const el = document.querySelector(`.error[data-for="${fieldName}"]`);
+    let el = document.querySelector(`.error[data-for="${fieldName}"]`);
+    if (!el) {
+      // try to find the input and insert an error node after it
+      const input = document.querySelector(`[name="${fieldName}"]`);
+      if (input) {
+        el = document.createElement('div');
+        el.className = 'error';
+        el.setAttribute('data-for', fieldName);
+        el.style.color = '#ff6b6b';
+        el.style.marginTop = '6px';
+        el.style.fontSize = '13px';
+        input.insertAdjacentElement('afterend', el);
+      }
+    }
     if (el) el.textContent = message || '';
   }
 
@@ -244,7 +256,7 @@
     $$('.error').forEach(e => e.textContent = '');
   }
 
-  // clear error for an input when the user types
+  // clear error for an input when the user types/changes
   ['input','change'].forEach(evt => {
     $$('#name, #email, #message').forEach(input => {
       if (!input) return;
@@ -285,11 +297,15 @@
     return ok;
   }
 
-  form.addEventListener('submit', function (e) {
+  // main submit handler
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // run client-side validation
     if (!validate()) {
+      // show a clear alert as requested
+      alert('Please fill the fields');
+
       // focus first errored field
       const firstError = document.querySelector('.error:not(:empty)');
       if (firstError) {
@@ -303,12 +319,38 @@
     // If validation passes, redirect to 404page.html immediately
     // (no status messages shown)
     window.location.href = '404page.html';
-  });
+  }
+
+  // Attach submit listener safely
+  form.addEventListener('submit', handleSubmit);
+
+  // Attach a click fallback on the submit button: ensures the handler runs if some browsers/firewalls interfere
+  if (submitBtn) {
+    submitBtn.addEventListener('click', function(e){
+      // let the form submit handler do validation/redirect
+      // but ensure default isn't skipped
+      // We call handleSubmit directly to keep behavior consistent
+      handleSubmit(e);
+    });
+  }
+
+  // Optional: allow Enter key on form to submit (typical browser behavior),
+  // but ensure Enter inside textarea does NOT submit (we prevent that).
+  const textarea = $('#message');
+  if (textarea) {
+    textarea.addEventListener('keydown', function(ev) {
+      // if user presses Ctrl+Enter or Shift+Enter, allow a newline; do not submit
+      // we explicitly prevent treating Enter as submit inside textarea
+      if (ev.key === 'Enter' && !ev.ctrlKey && !ev.shiftKey) {
+        // allow newline, do not submit (do nothing)
+        // if you want Enter to submit, change this behavior
+        return;
+      }
+    });
+  }
 
 })();
 </script>
-
-
 
 
 

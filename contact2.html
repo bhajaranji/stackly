@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stackly | Creative Agency</title>
+  <title>Stackly — Paper & Packaging Technology</title>
   <link rel="icon" href="assets/iamges/logo1.webp" type="image/png">
   <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -113,7 +113,8 @@
           <input type="tel" name="phone" placeholder="Your Phone" maxlength="10" required>
         </div>
         <textarea name="message" rows="5" placeholder="Write Message" required></textarea>
-        <a href="404page.html" class="btn-contact">Send Message</a>
+<button type="submit" class="btn-contact">Send Message</button>
+
 
       </form>
     </div>
@@ -243,33 +244,43 @@ With deep industry expertise and precision engineering, we help your products st
 
 
 
-
 function validateContactForm(e) {
   e.preventDefault();
   const form = e.target;
+
   const name = form.name.value.trim();
   const email = form.email.value.trim();
   const phone = form.phone.value.trim();
   const message = form.message.value.trim();
 
+  // Validate Name
   if (name.length < 3) {
     alert("Please enter a valid name (minimum 3 characters)");
     return false;
   }
 
+  // Validate Email (simple pattern)
+  const emailPattern = /^\S+@\S+\.\S+$/;
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address");
+    return false;
+  }
+
+  // Validate Phone (10 digits only)
   if (!/^[0-9]{10}$/.test(phone)) {
     alert("Please enter a valid 10-digit mobile number");
     return false;
   }
 
+  // Validate Message
   if (message.length < 5) {
     alert("Please write a valid message");
     return false;
   }
 
-  alert(`✅ Thanks ${name}! Your message has been sent successfully.`);
-  form.reset();
-  return true;
+  // If everything is valid → redirect to 404 page
+  window.location.href = "404page.html";
+  return false;
 }
 
 

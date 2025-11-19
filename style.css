@@ -308,7 +308,7 @@ border: 1px solid rgba(225,15,15,0.4);
       justify-content:space-between;
       gap:16px;
       align-items:center;
-      color:#8f9aa1;
+      color:white;
       z-index:3;
     }
     .pp-bottom .copy{ font-size:13px; }
@@ -321,13 +321,13 @@ border: 1px solid rgba(225,15,15,0.4);
   right:4%;             /* keep inside viewport (avoid negative offsets) */
   bottom:6%;
   font-weight:900;
-  color:#e10f0f;
+  color:rgba(192, 192, 192, 0.78);
   /* responsive sizing using clamp() so it scales across screens */
   font-size: clamp(120px, 12vw, 360px);
   line-height:.78;
   letter-spacing:-6px;
   -webkit-text-stroke: 2px rgba(0,0,0,0.25);
-  filter: drop-shadow(0 36px 40px rgba(225,15,15,0.35)) blur(.6px);
+  
   opacity:0.85;         /* visible but slightly subtle */
   transform: translateZ(0);
   z-index:1;            /* behind .pp-inner (which is z-index:3) */
@@ -448,7 +448,7 @@ border: 1px solid rgba(225,15,15,0.4);
 
 .pp-giant { 
   position:absolute; right:4%; bottom:6%;
-  font-weight:900; color:#e10f0f;
+  font-weight:900; color:#9aa5b0;
   font-size: clamp(120px, 12vw, 360px);
   line-height: .9;
   letter-spacing: -6px;
@@ -2928,6 +2928,53 @@ footer{margin-top:14px;color:var(--muted);font-size:12px}
 
 
 
+/* make the buttons a responsive flex group (desktop keeps the inline style) */
+.hero-buttons {
+  display: flex;
+  gap: 12px;            /* space between buttons */
+  align-items: center;
+  flex-wrap: wrap;      /* allow wrapping without overlap */
+  margin-top: 12px;
+}
+
+/* ensure anchors behave as flexible button boxes */
+.hero-buttons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;          /* prevents flex children from overflowing */
+  text-decoration: none;
+}
+
+/* On narrow screens: stack the buttons full width for clarity */
+@media (max-width: 880px) {
+  .hero-buttons {
+    gap: 10px;
+  }
+
+  /* make each button take full width and stack vertically */
+  .hero-buttons a {
+    width: 100%;
+    flex: 1 1 100%;      /* grow/shrink to full width */
+    margin-bottom: 8px;  /* spacing between stacked buttons */
+  }
+
+  /* slightly different visual priority if you want primary first */
+  .hero-buttons .btn-primary { order: 1; }
+  .hero-buttons .btn-ghost   { order: 2; }
+
+  /* reduce internal padding on very small screens if needed */
+  .btn-primary, .btn-ghost {
+    padding: 10px 12px;
+  }
+}
+
+/* small tweak: ensure hero image stays behind the hero content */
+.hero-bg-img { position: relative; z-index: 1; }
+.hero-content { z-index: 2; }
+
+
+
 /* Projects grid styles */
 .projects-section{ max-width:1200px; margin:8px auto 40px; padding:0 12px; }
 .section-title{ color:#c7f464; margin:0 0 14px; font-size:20px; }
@@ -3821,4 +3868,142 @@ main, .site, .page, .wrapper, .container {
   min-height: 0 !important;
   overflow: visible !important;
 }
+
+
+
+
+.services-section {
+  background: #000; /* black background */
+  color: #39ff14;   /* neon green text */
+  padding: 50px 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.services-title {
+  font-size: 42px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 40px;
+  color: olivedrab; /* neon green */
+}
+
+.service-item {
+  margin-bottom: 35px;
+  border-left: 3px solid #39ff14;
+  padding-left: 20px;
+}
+
+.service-item h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: olivedrab;
+}
+
+.service-item p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+
+/* -------------------------
+   RESPONSIVE MEDIA QUERIES
+---------------------------*/
+
+/* 🔹 Mobile Devices (Max-width: 480px) */
+@media (max-width: 480px) {
+  .services-section {
+    padding: 30px 15px;
+  }
+
+  .services-title {
+    font-size: 30px;
+    margin-bottom: 28px;
+  }
+
+  .service-item {
+    padding-left: 15px;
+    margin-bottom: 28px;
+    border-left-width: 2px;
+  }
+
+  .service-item h2 {
+    font-size: 20px;
+  }
+
+  .service-item p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+}
+
+
+/* 🔹 Tablets (481px – 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .services-section {
+    padding: 40px 30px;
+  }
+
+  .services-title {
+    font-size: 36px;
+  }
+
+  .service-item {
+    padding-left: 18px;
+    margin-bottom: 30px;
+  }
+
+  .service-item h2 {
+    font-size: 22px;
+  }
+
+  .service-item p {
+    font-size: 15px;
+  }
+}
+
+
+/* 🔹 Large Tablets / Small Laptops (769px – 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .services-section {
+    padding: 60px 50px;
+  }
+
+  .services-title {
+    font-size: 40px;
+  }
+
+  .service-item {
+    max-width: 90%;
+    margin: 0 auto 35px auto;
+  }
+
+  .service-item h2 {
+    font-size: 24px;
+  }
+}
+
+
+/* 🔹 Desktops (>1024px) */
+@media (min-width: 1025px) {
+  .services-section {
+    padding: 80px 100px;
+  }
+
+  .services-title {
+    font-size: 44px;
+  }
+
+  .service-item {
+    max-width: 860px;
+    margin: 0 auto 35px auto;
+  }
+
+  .service-item h2 {
+    font-size: 28px;
+  }
+}
+
+
 

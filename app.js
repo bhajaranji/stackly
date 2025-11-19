@@ -460,10 +460,18 @@ tmp.src = real;
 // Uses a cloned first slide to make the loop seamless.
 
 (function () {
-  const viewport = document.getElementById('testimonialViewport');
+    const viewport = document.getElementById('testimonialViewport');
   const track = document.getElementById('testimonialTrack');
+
+  // defensive: stop if required DOM elements are missing
+  if (!viewport || !track) {
+    console.warn('testimonial: missing #testimonialViewport or #testimonialTrack — slider disabled.');
+    return;
+  }
+
   let slides = Array.from(track.children);
   if (slides.length === 0) return;
+
 
   // clone first slide and append - used to create continuous transition
   const firstClone = slides[0].cloneNode(true);
@@ -511,11 +519,12 @@ tmp.src = real;
     clearInterval(timer);
     timer = null;
   }
-
-  // Pause on hover for usability
-  const container = document.querySelector('.testimonial-viewport');
+const container = document.getElementById('testimonialViewport'); // use the same ID as above
+if (container) {
   container.addEventListener('mouseenter', () => { isPaused = true; });
   container.addEventListener('mouseleave', () => { isPaused = false; });
+}
+
 
   // start autoplay
   start();
@@ -576,8 +585,19 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     clearErrors();
+
+  /**
+   * Simple email validator
+   * @param {string} v - the email string to validate
+   * @returns {boolean} true if the email is valid, false otherwise
+   */
+  function isEmail(v){
+    // basic email validation: at least one character before and after the @ symbol, and at least one character after the dot.
+    return /\S+@\S+\.\S+/.test(v);
+  }
     formMessage.textContent = '';
 
+/*******  9534f01c-9b45-4b2d-bfc2-83d850140efa  *******/
     const data = {
       name: form.name.value.trim(),
       company: form.company.value.trim(),
