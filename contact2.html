@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stackly | Creative Agency</title>
+  <link rel="icon" href="assets/iamges/logo1.webp" type="image/png">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-container">
+    <!-- Logo -->
+    <a class="logo" href="index.html" aria-label="Stackly Home">
+      <img src="assets/iamges/logo2.webp" alt="Stackly logo">
+    </a>
+
+    <!-- Desktop nav (visible ≥900px) -->
+    <nav class="nav-desktop desktop-only" aria-label="Primary">
+      <ul class="nav-list">
+        <li class="dropdown">
+          <a href="home1.html" class="dropbtn">Home ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="index.html">home1</a></li>
+          </ul>
+        </li>
+        <li><a href="serives2.html">Services</a></li>
+        <li><a href="about2.html">About Us</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a href="login.html" class="btn neon desktop-only">Explore More</a>
+
+    <!-- Hamburger (visible <900px) -->
+    <button id="hamburger" class="hamburger mobile-only" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile overlay nav -->
+  <nav id="site-nav" class="site-nav mobile-only" aria-label="Primary" aria-hidden="true">
+    <button class="nav-close" id="nav-close" aria-label="Close menu">✕</button>
+    <ul class="nav-overlay-list">
+      <li class="dropdown">
+        <a href="home1.html" class="dropbtn">Home ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index.html">home1</a></li>
+        </ul>
+      </li>
+      <li><a href="service2.html">Services</a></li>
+      <li><a href="about2.html">About Us</a></li>
+      <li><a href="blog2.html">Blog</a></li>
+      <li><a href="contact2.html">Contact</a></li>
+      <li><a href="login.html" class="btn neon">Explore More</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+
+<section class="page-hero">
+  <div class="page-hero-overlay"></div>
+
+  <!-- Images -->
+  <img src="assets/iamges/home1.8.webp" alt="Banner 1" class="page-hero-bg active">
+  <img src="assets/iamges/home1.9.webp" alt="Banner 2" class="page-hero-bg">
+  <img src="assets/iamges/home1.10.webp" alt="Banner 3" class="page-hero-bg">
+
+  <!-- Text Content -->
+  <div class="page-hero-content">
+    <h1>Our CONTACT</h1>
+    <p>Home > CONTACT</p>
+  </div>
+</section>
+
+
+
+
+
+<section class="contact-section">
+  <div class="contact-container">
+
+    <!-- LEFT CONTACT INFO -->
+    <div class="contact-info">
+      <h4 class="sub-heading">Get In Touch</h4>
+      <h2 class="heading">Need Any Help With Digital Services</h2>
+      <p>
+        Our team is ready to support you with expert solutions.  
+        Let us help you grow your business with confidence.
+      </p>
+      <ul>
+        <li>📞 123-456-7890</li>
+        <li>📩 support@stackly.com</li>
+        <li>📍 Hyderabad, India</li>
+      </ul>
+    </div>
+
+    <!-- RIGHT CONTACT FORM -->
+    <div class="contact-form-box">
+      <h3>Don’t Hesitate To Contact Us</h3>
+      <form class="contact-form" onsubmit="return validateContactForm(event)">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Your Full Name" required>
+          <input type="email" name="email" placeholder="Your Email Address" required>
+          <input type="tel" name="phone" placeholder="Your Phone" maxlength="10" required>
+        </div>
+        <textarea name="message" rows="5" placeholder="Write Message" required></textarea>
+        <a href="404page.html" class="btn-contact">Send Message</a>
+
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+  <!-- 📍 GOOGLE MAP EMBED SECTION -->
+<div class="map-box">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.740793921458!2d77.61048060860395!3d12.860011217266724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae6b0024736263%3A0x549058c406390078!2sStackly!5e0!3m2!1sen!2sin!4v1760089561923!5m2!1sen!2sin" 
+    allowfullscreen 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+</section>
+
+
+
+
+<!-- =======================
+         FOOTER
+======================= -->
+<footer class="footer reveal">
+  <div class="footer-container">
+
+    <!-- 1. Brand Column -->
+    <div class="footer-col footer-brand reveal">
+      <a href="index.html" class="footer-logo">
+        <img src="assets/iamges/logo2.webp" alt="Stackly Logo">
+     
+      </a>
+      <p>We design premium paper and packaging experiences built for impact.
+With deep industry expertise and precision engineering, we help your products stand out and your operations scale.</p>
+    </div>
+
+    <!-- 2. Quick Links -->
+    <div class="footer-col reveal">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="home1.html">Home</a></li>
+        <li><a href="about2.html">About Us</a></li>
+        <li><a href="serives2.html">Services</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- 3. Services -->
+    <div class="footer-col reveal">
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="404page.html">BrandForm Packaging</a></li>
+        <li><a href="404page.html">Material Science Lab</a></li>
+        <li><a href="404page.html">PackStructure Engineering</a></li>
+        <li><a href="404page.html">PrintFusion Studio</a></li>
+        <li><a href="404page.html">EcoCycle Innovations</a></li>
+        <li><a href="404page.html">HeavyDuty Corr-Pack Systems</a></li>
+      </ul>
+    </div>
+
+    <!-- 4. Newsletter / Contact -->
+    <div class="footer-col reveal">
+      <h4>Stay Connected</h4>
+      <p>Subscribe to our newsletter to get the latest digital trends and insights.</p>
+      <form class="footer-newsletter" onsubmit="event.preventDefault(); window.location.href='404page.html';">
+  <input type="email" placeholder="Enter your email" required>
+  <button type="submit">
+    <i class="fa-solid fa-paper-plane"></i>
+  </button>
+</form>
+
+
+      <div class="social-links">
+        <a href="404page.html"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-twitter"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-instagram"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom reveal">
+    <p>© 2025 Stackly Digital Agency | All Rights Reserved | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+
+
+<script>
+
+
+//header function
+  const heroImages = document.querySelectorAll('.page-hero-bg');
+  let current = 0;
+
+  function showNextImage() {
+    heroImages[current].classList.remove('active');
+    current = (current + 1) % heroImages.length;
+    heroImages[current].classList.add('active');
+  }
+
+  setInterval(showNextImage, 4000); // change image every 4 seconds
+
+
+
+// footer function    
+  const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      } else {
+        entry.target.classList.remove("active");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  reveals.forEach((el) => observer.observe(el));
+
+
+
+
+function validateContactForm(e) {
+  e.preventDefault();
+  const form = e.target;
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const phone = form.phone.value.trim();
+  const message = form.message.value.trim();
+
+  if (name.length < 3) {
+    alert("Please enter a valid name (minimum 3 characters)");
+    return false;
+  }
+
+  if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please enter a valid 10-digit mobile number");
+    return false;
+  }
+
+  if (message.length < 5) {
+    alert("Please write a valid message");
+    return false;
+  }
+
+  alert(`✅ Thanks ${name}! Your message has been sent successfully.`);
+  form.reset();
+  return true;
+}
+
+
+
+
+
+
+
+
+
+</script>
+<script src="main.js" defer></script>
+</body>
+</html>s

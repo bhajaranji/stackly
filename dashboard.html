@@ -1,761 +1,398 @@
 <!doctype html>
 <html lang="en">
+    
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Stackly — Dashboard (Charts)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Stackly – Packaging Dashboard</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
   <style>
-    /* ---------- RESET & BASE ---------- */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#f6faf6,#ffffff);
-      color:#0f172a;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.4;
-      padding:0;
-    }
-    a{color:inherit;text-decoration:none}
-
-    /* ---------- LAYOUT ---------- */
-    .app {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      min-height:100vh;
+    /* ===== SCOPE EVERYTHING UNDER .dash (no root collisions) ===== */
+    :where(.dash *){ box-sizing:border-box; }
+    .dash{
+      --radius:14px; --gap:14px;
+      /* Paper & Packaging palette: warm kraft + forest green + charcoal */
+      --bg:#0f1113;               /* page background (deep) */
+      --panel:#151617;            /* panels/cards */
+      --text:#f3efe6;             /* off-white */
+      --muted:#b9b6ad;           /* muted text */
+      --kraft:#caa45a;           /* kraft / mustard accent */
+      --forest:#2f7a45;          /* green accent */
+      --paper:#efe7d6;           /* light paper (used in charts/labels) */
+      background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      min-height:100svh; display:grid; grid-template-columns:260px 1fr; grid-template-rows:auto 1fr;
+      grid-template-areas:"sidebar header" "sidebar main";
     }
 
-    /* Sidebar */
-    .sidebar {
-      background: #0f172a;
-      color: #e6eef1;
-      padding: 20px 18px;
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-      border-right: 1px solid rgba(255,255,255,0.04);
-      transition: transform .28s ease, opacity .28s ease;
+    /* subtle entrance animation */
+    .fade-in { opacity:0; transform: translateY(6px); transition:opacity .45s ease, transform .45s ease; }
+    .fade-in.show { opacity:1; transform:none; }
+
+    /* ===== SIDEBAR ===== */
+    .dash__sidebar{ grid-area:sidebar; position:sticky; top:0; height:100svh; padding:18px;
+      background:linear-gradient(180deg,#121312,#0f1113); border-right:1px solid rgba(255,255,255,.03);
+      display:flex; flex-direction:column; gap:14px; transition:transform .28s ease, opacity .28s ease; }
+    .brand{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.02); }
+    .brand__logo{
+      width:32px;height:32px;border-radius:8px;
+      background:linear-gradient(135deg,var(--kraft), #b07b3f);
+      box-shadow:0 8px 28px rgba(202,164,90,.12);
+      display:grid;place-items:center;font-weight:800;color:#2b2315;
     }
-    .sidebar.hidden { transform: translateX(-110%); opacity:0; position:fixed; z-index:80; top:0; left:0; height:100vh; width:260px; }
-    .sidebar.open { transform: translateX(0); opacity:1; }
-    .brand {display:flex;gap:12px;align-items:center}
-    .logo {width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#c7f464,#2e4e3f);display:flex;align-items:center;justify-content:center;font-weight:800;color:#022}
-    .brand h1{font-size:16px;margin:0}
-    .brand p{font-size:12px;margin:0;color:rgba(230,238,241,0.85)}
-    .nav {display:flex;flex-direction:column;gap:6px;margin-top:8px}
-    .nav a{padding:10px;border-radius:8px;color:#cfeee2;font-size:14px;display:flex;align-items:center;gap:10px}
-    .nav a.active{background:rgba(199,244,100,0.08);color:#ccff9a}
-    .sidebar-footer{margin-top:auto;font-size:12px;color:rgba(230,238,241,0.6)}
+    .brand__name{ margin:0; font-size:15px; letter-spacing:.2px; color:var(--paper) }
+    .nav{ display:grid; gap:6px; }
+    .nav a{ display:grid; grid-template-columns:28px 1fr auto; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; text-decoration:none; color:inherit; border:1px solid transparent; transition:background .18s ease, transform .12s ease; }
+    .nav a:hover{ background: rgba(202,164,90,0.06); transform:translateX(4px); }
+    .nav a.is-active{ background:rgba(47,122,69,0.12); border-color:rgba(47,122,69,0.14); box-shadow:0 6px 30px rgba(47,122,69,0.04); }
+    .nav__icon{ width:28px; height:28px; display:grid; place-items:center; border-radius:8px; background:rgba(255,255,255,.02); font-size:12px; color:var(--muted) }
+    .sep{ height:1px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.03),transparent); margin:6px 0; }
+    .sidebar-foot{ margin-top:auto; display:grid; gap:8px; }
+    .sidebar-foot .mini{ display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:10px; background:rgba(255,255,255,.01); border:1px solid rgba(255,255,255,.02); }
+    .btn{ padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.04); background:rgba(255,255,255,.02); color:var(--text); cursor:pointer; transition:transform .12s ease, box-shadow .12s ease; }
+    .btn:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.5); }
 
-    /* Main area */
-    .main {padding: 22px;}
-    header.topbar {display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-    .search {display:flex;gap:8px;align-items:center;background:#fff;border-radius:10px;padding:8px 10px;box-shadow:0 6px 18px rgba(16,24,40,0.04);border:1px solid rgba(16,24,40,0.04)}
-    .search input{border:0;outline:0;font-size:14px}
-    .user {display:flex;gap:12px;align-items:center}
-    .btn {background:#2e4e3f;color:#fff;border:0;padding:9px 14px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(46,78,63,0.12)}
-    .btn.ghost{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,0.06);box-shadow:none;font-weight:600}
-    .btn.small{padding:6px 10px;border-radius:8px;font-weight:600}
+    /* collapse */
+    .dash.is-collapsed{ grid-template-columns:84px 1fr; }
+    .dash.is-collapsed .brand__name, .dash.is-collapsed .nav span, .dash.is-collapsed .sidebar-foot .mini strong, .dash.is-collapsed .sidebar-foot .mini small { display:none; }
 
-    /* KPI cards */
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
-    .card{background:#fff;border-radius:12px;padding:14px;border:1px solid rgba(15,23,42,0.04);box-shadow: 0 6px 18px rgba(16,24,40,0.03)}
-    .card .label{font-size:12px;color:#64748b}
-    .card .value{font-size:22px;font-weight:800;margin-top:6px}
-    .card .meta{font-size:12px;color:#94a3b8;margin-top:8px}
+    /* ===== HEADER ===== */
+    .dash__header{ grid-area:header; display:grid; grid-template-columns:1fr auto auto; align-items:center; gap:10px;
+      padding:14px 18px; border-bottom:1px solid rgba(255,255,255,.03);
+      background:rgba(20,20,18,.55); backdrop-filter:saturate(140%) blur(6px); position:sticky; top:0; z-index:10; }
+    .search{ display:flex; align-items:center; gap:10px; background:#121212; border:1px solid rgba(255,255,255,.03); border-radius:10px; padding:10px 12px; }
+    .search input{ background:transparent; border:0; outline:0; color:var(--text); width:100%; font-size:14px; }
+    .btn--brand{ background:linear-gradient(135deg,var(--kraft), #b07b3f); border-color:transparent; color:#2b2315; font-weight:700; }
 
-    /* Charts area */
-    .grid-2{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:18px}
-    .chart-card{background:#fff;border-radius:12px;padding:14px;border:1px solid rgba(15,23,42,0.04)}
-    .chart-title{font-weight:700;margin-bottom:10px}
-    .chart-controls{display:flex;gap:8px;margin-bottom:10px}
+    /* ===== MAIN GRID ===== */
+    .dash__main{ grid-area:main; padding:18px; display:grid; gap:var(--gap); grid-template-columns:repeat(12,1fr); align-content:start; }
+    .card{ background:var(--panel); border:1px solid rgba(255,255,255,.03); border-radius:var(--radius); padding:16px; box-shadow:0 10px 40px rgba(0,0,0,.5); transition:transform .14s ease, box-shadow .14s ease; }
+    .card:hover{ transform:translateY(-4px); box-shadow:0 18px 50px rgba(0,0,0,.6); }
+    .card__head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
+    .card__title{ font-size:13px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; }
 
-    /* Orders table */
-    .orders {background:#fff;border-radius:12px;padding:14px;border:1px solid rgba(15,23,42,0.04)}
-    table{width:100%;border-collapse:collapse;font-size:14px}
-    thead th{text-align:left;font-size:12px;color:#64748b;padding:10px 8px;border-bottom:1px solid rgba(15,23,42,0.04)}
-    tbody td{padding:12px 8px;border-bottom:1px solid rgba(15,23,42,0.03)}
-    .badge{display:inline-block;padding:6px 8px;border-radius:999px;font-size:12px;font-weight:700}
-    .badge.pending{background:#fff4e6;color:#c47a00;border:1px solid rgba(196,122,0,0.08)}
-    .badge.production{background:#ecfdf5;color:#0f5132;border:1px solid rgba(16,81,50,0.08)}
-    .badge.shipped{background:#ecfeff;color:#064e3b;border:1px solid rgba(6,78,59,0.06)}
+    /* KPIs */
+    .kpis{ grid-column:1 / -1; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--gap); }
+    .kpi{ display:grid; gap:8px; }
+    .kpi .value{ font-size:28px; font-weight:800; letter-spacing:-.02em; color:var(--paper); }
+    .kpi .delta{ font-size:12px; color:var(--forest); }
 
-    /* modal */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:18px;z-index:60}
-    .modal{background:#fff;padding:18px;border-radius:12px;max-width:720px;width:100%;box-shadow:0 12px 40px rgba(2,6,23,0.3)}
-    .modal h3{margin:0 0 12px}
-    .form-row{display:flex;gap:10px;margin-bottom:10px}
-    .form-row .col{flex:1}
-    .input{width:100%;padding:9px;border-radius:8px;border:1px solid rgba(15,23,42,0.06)}
-    .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+    /* Layout */
+    .chart-lg{ grid-column:span 8; }
+    .chart-sm{ grid-column:span 4; }
+    .table-wrap{ grid-column:span 7; }
+    .activity{ grid-column:span 5; }
+    canvas{ width:100% !important; height:320px !important; }
 
-    /* small helpers */
-    .muted{color:#64748b;font-size:13px}
-    .small{font-size:13px}
-    .right{margin-left:auto}
+    /* Table */
+    table{ width:100%; border-collapse:collapse; font-size:14px; color:var(--text); }
+    thead th{ text-align:left; padding:10px; color:var(--muted); border-bottom:1px solid rgba(255,255,255,.03); }
+    tbody td{ padding:12px 10px; border-bottom:1px dashed rgba(255,255,255,.02); }
+    tbody tr:hover{ background:rgba(255,255,255,.01); }
 
-    /* responsive */
-    @media (max-width: 980px){
-      .app{grid-template-columns: 1fr}
-      .sidebar{display:flex;flex-direction:row;gap:10px;overflow:auto;padding:12px}
-      .main{padding:14px}
-      .kpis{grid-template-columns:repeat(1,1fr)}
-      .grid-2{grid-template-columns:1fr}
-      .sidebar { position:fixed; top:0; left:0; height:100vh; z-index:80; transform: translateX(-110%); }
-      .hamburger { display:flex; }
+    /* Activity */
+    .timeline{ display:grid; gap:12px; }
+    .tick{ display:grid; grid-template-columns:28px 1fr auto; gap:12px; align-items:center; }
+    .dot{ width:10px;height:10px;border-radius:50%; background:var(--forest); box-shadow:0 0 0 6px rgba(47,122,69,.08); }
+    .muted{ color:var(--muted); font-size:12px; }
+
+    /* Responsive */
+    @media (max-width:1200px){ .chart-lg{ grid-column:1 / -1; } .chart-sm{ grid-column:span 6; } .table-wrap{ grid-column:1 / -1; } .activity{ grid-column:1 / -1; } .kpis{ grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:900px){ .dash{ grid-template-columns:84px 1fr; } }
+    @media (max-width:700px){ .dash__main{ grid-template-columns:repeat(6,1fr); } .chart-sm{ grid-column:span 6; } .kpis{ grid-template-columns:1fr; } }
+
+    /* ----- Mobile off-canvas sidebar (override for small screens) ----- */
+    @media (max-width: 900px) {
+      .dash {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+          "header"
+          "main";
+      }
+      .dash__header { grid-column: 1 / -1; }
+      .dash__sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 84%;
+        max-width: 340px;
+        transform: translateX(-110%);
+        transition: transform 280ms ease, opacity 280ms ease;
+        z-index: 2000;
+        box-shadow: 0 18px 40px rgba(2,6,23,.65);
+        border-right: none;
+        padding-top: 18px;
+        background: linear-gradient(180deg,#121312,#0f1113);
+        visibility: hidden;
+        opacity: 0;
+      }
+      .dash__sidebar.open { transform: translateX(0); visibility: visible; opacity: 1; }
+      .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 1990; display: none; }
+      .mobile-overlay.visible { display:block; }
+      .dash__sidebar { position: fixed; }
+      .sidebar-foot #collapse { display: none; }
+      .dash__main { padding-top: 12px; }
+      .dash__header { padding-left: 56px; }
+      .mobile-toggle { display: flex !important; }
     }
 
-    /* micro */
-    .chip {padding:6px 10px;border-radius:999px;border:1px solid rgba(15,23,42,0.04);font-size:13px}
-    .ctrl {padding:6px 8px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:#fff;cursor:pointer}
+    /* mobile toggle (hidden by default on desktop) */
+    .mobile-toggle {
+      display: none;
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      z-index: 2010;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.04);
+      cursor: pointer;
+      color:var(--text);
+    }
 
-    /* topbar actions in mobile */
-    .topbar-left { display:flex; align-items:center; gap:10px; }
-    .hamburger{display:none;align-items:center;gap:8px;background:#fff;border-radius:8px;padding:8px;cursor:pointer;box-shadow:0 6px 18px rgba(16,24,40,0.04)}
-    .back-link{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid rgba(15,23,42,0.06)}
+    /* small utility for chart legends / fonts */
+    .chart-legend { display:flex; gap:10px; align-items:center; font-size:13px; color:var(--muted); }
+
+    /* small accessible focus states */
+    a:focus, button:focus { outline: 3px solid rgba(202,164,90,.14); outline-offset: 3px; }
 
   </style>
 </head>
-<body>
 
-  <div class="app" aria-live="polite">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-      <div class="brand" role="img" aria-label="Stackly logo">
-        <div class="logo">S</div>
-        <div>
-          <h1>Stackly</h1>
-          <p>Paper & Packaging</p>
-        </div>
-      </div>
-
-      <nav class="nav" aria-label="Main menu">
-        <a href="#" class="active" data-section="dashboard">Dashboard</a>
-        <a href="#" data-section="orders">Orders</a>
-        <a href="#" data-section="production">Production</a>
-        <a href="#" data-section="inventory">Inventory</a>
-        <a href="#" data-section="clients">Clients</a>
-        <a href="#" data-section="reports">Reports</a>
-        <small>Admin • Stackly</small>
-      </nav>
-
-      <div class="sidebar-footer">
-        © <span id="year"></span> Stackly
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main" role="main">
-      <header class="topbar">
-        <div class="topbar-left">
-          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-            <svg width="18" height="14" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M3 6h18M3 12h18M3 18h18" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </button>
-
-          <a class="back-link" id="backToWebsite" href="index.html" title="Back to website">
-            ← Back to website
-          </a>
-
-          <div>
-            <h2 style="margin:0;font-size:20px">Welcome back, Admin</h2>
-            <div class="muted">Overview of operations & KPIs</div>
-          </div>
-        </div>
-
-        <div class="user">
-          <div class="search" role="search">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 21l-4.35-4.35" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <input id="searchInput" placeholder="Search orders, clients..." aria-label="Search orders or clients">
-          </div>
-          <button class="btn ghost" id="exportBtn">Export</button>
-          <button class="btn" id="newOrderBtn">New Order</button>
-        </div>
-      </header>
-
-      <!-- KPIs -->
-      <section class="kpis" aria-label="Key performance indicators">
-        <div class="card">
-          <div class="label">Monthly Revenue</div>
-          <div class="value" id="kpiRevenue">₹0</div>
-          <div class="meta">Compared to last month <span id="revChange">+0%</span></div>
-        </div>
-
-        <div class="card">
-          <div class="label">Active Orders</div>
-          <div class="value" id="kpiOrders">0</div>
-          <div class="meta">In production, pending & shipped</div>
-        </div>
-
-        <div class="card">
-          <div class="label">Today's Production</div>
-          <div class="value" id="kpiProd">0</div>
-          <div class="meta">Units produced across lines</div>
-        </div>
-      </section>
-
-      <!-- Charts -->
-      <section class="grid-2" aria-label="Charts">
-
-        <!-- LEFT: Revenue area with controls -->
-        <div class="chart-card" id="leftChartCard">
-          <div style="display:flex;align-items:center;gap:14px;justify-content:space-between">
-            <div>
-              <div class="chart-title" id="leftChartTitle">Revenue (last 12 months)</div>
-              <div class="muted small">Switch graph type to view data differently</div>
-            </div>
-            <div class="chart-controls" role="tablist" aria-label="Revenue chart types">
-              <button class="ctrl" data-chart="line" data-target="revenue">Line</button>
-              <button class="ctrl" data-chart="area" data-target="revenue">Area</button>
-              <button class="ctrl" data-chart="bar" data-target="revenue">Bar</button>
-              <button class="ctrl" data-chart="pie" data-target="revenue">Pie (Qtr)</button>
-            </div>
-          </div>
-
-          <div id="revenueChart" aria-hidden style="margin-top:12px"></div>
-          <div class="muted small" style="margin-top:8px">Tip: Try different chart types for different insights.</div>
-        </div>
-
-        <!-- RIGHT: Production area with controls -->
-        <div class="chart-card" id="rightChartCard">
-          <div style="display:flex;align-items:center;gap:14px;justify-content:space-between">
-            <div>
-              <div class="chart-title">Production by Line</div>
-              <div class="muted small">Toggle type</div>
-            </div>
-            <div class="chart-controls" role="tablist" aria-label="Production chart types">
-              <button class="ctrl" data-chart="hbar" data-target="production">H-Bar</button>
-              <button class="ctrl" data-chart="donut" data-target="production">Donut</button>
-              <button class="ctrl" data-chart="stack" data-target="production">Stack</button>
-            </div>
-          </div>
-
-          <div id="productionChart" aria-hidden style="margin-top:12px"></div>
-          <div class="muted small" style="margin-top:8px">Stack shows two simulated shifts per line.</div>
-        </div>
-      </section>
-
-      <!-- Orders -->
-      <section class="orders" aria-label="Recent Orders">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
-          <h3 style="margin:0">Recent Orders</h3>
-          <div class="muted small" style="margin-left:auto" id="ordersCount">0 items</div>
-        </div>
-
-        <div style="overflow:auto">
-          <table id="ordersTable" aria-describedby="ordersCount">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Client</th>
-                <th>Qty</th>
-                <th>Status</th>
-                <th>ETA</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- populated by JS -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <footer style="margin-top:18px;font-size:13px;color:#64748b">© <span id="year2"></span> Stackly — Paper & Packaging</footer>
-    </main>
-  </div>
-
-  <!-- Modal (New Order) -->
-  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <h3>Create new order</h3>
-      <div>
-        <div class="form-row">
-          <div class="col">
-            <label class="small muted">Order ID</label>
-            <input id="m_orderId" class="input" placeholder="ST-1004" />
-          </div>
-          <div class="col">
-            <label class="small muted">Client</label>
-            <input id="m_client" class="input" placeholder="Client name" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col">
-            <label class="small muted">Quantity</label>
-            <input id="m_qty" type="number" class="input" placeholder="10000" />
-          </div>
-          <div class="col">
-            <label class="small muted">Status</label>
-            <select id="m_status" class="input">
-              <option value="Pending">Pending</option>
-              <option value="In Production">In Production</option>
-              <option value="Shipped">Shipped</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col">
-            <label class="small muted">ETA</label>
-            <input id="m_eta" type="date" class="input" />
-          </div>
-          <div class="col">
-            <label class="small muted">Notes</label>
-            <input id="m_notes" class="input" placeholder="Short note" />
-          </div>
-        </div>
-
-        <div class="modal-actions">
-          <button class="btn ghost" id="cancelModal">Cancel</button>
-          <button class="btn" id="saveModal">Create Order</button>
-        </div>
-      </div>
+<body class="dash">
+  <!-- ==== Sidebar (keep this separate from your site header/footer) ==== -->
+  <aside class="dash__sidebar fade-in" id="sidebar">
+    <div class="brand"><div class="brand__logo">P</div><h1 class="brand__name">Stackly — Paper & Packaging</h1></div>
+    <nav class="nav">
+      <a class="is-active" href="404page.html"><span class="nav__icon">🏭</span><span>Overview</span><span></span></a>
+      <a href="404page.html"><span class="nav__icon">📦</span><span>Production</span></a>
+      <a href="404page.html"><span class="nav__icon">🧾</span><span>Orders</span></a>
+      <a href="404page.html"><span class="nav__icon">📊</span><span>Inventory</span></a>
+      <a href="404page.html"><span class="nav__icon">🚚</span><span>Logistics</span></a>
+      <a href="404page.html"><span class="nav__icon">👥</span><span>Clients</span></a>
+      <a href="index.html"><span class="nav__icon">↩️</span><span>Back to Website</span></a>
+    </nav>
+    <div class="sep"></div>
+    <div class="sidebar-foot">
+      <div class="mini"><div class="nav__icon">📦</div><div><strong>Packaging Suite</strong><br><small class="muted">Production templates & QA</small></div></div>
+      <button class="btn" id="collapse">Toggle Sidebar</button>
     </div>
-  </div>
+  </aside>
 
-  <!-- ---------- SCRIPT: data, UI & interactions (CHARTS UPDATED) ---------- -->
+  <!-- ==== Header (local to dashboard) ==== -->
+  <header class="dash__header">
+    <div class="search"><span>🔍</span><input type="text" placeholder="Search orders, SKUs, clients..." aria-label="Search" /></div>
+    <button class="btn" id="theme">🌙</button>
+    <button class="btn btn--brand">New Order</button>
+  </header>
+
+  <!-- ==== Main ==== -->
+  <main class="dash__main">
+    <!-- KPIs -->
+    <section class="kpis">
+      <div class="card kpi fade-in show">
+        <div class="card__head"><span class="card__title">Monthly Orders</span><span>⋯</span></div>
+        <div class="value">₹ 24.3L</div><div class="delta">▲ +6.8% MoM</div>
+      </div>
+      <div class="card kpi fade-in show" style="transition-delay:.05s">
+        <div class="card__head"><span class="card__title">Production Output</span><span>⋯</span></div>
+        <div class="value">42,800 m²</div><div class="delta">▲ +3.2%</div>
+      </div>
+      <div class="card kpi fade-in show" style="transition-delay:.1s">
+        <div class="card__head"><span class="card__title">Material Stock</span><span>⋯</span></div>
+        <div class="value">Kraft: 12T</div><div class="delta" style="color:var(--kraft)">• Stable</div>
+      </div>
+      <div class="card kpi fade-in show" style="transition-delay:.15s">
+        <div class="card__head"><span class="card__title">Avg Lead Time</span><span>⋯</span></div>
+        <div class="value">3.8 days</div><div class="delta" style="color:#ff6b6b">▼ -0.4d</div>
+      </div>
+    </section>
+
+    <!-- Charts -->
+    <section class="card chart-lg fade-in show" style="animation-delay:.02s">
+      <div class="card__head"><span class="card__title">Orders (Last 12 Months)</span><span class="chart-legend"><span style="color:var(--kraft)">● Orders</span><span style="color:var(--forest)">● Production</span></span></div>
+      <canvas id="chartLine" aria-label="Orders vs Production chart"></canvas>
+    </section>
+
+    <section class="card chart-sm fade-in show" style="animation-delay:.04s">
+      <div class="card__head"><span class="card__title">Material Mix</span><span>🎛️</span></div>
+      <canvas id="chartDough" aria-label="Material mix doughnut chart"></canvas>
+    </section>
+
+    <section class="card chart-sm fade-in show" style="animation-delay:.06s">
+      <div class="card__head"><span class="card__title">Weekly Production (m²)</span><span>📈</span></div>
+      <canvas id="chartBar" aria-label="Weekly Production bar chart"></canvas>
+    </section>
+
+    <!-- Table -->
+    <section class="card table-wrap fade-in show" style="animation-delay:.08s">
+      <div class="card__head"><span class="card__title">Top Clients</span><button class="btn" id="export">Export CSV</button></div>
+      <table>
+        <thead><tr><th>Client</th><th>Service</th><th>Order Value</th><th>Status</th></tr></thead>
+        <tbody id="tbodyClients">
+          <tr><td>GreenPack Industries</td><td>Corrugated Boxes</td><td>₹ 18,50,000</td><td>Active</td></tr>
+          <tr><td>Kraftworks Pvt Ltd</td><td>Kraft Paper Sheets</td><td>₹ 12,00,000</td><td>Active</td></tr>
+          <tr><td>EcoWrap Solutions</td><td>Recycled Packaging</td><td>₹ 8,75,000</td><td>Pending</td></tr>
+          <tr><td>BoxLab</td><td>Display Cartons</td><td>₹ 6,40,000</td><td>Active</td></tr>
+          <tr><td>ParcelPro</td><td>Fulfilment Packaging</td><td>₹ 4,20,000</td><td>Churned</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Activity -->
+    <section class="card activity fade-in show" style="animation-delay:.10s">
+      <div class="card__head"><span class="card__title">Activity</span><span>⚡</span></div>
+      <div class="timeline">
+        <div class="tick"><span class="dot"></span><p><strong>GreenPack Industries</strong> new PO received (20,000 pcs)</p><span class="muted">5m</span></div>
+        <div class="tick"><span class="dot" style="background:var(--kraft); box-shadow:0 0 0 6px rgba(202,164,90,.08)"></span><p>Raw material <strong>Kraft</strong> batch QA passed</p><span class="muted">1h</span></div>
+        <div class="tick"><span class="dot" style="background:#ff6b6b; box-shadow:0 0 0 6px rgba(255,107,107,.06)"></span><p>Delay reported for <strong>EcoWrap Solutions</strong> (ink supply)</p><span class="muted">3h</span></div>
+        <div class="tick"><span class="dot"></span><p>Line B completed run (4,200 m²)</p><span class="muted">6h</span></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== Sidebar collapse & theme toggle (dark/light) =====
+(function(){
+  const root = document.body;                  // root element with CSS vars
+  const dash = document.querySelector('.dash'); // element to get helper class
+
+  // collapse button
+  const coll = document.getElementById('collapse');
+  if (coll) coll.addEventListener('click', ()=> dash.classList.toggle('is-collapsed'));
+
+  // theme toggle (keeps same structure but adjusts to packaging palette)
+  const themeBtn = document.getElementById('theme');
+  if (themeBtn) themeBtn.addEventListener('click', ()=> {
+    const isLight = getComputedStyle(dash).getPropertyValue('--bg').trim() === '#f6f7fb';
+    if (isLight) {
+      // back to dark packaging theme
+      dash.style.setProperty('--bg', '#0f1113');
+      dash.style.setProperty('--panel', '#151617');
+      dash.style.setProperty('--text', '#f3efe6');
+      dash.style.setProperty('--muted', '#b9b6ad');
+      dash.style.setProperty('--kraft', '#caa45a');
+      dash.style.setProperty('--forest', '#2f7a45');
+      themeBtn.textContent = '🌙';
+      dash.classList.remove('is-light');
+    } else {
+      // light version (paper-like)
+      dash.style.setProperty('--bg', '#f6f7fb');
+      dash.style.setProperty('--panel', '#ffffff');
+      dash.style.setProperty('--text', '#0b0c0f');
+      dash.style.setProperty('--muted', '#6b6e73');
+      dash.style.setProperty('--kraft', '#b07b3f');
+      dash.style.setProperty('--forest', '#2f7a45');
+      themeBtn.textContent = '☀️';
+      dash.classList.add('is-light');
+    }
+  });
+})();
+
+
+    // ===== Charts (Chart.js) - tailored for paper & packaging =====
+    (function(){
+      const rootStyles = getComputedStyle(document.body);
+      const text = rootStyles.getPropertyValue('--text').trim() || '#f3efe6';
+      const grid = 'rgba(255,255,255,.04)';
+
+      // Orders (line) — show orders vs production (numbers scaled for demo)
+      new Chart(document.getElementById('chartLine'), {
+        type: 'line',
+        data: {
+          labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+          datasets: [
+            { label:'Orders (k)', data:[8,10,11,13,15,18,17,19,21,23,24,26], tension:.32, fill:true, borderColor:'rgba(202,164,90,1)', backgroundColor:'rgba(202,164,90,0.12)', pointRadius:2, pointBackgroundColor:'rgba(202,164,90,1)' },
+            { label:'Production (m²)', data:[7,9,10,12,14,16,15,17,18,20,21,22], tension:.32, fill:true, borderColor:'rgba(47,122,69,1)', backgroundColor:'rgba(47,122,69,0.08)', pointRadius:2, pointBackgroundColor:'rgba(47,122,69,1)' }
+          ]
+        },
+        options: {
+          responsive:true, maintainAspectRatio:false,
+          scales:{ x:{ grid:{ color:grid }, ticks:{ color:text } }, y:{ grid:{ color:grid }, ticks:{ color:text } } },
+          plugins:{ legend:{ labels:{ color:text } }, tooltip:{ intersect:false, mode:'index' } },
+          interaction: { mode: 'nearest', intersect: false }
+        }
+      });
+
+      // Doughnut: Material Mix (Kraft, Corrugated, Coated, Recycled)
+      new Chart(document.getElementById('chartDough'), {
+        type:'doughnut',
+        data:{ labels:['Kraft','Corrugated','Coated','Recycled'], datasets:[{ data:[45,25,20,10], backgroundColor:['#caa45a','#a67b3a','#e6d1b0','#7ea979'] }] },
+        options:{ plugins:{ legend:{ position:'bottom', labels:{ color:text } } }, cutout:'62%' }
+      });
+
+      // Bar: Weekly Production (sqm)
+      new Chart(document.getElementById('chartBar'), {
+        type:'bar',
+        data:{ labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], datasets:[{ label:'Production (m²)', data:[5600,6400,6100,6800,7400,8000,7200], backgroundColor:'#caa45a' }] },
+        options:{ responsive:true, scales:{ x:{ grid:{ display:false }, ticks:{ color:text } }, y:{ grid:{ color:grid }, ticks:{ color:text } } }, plugins:{ legend:{ display:false } } }
+      });
+    })();
+
+    // ===== Export table to CSV =====
+    const exportBtn = document.getElementById('export');
+    if (exportBtn) exportBtn.addEventListener('click', ()=> {
+      const rows = [...document.querySelectorAll('#tbodyClients tr')].map(tr => [...tr.children].map(td => `"${td.textContent.replace(/"/g,'""')}"`).join(','));
+      const csv  = ['"Client","Service","Order Value","Status"', ...rows].join('\n');
+      const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'stackly-clients.csv'; a.click(); URL.revokeObjectURL(a.href);
+    });
+
+    // small entrance toggles for fade-in elements
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.fade-in').forEach((el, i) => {
+        setTimeout(()=> el.classList.add('show'), 80 + i * 40);
+      });
+    });
+  </script>
+
+  <!-- ===== single mobile toggle script (no duplicates) ===== -->
   <script>
     (function(){
-      // sample initial data
-      const revenueData = [
-        {month:'Jan', revenue:12000},
-        {month:'Feb', revenue:15000},
-        {month:'Mar', revenue:18000},
-        {month:'Apr', revenue:17000},
-        {month:'May', revenue:21000},
-        {month:'Jun', revenue:24000},
-        {month:'Jul', revenue:22000},
-        {month:'Aug', revenue:26000},
-        {month:'Sep', revenue:28000},
-        {month:'Oct', revenue:30000},
-        {month:'Nov', revenue:32000},
-        {month:'Dec', revenue:36000}
-      ];
+      const header = document.querySelector('.dash__header');
+      const sidebar = document.querySelector('.dash__sidebar');
+      if (!header || !sidebar) return;
 
-      // For stacked chart: break each line into shiftA and shiftB (simulated)
-      const productionData = [
-        {line:'Line A', produced:4200, shiftA:2500, shiftB:1700},
-        {line:'Line B', produced:3800, shiftA:1900, shiftB:1900},
-        {line:'Line C', produced:2900, shiftA:1600, shiftB:1300},
-        {line:'Line D', produced:3400, shiftA:2000, shiftB:1400}
-      ];
+      // create hamburger button with class (styled via CSS)
+      const btn = document.createElement('button');
+      btn.id = 'mobileToggle';
+      btn.className = 'mobile-toggle';
+      btn.setAttribute('aria-label','Open menu');
+      btn.innerHTML = '☰';
+      header.appendChild(btn);
 
-      let orders = [
-        {id:'ST-1001', client:'PaperCo', qty:12000, status:'In Production', eta:'2025-11-20'},
-        {id:'ST-1002', client:'PackSmart', qty:8000, status:'Pending', eta:'2025-11-25'},
-        {id:'ST-1003', client:'EcoWrap', qty:5000, status:'Shipped', eta:'2025-11-14'}
-      ];
+      // overlay (hidden by default)
+      const overlay = document.createElement('div');
+      overlay.className = 'mobile-overlay';
+      document.body.appendChild(overlay);
 
-      // DOM refs
-      const kpiRevenue = document.getElementById('kpiRevenue');
-      const kpiOrders = document.getElementById('kpiOrders');
-      const kpiProd = document.getElementById('kpiProd');
-
-      const ordersCount = document.getElementById('ordersCount');
-      const searchInput = document.getElementById('searchInput');
-      const newOrderBtn = document.getElementById('newOrderBtn');
-      const modal = document.getElementById('modalBackdrop');
-      const cancelModal = document.getElementById('cancelModal');
-      const saveModal = document.getElementById('saveModal');
-      const sidebar = document.getElementById('sidebar');
-      const hamburger = document.getElementById('hamburger');
-      const navLinks = document.querySelectorAll('.nav a');
-      const backToWebsite = document.getElementById('backToWebsite');
-
-      // track current chosen chart types so we can redraw during resizes
-      let currentRevenueType = 'line';
-      let currentProductionType = 'hbar';
-      let currentSection = 'dashboard';
-
-      // ---------- helpers ----------
-      function numberWithCommas(x){
-        if (x == null) return '0';
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      function openSidebar(){
+        sidebar.classList.add('open');
+        overlay.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeSidebar(){
+        sidebar.classList.remove('open');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
       }
 
-      function renderKPIs(){
-        const totalRevenue = revenueData.reduce((s,d)=>s+d.revenue,0);
-        kpiRevenue.textContent = '₹' + numberWithCommas(totalRevenue);
-        kpiOrders.textContent = orders.length;
-        const totProd = productionData.reduce((s,d)=>s+d.produced,0);
-        kpiProd.textContent = numberWithCommas(totProd);
-        document.getElementById('revChange').textContent = '+7%';
-      }
-
-      // ---------- CHART DRAWING UTILITIES (SVG) ----------
-      // Clear helper
-      function clearEl(id){ const el = document.getElementById(id); if (el) el.innerHTML=''; return el; }
-
-      // utility: create svg root responsive to container width
-      function createSVG(containerEl, h){
-        const rect = containerEl.getBoundingClientRect();
-        const w = Math.max(320, Math.floor(rect.width));
-        const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
-        svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-        svg.setAttribute('width','100%');
-        svg.setAttribute('height', h);
-        return {svg,w,h};
-      }
-      function makeEl(svg,tag,attrs, text){
-        const el = document.createElementNS(svg.namespaceURI, tag);
-        if (attrs) Object.keys(attrs).forEach(k=> el.setAttribute(k, attrs[k]));
-        if (text != null) el.textContent = text;
-        svg.appendChild(el);
-        return el;
-      }
-
-      // 1) Revenue - LINE (sparkline)
-      function drawRevenueLine(){
-        const el = clearEl('revenueChart');
-        const {svg,w,h} = createSVG(el, 160);
-        const pad=12;
-        const max = Math.max(...revenueData.map(d=>d.revenue));
-        const min = Math.min(...revenueData.map(d=>d.revenue));
-        const stepX = (w - pad*2) / (revenueData.length - 1);
-        const pts = revenueData.map((d,i)=> ({x:pad+i*stepX, y: pad + (1-((d.revenue-min)/(max-min||1)))*(h-pad*2)}));
-        const pathD = pts.map((p,i)=> (i===0?`M ${p.x} ${p.y}`:`L ${p.x} ${p.y}`)).join(' ');
-        makeEl(svg,'path',{d:pathD, fill:'none', stroke:'#16a34a', 'stroke-width':2.6, 'stroke-linecap':'round'});
-        pts.forEach((p,i)=>{
-          makeEl(svg,'circle',{cx:p.x,cy:p.y,r:i===pts.length-1?3.6:2.4,fill:i===pts.length-1?'#16a34a':'#fff',stroke:'#94a3b8','stroke-width':1});
-        });
-        el.appendChild(svg);
-      }
-
-      // 2) Revenue - AREA
-      function drawRevenueArea(){
-        const el = clearEl('revenueChart');
-        const {svg,w,h} = createSVG(el, 160);
-        const pad=12;
-        const max = Math.max(...revenueData.map(d=>d.revenue));
-        const min = Math.min(...revenueData.map(d=>d.revenue));
-        const stepX = (w - pad*2) / (revenueData.length - 1);
-        const pts = revenueData.map((d,i)=> ({x:pad+i*stepX, y: pad + (1-((d.revenue-min)/(max-min||1)))*(h-pad*2)}));
-        const pathD = pts.map((p,i)=> (i===0?`M ${p.x} ${p.y}`:`L ${p.x} ${p.y}`)).join(' ');
-        const areaD = pathD + ` L ${pad + (revenueData.length-1)*stepX} ${h-pad} L ${pad} ${h-pad} Z`;
-        makeEl(svg,'path',{d:areaD, fill:'rgba(34,197,94,0.08)'});
-        makeEl(svg,'path',{d:pathD, fill:'none', stroke:'#16a34a', 'stroke-width':2.6});
-        el.appendChild(svg);
-      }
-
-      // 3) Revenue - Vertical Bars (monthly)
-      function drawRevenueBars(){
-        const el = clearEl('revenueChart');
-        const {svg,w,h} = createSVG(el, 160);
-        const pad=12;
-        const max = Math.max(...revenueData.map(d=>d.revenue));
-        const barW = (w - pad*2) / revenueData.length * 0.7;
-        revenueData.forEach((d,i)=>{
-          const x = pad + i*((w - pad*2)/revenueData.length) + ((w - pad*2)/revenueData.length - barW)/2;
-          const barH = ((d.revenue/max) * (h - pad*2));
-          const y = h - pad - barH;
-          makeEl(svg,'rect',{x:x,y:y,width:barW,height:barH,rx:6,fill:'#16a34a'});
-          makeEl(svg,'text',{x:x+barW/2,y:h-pad+12,'text-anchor':'middle','font-size':10,fill:'#6b7280'}, d.month);
-        });
-        el.appendChild(svg);
-      }
-
-      // 4) Revenue - Pie (quarterly)
-      function drawRevenuePie(){
-        const el = clearEl('revenueChart');
-        const {svg,w,h} = createSVG(el, 240);
-        const cx = w/2, cy = 120, r = Math.min(80, (w/2)-40);
-        const quarters = [
-          {q:'Q1', value: revenueData[0].revenue + revenueData[1].revenue + revenueData[2].revenue},
-          {q:'Q2', value: revenueData[3].revenue + revenueData[4].revenue + revenueData[5].revenue},
-          {q:'Q3', value: revenueData[6].revenue + revenueData[7].revenue + revenueData[8].revenue},
-          {q:'Q4', value: revenueData[9].revenue + revenueData[10].revenue + revenueData[11].revenue}
-        ];
-        const total = quarters.reduce((s,d)=>s+d.value,0);
-        let angle = -Math.PI/2;
-        const colors = ['#16a34a','#34d399','#a3e635','#86efac'];
-        quarters.forEach((q,i)=>{
-          const slice = (q.value/total) * Math.PI*2;
-          const x1 = cx + Math.cos(angle) * r;
-          const y1 = cy + Math.sin(angle) * r;
-          angle += slice;
-          const x2 = cx + Math.cos(angle) * r;
-          const y2 = cy + Math.sin(angle) * r;
-          const large = slice > Math.PI ? 1 : 0;
-          const d = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z`;
-          makeEl(svg,'path',{d:d, fill:colors[i%colors.length], stroke:'#fff','stroke-width':1});
-          const mid = angle - slice/2;
-          const lx = cx + Math.cos(mid) * (r + 28);
-          const ly = cy + Math.sin(mid) * (r + 28);
-          makeEl(svg,'text',{x:lx,y:ly,'font-size':12,'text-anchor':'middle',fill:'#0f172a'}, q.q + ' • ' + Math.round((q.value/total)*100) + '%');
-        });
-        el.appendChild(svg);
-      }
-
-      // ---------- PRODUCTION CHARTS ----------
-      // A) Horizontal bars (per line)
-      function drawProdHBar(){
-        const el = clearEl('productionChart');
-        const {svg,w,h} = createSVG(el, 160);
-        const pad = 10;
-        const max = Math.max(...productionData.map(d=>d.produced));
-        const barH = (h - pad*2) / productionData.length * 0.6;
-        const gap = ((h - pad*2) / productionData.length) - barH;
-        productionData.forEach((d,i)=>{
-          const y = pad + i*(barH + gap);
-          const bw = Math.max(6, (d.produced/max) * (w - pad*2));
-          makeEl(svg,'rect',{x:pad,y:y,width:w-pad*2,height:barH,rx:6,fill:'#f1f5f9'});
-          makeEl(svg,'rect',{x:pad,y:y,width:bw,height:barH,rx:6,fill:'#10b981'});
-          makeEl(svg,'text',{x:w-pad,y:y+barH/2+4,'text-anchor':'end','font-size':12,fill:'#0f172a'}, d.line + ' • ' + numberWithCommas(d.produced));
-        });
-        el.appendChild(svg);
-      }
-
-      // B) Donut chart (share)
-      function drawProdDonut(){
-        const el = clearEl('productionChart');
-        const {svg,w,h} = createSVG(el, 220);
-        const total = productionData.reduce((s,d)=>s+d.produced,0);
-        const cx = w/2, cy = 110, r = Math.min(70, (w/2)-20), thickness=28;
-        let angle=-Math.PI/2;
-        const colors = ['#10b981','#34d399','#60a5fa','#f97316'];
-        productionData.forEach((d,i)=>{
-          const slice = (d.produced/total) * Math.PI*2;
-          const x1 = cx + Math.cos(angle) * r;
-          const y1 = cy + Math.sin(angle) * r;
-          angle += slice;
-          const x2 = cx + Math.cos(angle) * r;
-          const y2 = cy + Math.sin(angle) * r;
-          const large = slice > Math.PI ? 1 : 0;
-          const dOuter = `M ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2}`;
-          const rInner = r - thickness;
-          const x2i = cx + Math.cos(angle) * rInner;
-          const y2i = cy + Math.sin(angle) * rInner;
-          const x1i = cx + Math.cos(angle - slice) * rInner;
-          const y1i = cy + Math.sin(angle - slice) * rInner;
-          const pathD = `${dOuter} L ${x2i} ${y2i} A ${rInner} ${rInner} 0 ${large} 0 ${x1i} ${y1i} Z`;
-          makeEl(svg,'path',{d:pathD,fill:colors[i%colors.length],stroke:'#fff','stroke-width':1});
-          const mid = angle - slice/2;
-          const lx = cx + Math.cos(mid) * (r + 30);
-          const ly = cy + Math.sin(mid) * (r + 30);
-          makeEl(svg,'text',{x:lx,y:ly,'text-anchor':'middle','font-size':12,fill:'#0f172a'}, d.line + ' • ' + Math.round((d.produced/total)*100) + '%');
-        });
-        el.appendChild(svg);
-      }
-
-      // C) Stacked bar (shiftA + shiftB)
-      function drawProdStack(){
-        const el = clearEl('productionChart');
-        const {svg,w,h} = createSVG(el, 160);
-        const pad=10;
-        const max = Math.max(...productionData.map(d=>d.shiftA + d.shiftB));
-        const barH = (h - pad*2) / productionData.length * 0.6;
-        const gap = ((h - pad*2) / productionData.length) - barH;
-        productionData.forEach((d,i)=>{
-          const y = pad + i*(barH+gap);
-          const total = d.shiftA + d.shiftB;
-          const bwA = (d.shiftA/max) * (w - pad*2);
-          const bwB = (d.shiftB/max) * (w - pad*2);
-          makeEl(svg,'rect',{x:pad,y:y,width:w-pad*2,height:barH,rx:6,fill:'#f1f5f9'});
-          makeEl(svg,'rect',{x:pad,y:y,width:bwA,height:barH,rx:6,fill:'#60a5fa'});
-          makeEl(svg,'rect',{x:pad+bwA,y:y,width:bwB,height:barH,rx:6,fill:'#10b981'});
-          makeEl(svg,'text',{x:w-pad,y:y+barH/2+4,'text-anchor':'end','font-size':12,fill:'#0f172a'}, d.line + ' • ' + numberWithCommas(total));
-        });
-        el.appendChild(svg);
-      }
-
-      // ---------- render orders ----------
-      const ordersTableBody = document.querySelector('#ordersTable tbody');
-      function renderOrders(list){
-        ordersTableBody.innerHTML = '';
-        list.forEach(o=>{
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${o.id}</td>
-            <td>${o.client}</td>
-            <td>${numberWithCommas(o.qty)}</td>
-            <td></td>
-            <td>${o.eta||'-'}</td>
-            <td></td>
-          `;
-          const statusTd = tr.children[3];
-          const span = document.createElement('span');
-          span.className = 'badge ' + (o.status === 'Pending' ? 'pending' : o.status === 'Shipped' ? 'shipped' : 'production');
-          span.textContent = o.status;
-          statusTd.appendChild(span);
-
-          const actTd = tr.children[5];
-          const btn = document.createElement('button');
-          btn.className = 'btn ghost';
-          btn.textContent = 'View';
-          btn.style.fontSize='13px';
-          btn.addEventListener('click', ()=> alert(`Order ${o.id}\nClient: ${o.client}\nQty: ${o.qty}\nStatus: ${o.status}\nETA: ${o.eta}`));
-          actTd.appendChild(btn);
-
-          ordersTableBody.appendChild(tr);
-        });
-        document.getElementById('ordersCount').textContent = orders.length + ' items';
-      }
-
-      // search
-      document.getElementById('searchInput').addEventListener('input', (e)=>{
-        const q = e.target.value.trim().toLowerCase();
-        if (!q) renderOrders(orders);
-        else renderOrders(orders.filter(o => (o.id + ' ' + o.client).toLowerCase().includes(q)));
+      btn.addEventListener('click', (e)=> {
+        e.preventDefault();
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
       });
-
-      // modal
-      function openModal(){
-        modal.style.display='flex';
-        modal.setAttribute('aria-hidden','false');
-      }
-      function closeModal(){
-        modal.style.display='none';
-        modal.setAttribute('aria-hidden','true');
-        ['m_orderId','m_client','m_qty','m_eta','m_notes'].forEach(id=> document.getElementById(id).value='');
-        document.getElementById('m_status').value='Pending';
-      }
-      document.getElementById('newOrderBtn').addEventListener('click', openModal);
-      document.getElementById('cancelModal').addEventListener('click', closeModal);
-      document.getElementById('modalBackdrop').addEventListener('click', (ev)=> { if(ev.target===modal) closeModal(); });
-      document.getElementById('saveModal').addEventListener('click', ()=>{
-        const id = document.getElementById('m_orderId').value.trim();
-        const client = document.getElementById('m_client').value.trim();
-        const qty = parseInt(document.getElementById('m_qty').value, 10) || 0;
-        const status = document.getElementById('m_status').value;
-        const eta = document.getElementById('m_eta').value;
-        if (!id || !client || qty <= 0) { alert('Please fill order id, client and a valid quantity.'); return; }
-        orders.unshift({id, client, qty, status, eta});
-        renderOrders(orders);
-        renderKPIs();
-        closeModal();
-      });
-
-      // export small CSV
-      document.getElementById('exportBtn').addEventListener('click', ()=>{
-        const header = ['Order ID','Client','Qty','Status','ETA'];
-        const rows = orders.map(o => [o.id,o.client,o.qty,o.status,o.eta]);
-        const csv = [header, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
-        const blob = new Blob([csv], {type:'text/csv'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url; a.download = 'stackly-orders.csv'; document.body.appendChild(a); a.click();
-        a.remove(); URL.revokeObjectURL(url);
-      });
-
-      // ---------- Chart type switching logic ----------
-      function setActiveChartBtn(target, type){
-        document.querySelectorAll(`[data-target="${target}"]`).forEach(b=>{
-          if (b.getAttribute('data-chart') === type) b.style.background = '#f1f5f9';
-          else b.style.background = '';
-        });
-      }
-
-      function drawRevenueByType(t){
-        currentRevenueType = t;
-        if (t === 'line') drawRevenueLine();
-        else if (t === 'area') drawRevenueArea();
-        else if (t === 'bar') drawRevenueBars();
-        else if (t === 'pie') drawRevenuePie();
-        setActiveChartBtn('revenue', t);
-      }
-      function drawProductionByType(t){
-        currentProductionType = t;
-        if (t === 'hbar') drawProdHBar();
-        else if (t === 'donut') drawProdDonut();
-        else if (t === 'stack') drawProdStack();
-        setActiveChartBtn('production', t);
-      }
-
-      document.querySelectorAll('.chart-controls button').forEach(btn=>{
-        btn.addEventListener('click', ()=>{
-          const type = btn.getAttribute('data-chart');
-          const target = btn.getAttribute('data-target');
-          if (target === 'revenue') drawRevenueByType(type);
-          else drawProductionByType(type);
-        });
-      });
-
-      // NAV behavior: when switching sections, change chart presets
-      navLinks.forEach(a=>{
-        a.addEventListener('click', (ev)=>{
-          ev.preventDefault();
-          navLinks.forEach(x=>x.classList.remove('active'));
-          a.classList.add('active');
-          const section = a.getAttribute('data-section');
-          currentSection = section;
-
-          // adapt charts based on section
-          if (section === 'orders'){
-            document.getElementById('leftChartTitle').textContent = 'Orders — Monthly (sample)';
-            drawRevenueByType('bar');
-            drawProductionByType('donut');
-          } else if (section === 'production'){
-            document.getElementById('leftChartTitle').textContent = 'Production Overview (by quarters)';
-            drawRevenueByType('pie');
-            drawProductionByType('stack');
-          } else { // dashboard or other
-            document.getElementById('leftChartTitle').textContent = 'Revenue (last 12 months)';
-            drawRevenueByType('line');
-            drawProductionByType('hbar');
-          }
-
-          // close mobile sidebar if open
-          if (window.innerWidth <= 980) {
-            sidebar.classList.add('hidden');
-            sidebar.classList.remove('open');
-          }
-        });
-      });
-
-      // hamburger toggle for mobile
-      hamburger.addEventListener('click', ()=>{
-        if (sidebar.classList.contains('open')){
-          sidebar.classList.remove('open');
-          sidebar.classList.add('hidden');
-        } else {
-          sidebar.classList.remove('hidden');
-          sidebar.classList.add('open');
-        }
-      });
-
-      // clicking Back to website - provide a hook (already a link). If you want it to navigate to homepage change href.
-      backToWebsite.addEventListener('click', (e)=>{
-        // default behavior goes to '/', leave as is. This listener is for demo feedback.
-        // If you want to navigate to a specific external URL, set backToWebsite.href = 'https://yourdomain.com';
-      });
-
-      // redraw charts on resize to stay responsive
-      let resizeTimeout = null;
-      window.addEventListener('resize', ()=>{
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(()=>{
-          // redraw current chart types
-          if (currentSection === 'orders'){
-            drawRevenueByType('bar'); drawProductionByType('donut');
-          } else if (currentSection === 'production'){
-            drawRevenueByType('pie'); drawProductionByType('stack');
-          } else {
-            drawRevenueByType(currentRevenueType); drawProductionByType(currentProductionType);
-          }
-        }, 120);
-      });
-
-      // initial render
-      function init(){
-        document.getElementById('year').textContent = new Date().getFullYear();
-        document.getElementById('year2').textContent = new Date().getFullYear();
-        renderKPIs();
-        renderOrders(orders);
-        drawRevenueByType('line');   // default
-        drawProductionByType('hbar'); // default
-
-        // mobile: hide sidebar initially
-        if (window.innerWidth <= 980){
-          sidebar.classList.add('hidden');
-        }
-      }
-      init();
+      overlay.addEventListener('click', closeSidebar);
+      sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setTimeout(closeSidebar, 50)));
+      document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeSidebar(); });
 
     })();
   </script>
+
 </body>
 </html>

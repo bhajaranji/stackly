@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stackly Creative Agency</title>
+  <link rel="icon" href="assets/iamges/logo1.webp" type="image/png">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<!-- Header -->
+<header class="site-header">
+  <div class="container nav-container">
+    <!-- Logo -->
+    <a class="logo" href="index.html" aria-label="Stackly Home">
+      <img src="assets/iamges/logo2.webp" alt="Stackly logo">
+    </a>
+
+    <!-- Desktop nav (visible ≥900px) -->
+    <nav class="nav-desktop desktop-only" aria-label="Primary">
+      <ul class="nav-list">
+        <li class="dropdown">
+          <a href="home1.html" class="dropbtn">Home ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="index.html">home1</a></li>
+          </ul>
+        </li>
+        <li><a href="serives2.html">Services</a></li>
+        <li><a href="about2.html">About Us</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Desktop CTA -->
+    <a href="login.html" class="btn neon desktop-only">Explore More</a>
+
+    <!-- Hamburger (visible <900px) -->
+    <button id="hamburger" class="hamburger mobile-only" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile overlay nav -->
+  <nav id="site-nav" class="site-nav mobile-only" aria-label="Primary" aria-hidden="true">
+    <button class="nav-close" id="nav-close" aria-label="Close menu">✕</button>
+    <ul class="nav-overlay-list">
+      <li class="dropdown">
+        <a href="home1.html" class="dropbtn">Home ▾</a>
+        <ul class="dropdown-content">
+          <li><a href="index.html">home1</a></li>
+        </ul>
+      </li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about2.html">About Us</a></li>
+      <li><a href="blog2.html">Blog</a></li>
+      <li><a href="contact2.html">Contact</a></li>
+      <li><a href="login.html" class="btn neon">Explore More</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+
+<!-- 🧭 Hero Section -->
+<section class="agency-hero">
+  <!-- Two images for smooth crossfade -->
+  <img id="hero-bg-1" src="assets/iamges/home1.1.webp" class="hero-bg active" alt="Hero Image 1">
+  <img id="hero-bg-2" src="assets/iamges/home1.2.webp" class="hero-bg" alt="Hero Image 2">
+
+  <div class="hero-content">
+    <h1>Premium Paper & Packaging for Brands That Demand Excellence <span> That Demand Excellence</span></h1>
+    <p>  From luxury rigid boxes to high-strength corrugated packaging, we craft products that combine beauty, strength, and sustainability. Our solutions ensure your brand leaves a powerful impression from the moment customers see the box.</p>
+    <button class="cta-btn" onclick="window.location.href='404page.html'">
+      JOIN NOW <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</section>
+
+
+<!-- 🧭 About Us Section -->
+<section class="about-us">
+  <div class="about-container">
+    <div class="about-left slide-right">
+      <img src="assets/iamges/home1.15.webp" alt="About Stackly Agency">
+    </div>
+
+    <div class="about-right slide-left">
+      <h4>About Us</h4>
+      <h2>Where Strength Meets Sustainability</h2>
+      <p>
+      Stackly began with a simple belief: every product deserves packaging that protects, performs, and elevates the brand. We’re a modern paper and packaging company blending craftsmanship, material science, and smart design to create packaging that truly makes an impact.
+      <p>
+    Our team works like a well-coordinated production line. Designers craft visuals and structure, material experts choose the right papers and boards, and engineers ensure strength, durability, and efficiency. The result is packaging that looks premium, feels sturdy, and supports your brand’s goals seamlessly.
+      </p>
+
+      <ul class="about-points">
+        <li><i class="fa-solid fa-check"></i> We create packaging that looks premium, performs reliably, and delivers a memorable experience from the moment it’s picked up.”  </li>
+        
+      </ul>
+
+      <a href="404page.html" class="about-btn">
+        Learn More <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!--ACCOUNTS-->
+<section id="accounts" class="account-section">
+  <div class="container">
+    <div class="heading-box">
+      <h5 class="sub-heading">Paper & Products</h5>
+      <h2 class="main-heading"> Tougher Boxes. Brighter Ideas.</h2>
+    </div>
+
+    <div class="card-wrapper">
+      <div class="finance-card">
+        <div class="icon">📦</div>   <!-- Creativity / Design -->
+
+       <h3>Custom Packaging Solutions</h3>
+<p>
+ Work built around your product. We craft tailored packaging designs, materials, and structures that align with your brand’s identity and goals. Every box, label, and material choice is shaped to match your vision, protect your product, and support your growth.
+</p>
+</div>
+
+      <div class="finance-card">
+        <div class="icon">💡</div>   
+       <h3>Tailored Packaging Solutions</h3>
+<p>
+Every box, board, and detail is made to fit your product perfectly. From structure to finishing, we craft packaging that supports your story and strengthens your brand presence..
+</p>
+      </div>
+
+      <div class="finance-card">
+        <div class="icon">🚀</div>  
+        <h3>Smart Packaging Strategy</h3>
+<p>
+ From concept to shelf, we create packaging plans built around your needs — combining material science, design clarity, and production efficiency for real results.
+</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================
+     HERO VIDEO SECTION
+========================= -->
+<section class="hero-section" style="position: relative; height: 90vh;">
+  <!-- Background image -->
+  <img src="assets/iamges/blog6.webp"    
+       alt="background image" 
+       style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(60%); z-index: 0;">
+  
+  <!-- Text content -->
+   <!-- Text content -->
+  <div class="hero-content">
+    <h5 class="hero-subtitle">WATCH VIDEO</h5>
+    <h1 class="hero-title">Exclusive Video Presentation</h1>
+    <p class="hero-text">
+     From concept to production, we build packaging solutions around your needs — blending material expertise, smart structural design, and efficient manufacturing for reliable results.
+    </p>
+
+    <div class="hero-buttons">
+      <!-- CTA Button -->
+      <a href="404page.html" class="cta-btn">Start a Demo</a>
+
+     
+</section>
+
+<!-- ========================
+     VIDEO POPUP
+========================= -->
+<div class="video-popup" id="videoPopup">
+  <div class="video-wrapper">
+    <span class="close-btn" id="closePopup">&times;</span>
+    <iframe
+      id="videoFrame"
+      src="https://www.youtube.com/embed/cO73XRRnytQ?si=Xhe_NScaHPmFW4dt"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+<!-- ========================
+     SERVICES / FEATURES SECTION
+========================= -->
+<section class="features-section">
+  <div class="container">
+    <h5 class="section-subtitle">— Our Core Features —</h5>
+    <h2 class="section-title">Delivering Next-Generation Packaging
+</h2>
+
+    <div class="features-grid">
+      <!-- Row 1 -->
+      <div class="feature-card">
+        <img src="assets/iamges/prmeium.webp" alt="Tax Consulting">
+        <div class="card-content">
+          <h3> Premium Materials</h3>
+          <p>We source and use high-quality papers, boards, and corrugated materials that improve durability and print finish.
+Whether it's kraft, duplex, SBS, rigid board, or corrugated flutes, we ensure the right material for strength, sustainability, and visual appeal.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/iamges/custom .webp" alt="Business Accounting">
+        <div class="card-content">
+          <h3>Custom Packaging Design</h3>
+          <p>We create packaging that fits your product perfectly — not the other way around.
+Our structural designers craft dielines, shapes, and box styles that balance aesthetics, protection, and cost efficiency. Every design is customized based on product size, weight, brand identity, and customer experience.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/iamges/sustainble.webp" alt="Payroll Management">
+        <div class="card-content">
+          <h3>Sustainable & Eco-Friendly Solutions</h3>
+          <p>We design eco-conscious packaging using recyclable, biodegradable, and responsibly sourced materials.
+With reduced plastic usage, water-based inks, and minimal-waste production, we help brands shift toward greener, more responsible packaging.</p>
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="feature-card">
+        <img src="assets/iamges/protect engineering.webp" alt="Financial Planning">
+        <div class="card-content">
+          <h3>Strong Protection Engineering</h3>
+          <p>Our packaging is built to protect.
+We engineer box structures that withstand compression, impact, and moisture during storage and transport. Inserts, partitions, and reinforced edges ensure delicate products remain safe from damage.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/iamges/reliable.webp" alt="Auditing">
+        <div class="card-content">
+          <h3> Reliable Delivery & Fulfillment</h3>
+          <p>We manage the complete production-to-delivery pipeline with strict timelines.
+Your packaging is produced efficiently, packed safely, and dispatched on time — ensuring smooth supply-chain operations.</p>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <img src="assets/iamges/brand.webp" alt="Budgeting">
+        <div class="card-content">
+          <h3>Brand-Focused Printing & Finishing</h3>
+          <p>Your packaging becomes a branding asset with our premium printing and finishing.
+We offer offset, digital, and flexo printing along with laminations, UV coatings, embossing, foiling, and textured finishes — making your product stand out on any shelf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us" id="why-choose-us">
+  <div class="why-choose-us-container">
+    <!-- Left: Image -->
+    <div class="why-choose-us-image">
+      <img src="assets/iamges/whychoose.webp" alt="Why Choose Us">
+    </div>
+
+    <!-- Right: Content -->
+    <div class="why-choose-us-content ">
+     <h2>Why Choose Stackly</h2>
+  <p>We blend material expertise with engineering precision to deliver packaging that looks premium—and performs even better.</p>
+  <ul>
+    <li>✔ <strong>Expert-Led Teams</strong> — Direct access to structural designers, material specialists, and production engineers who build and deliver high-quality packaging.<li>
+    <li>✔ <strong>Speed with Consistency</strong> — Fast prototyping, clear timelines, and efficient production runs backed by strict quality checks at every stage.</li>
+    <li>✔ <strong>Performance-Driven Results</strong> — Packaging tested for strength, durability, and product protection with measurable metrics like ECT, BCT, and moisture resistance.</li>
+    <li>✔ <strong>Full Ownership & Transparency</strong> — Clients receive final dielines, samples, artwork files, and production rights with no restrictions or hidden lock-ins.</li>
+    <li>✔ <strong>Flexible Production Capacity</strong> — From small custom batches to large-scale manufacturing, we scale output based on your demand and supply-chain requirements.</li>
+  </ul>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="testimonial-section">
+  <div class="testimonial-container">
+    <!-- Left Side -->
+    <div class="testimonial-left">
+      <div class="quote-icon">“</div>
+      <div class="client-images">
+        <img src="assets/iamges/testimonails.webp" alt="Main Client" class="client-main">
+        <img src="assets/iamges/testimonails3.webp" alt="Client Small" class="client-small">
+      </div>
+    </div>
+
+    <!-- Right Side -->
+    <div class="testimonial-right">
+      <h5 class="testimonial-subtitle">Medium — product + operations focus</h5>
+      <h2 class="testimonial-title">
+     Real Impact & Meaningful Outcomes
+      </h2>
+      <p class="testimonial-text">
+       “Stackly didn’t just design our boxes — they redesigned how we manufacture them. Their smart material choices (lower-cost kraft blends), efficient dieline engineering, and clear artwork handoffs sped up production, reduced material waste, and improved shelf impact. We launched faster and our fulfillment team had fewer returns. A true partner for scaling packaging operations.”
+      </p>
+      <div class="testimonial-author">
+        <img src="assets/iamges/testiminal6.webp" alt="David Carter">
+        <div>
+          <h4>David Carter</h4>
+          <span>Chief Financial Officer, stackly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="team-section" id="team">
+  <div class="team-container">
+    <h2 class="team-title">Meet Our Team</h2>
+
+    <div class="team-grid">
+      <!-- Member 1 -->
+      <div class="team-card reveal-left">
+        <div class="team-image">
+          <img src="assets/iamges/man1.webp" alt="John N. Holmes">
+          <div class="image-overlay"></div> 
+         
+        </div>
+        <div class="team-info">
+          <h3>John N. Holmes</h3>
+        </div>
+      </div>
+
+      <!-- Member 2 -->
+      <div class="team-card reveal-left">
+        <div class="team-image">
+          <img src="assets/iamges/man2.webp" alt="Kenneth A. Spencer">
+          <div class="image-overlay"></div> 
+          
+        </div>
+        <div class="team-info">
+          <h3>Kenneth A. Spencer</h3>
+          
+        </div>
+      </div>
+
+      <!-- Member 3 -->
+      <div class="team-card reveal-right">
+        <div class="team-image">
+          <img src="assets/iamges/man3.webp" alt="David K. Marble">
+          <div class="image-overlay"></div> 
+          
+        </div>
+        <div class="team-info">
+          <h3>David K. Marble</h3>
+        
+        </div>
+      </div>
+
+      <!-- Member 4 -->
+      <div class="team-card reveal-right">
+        <div class="team-image">
+          <img src="assets/iamges/man4.webp" alt="Raymond Grimes">
+          <div class="image-overlay"></div> 
+         
+        </div>
+        <div class="team-info">
+          <h3>Raymond Grimes</h3>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- CTA BANNER SECTION -->
+<section class="cta-banner">
+  <div class="cta-banner-content">
+    <p class="cta-subtext">Get a Quote</p>
+    <h1 class="cta-title"> Packaging that communicates clearly. Production that performs reliably..</h1>
+    <a href="404page.html" class="cta-button">Get Started Now</a>
+  </div>
+</section>
+
+<!-- BRAND LOGO MARQUEE SECTION -->
+<section class="brand-slider">
+  <div class="brand-track">
+    <img src="assets/iamges/marque1.webp" alt="Company 1">
+    <img src="assets/iamges/marque2.webp" alt="Company 2">
+    <img src="assets/iamges/marque3.webp" alt="Company 3">
+    <img src="assets/iamges/marque4.webp" alt="Company 4">
+    <img src="assets/iamges/marque5.webp" alt="Company 5">
+    <img src="assets/iamges/marque6.webp" alt="Company 6">
+    <!-- Duplicate for smooth infinite loop -->
+    <img src="assets/iamges/marque7.webp" alt="Company 1">
+    <img src="assets/iamges/marque8.webp" alt="Company 2">
+    <img src="assets/iamges/marque9.webp" alt="Company 3">
+    <img src="assets/iamges/marque10.jpg" alt="Company 4">
+    <img src="assets/iamges/marque4.webp" alt="Company 5">
+    <img src="assets/iamges/marque7.webp" alt="Company 6">
+  </div>
+</section>
+
+
+
+
+
+
+<!-- =======================
+         FOOTER
+======================= -->
+<footer class="footer reveal">
+  <div class="footer-container">
+
+    <!-- 1. Brand Column -->
+    <div class="footer-col footer-brand reveal">
+      <a href="index.html" class="footer-logo">
+        <img src="assets/iamges/logo2.webp" alt="Stackly Logo">
+     
+      </a>
+      <p>We design premium paper and packaging experiences built for impact.
+With deep industry expertise and precision engineering, we help your products stand out and your operations scale.</p>
+    </div>
+
+    <!-- 2. Quick Links -->
+    <div class="footer-col reveal">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="home1.html">Home</a></li>
+        <li><a href="about2.html">About Us</a></li>
+        <li><a href="serives2.html">Services</a></li>
+        <li><a href="blog2.html">Blog</a></li>
+        <li><a href="contact2.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- 3. Services -->
+    <div class="footer-col reveal">
+      <h4>Our Services</h4>
+      <ul>
+        <li><a href="404page.html">BrandForm Packaging</a></li>
+        <li><a href="404page.html">Material Science Lab</a></li>
+        <li><a href="404page.html">PackStructure Engineering</a></li>
+        <li><a href="404page.html">PrintFusion Studio</a></li>
+        <li><a href="404page.html">EcoCycle Innovations</a></li>
+        <li><a href="404page.html">HeavyDuty Corr-Pack Systems</a></li>
+      </ul>
+    </div>
+
+    <!-- 4. Newsletter / Contact -->
+    <div class="footer-col reveal">
+      <h4>Stay Connected</h4>
+      <p>Subscribe to our newsletter to get the latest digital trends and insights.</p>
+      <form class="footer-newsletter" onsubmit="event.preventDefault(); window.location.href='404page.html';">
+  <input type="email" placeholder="Enter your email" required>
+  <button type="submit">
+    <i class="fa-solid fa-paper-plane"></i>
+  </button>
+</form>
+
+
+      <div class="social-links">
+        <a href="404page.html"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-twitter"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-instagram"></i></a>
+        <a href="404page.html"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom reveal">
+    <p>© 2025 Stackly Digital Agency | All Rights Reserved | <a href="#">Privacy Policy</a></p>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- ✅ JavaScript for Background Slideshow -->
+<script>
+  const images = [
+    'assets/iamges/home1.1.webp',
+    'assets/iamges/home1.2.webp',
+    'assets/iamges/home1.3.webp'
+  ];
+
+  let index = 0;
+  const img1 = document.getElementById('hero-bg-1');
+  const img2 = document.getElementById('hero-bg-2');
+  let showingFirst = true;
+
+  setInterval(() => {
+    index = (index + 1) % images.length;
+
+    if (showingFirst) {
+      img2.src = images[index];
+      img2.classList.add('active');
+      img1.classList.remove('active');
+    } else {
+      img1.src = images[index];
+      img1.classList.add('active');
+      img2.classList.remove('active');
+    }
+
+    showingFirst = !showingFirst;
+  }, 4000); // change every 4 seconds (you can adjust)
+
+
+
+
+
+  // Select all elements with slide animation
+  const slideElements = document.querySelectorAll('.slide-left, .slide-right');
+
+  const scrollTrigger = () => {
+    slideElements.forEach((el) => {
+      const elementTop = el.getBoundingClientRect().top;
+      const triggerPoint = window.innerHeight - 100;
+
+      if (elementTop < triggerPoint) {
+        el.classList.add('show');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', scrollTrigger);
+  // Run once in case section is already visible
+  scrollTrigger();
+
+
+
+
+// Simple inline function as backup
+document.addEventListener('DOMContentLoaded', () => {
+  const playBtn = document.getElementById('playVideoBtn');
+  const videoPopup = document.getElementById('videoPopup');
+  const closePopup = document.getElementById('closePopup');
+  const videoFrame = document.getElementById('videoFrame');
+
+  const videoURL = "https://www.youtube.com/embed/digpucxFbMo?autoplay=1&si=i5XZONAZM2mBjTM-";
+
+  playBtn.addEventListener('click', () => {
+    videoFrame.src = videoURL;
+    videoPopup.classList.add('active');
+  });
+
+  closePopup.addEventListener('click', () => {
+    videoPopup.classList.remove('active');
+    videoFrame.src = "";
+  });
+
+  videoPopup.addEventListener('click', (e) => {
+    if (e.target === videoPopup) {
+      videoPopup.classList.remove('active');
+      videoFrame.src = "";
+    }
+  });
+});
+
+// ✅ Grab ALL reveal elements — from any section
+const revealElements = document.querySelectorAll(
+  ".reveal, .reveal-left, .reveal-right"
+);
+
+// ✅ One scroll function to handle everything
+function revealOnScroll() {
+  const windowHeight = window.innerHeight;
+  const revealPoint = 100;
+
+  revealElements.forEach((el) => {
+    const elementTop = el.getBoundingClientRect().top;
+
+    if (elementTop < windowHeight - revealPoint) {
+      el.classList.add("reveal-active");
+    } else {
+      el.classList.remove("reveal-active"); // optional
+    }
+  });
+}
+
+// ✅ Attach one listener
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll(); // trigger once when page loads
+
+
+
+
+const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+      } else {
+        entry.target.classList.remove("active");
+      }
+    });
+  }, { threshold: 0.2 });
+
+  reveals.forEach((el) => observer.observe(el));
+
+
+
+
+  //toogle function//
+
+
+
+
+
+
+  
+
+
+
+
+</script>
+
+<script src="main.js" defer></script>
+</body>
+</html>

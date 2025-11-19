@@ -1,3 +1,61 @@
+// Ensure code runs after DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  // --- 1) Pause background video on small devices (bandwidth saving) ---
+  const bgVideo = document.getElementById('bg-video'); // update id to match your HTML
+  const smallScreenQuery = '(max-width: 600px)'; // tweak breakpoint
+
+  function handleBgVideoOnResize() {
+    if (!bgVideo) return; // defensive: element may be absent
+    if (window.matchMedia(smallScreenQuery).matches) {
+      // small device — pause
+      if (!bgVideo.paused) bgVideo.pause();
+      bgVideo.setAttribute('data-paused-for-bandwidth', 'true');
+      console.log('Small device detected — background video paused to save bandwidth.');
+    } else {
+      // large device — play if not intentionally paused elsewhere
+      if (bgVideo.getAttribute('data-paused-for-bandwidth') === 'true') {
+        bgVideo.play().catch(() => {
+          /* autoplay may be blocked by browser; ignore */
+        });
+        bgVideo.removeAttribute('data-paused-for-bandwidth');
+      }
+    }
+  }
+
+  // initial check and on resize
+  handleBgVideoOnResize();
+  window.addEventListener('resize', handleBgVideoOnResize);
+
+  // --- 2) Defensive access to element.children (fixes your "reading 'children'" error) ---
+  // Example: replace direct usage like `const c = el.children[0]` with:
+  const maybeParent = document.querySelector('.some-parent'); // update selector
+  if (maybeParent) {
+    // safe to access children
+    const firstChild = maybeParent.children && maybeParent.children[0];
+    if (firstChild) {
+      // do work with firstChild
+    }
+  } else {
+    console.warn('Element ".some-parent" not found — skipping children access.');
+  }
+
+  // --- 3) Example using optional chaining where appropriate ---
+  // If you only need to read length or call a method, optional chaining prevents the exception:
+  const listLength = document.querySelector('.list')?.children?.length ?? 0;
+  console.log('listLength =', listLength);
+
+  // --- 4) If you previously used something like document.querySelector('#tabs').children ---
+  // Replace with:
+  const tabs = document.querySelector('#tabs');
+  if (tabs && tabs.children && tabs.children.length > 0) {
+    // safe manipulation
+  } else {
+    // fallback or early return
+  }
+});
+
+
+
 // script.js - final robust header interactions (desktop + mobile)
 (function() {
   const hamburger = document.getElementById('hamburger');
@@ -161,13 +219,8 @@
 
 })();
 
-
-
-
-/* Robust single script to reliably attempt autoplay for the bg video.
-   - Does NOT reference any missing controls.
-   - Respects prefers-reduced-motion and small-device data-savings.
-   - Logs helpful messages to console for debugging. */
+/* Robust autoplay logic — allows autoplay on small devices (muted + playsinline),
+   respects prefers-reduced-motion, and shows a simple play-overlay if autoplay is blocked. */
 (function(){
   const video = document.getElementById('bgVideo');
   if (!video) {
@@ -175,14 +228,56 @@
     return;
   }
 
-  // Helper: try to play and report result
-  async function tryPlayVideo() {
+  // small helper to create a simple play overlay (inline styles so no CSS required)
+  function createPlayOverlay() {
+    const wrapper = document.createElement('div');
+    wrapper.setAttribute('role','button');
+    wrapper.tabIndex = 0;
+    wrapper.className = 'bgvideo-play-overlay';
+    wrapper.style.position = 'absolute';
+    wrapper.style.inset = '0';
+    wrapper.style.display = 'grid';
+    wrapper.style.placeItems = 'center';
+    wrapper.style.background = 'linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.24))';
+    wrapper.style.cursor = 'pointer';
+    wrapper.style.zIndex = 60;
+
+    const btn = document.createElement('div');
+    btn.innerHTML = '▶';
+    btn.style.fontSize = '34px';
+    btn.style.padding = '12px 18px';
+    btn.style.borderRadius = '50%';
+    btn.style.background = 'rgba(255,255,255,0.08)';
+    btn.style.color = 'white';
+    btn.style.boxShadow = '0 6px 18px rgba(0,0,0,0.5)';
+    wrapper.appendChild(btn);
+
+    // attach click / keyboard handler (Enter/Space)
+    function activate(e){
+      if (e.type === 'keydown' && !/^(Enter| |Space)$/.test(e.key)) return;
+      wrapper.removeEventListener('click', activate);
+      wrapper.removeEventListener('keydown', activate);
+      wrapper.remove();
+      // try to play unmuted if user explicitly tapped (user gesture)
+      video.muted = false;
+      try { video.play(); } catch(err){ console.warn('Play after user gesture failed:', err); }
+    }
+    wrapper.addEventListener('click', activate);
+    wrapper.addEventListener('keydown', activate);
+    return wrapper;
+  }
+
+  // Helper: attempt to play and report result
+  async function tryPlayVideo({preferUnmuted = false} = {}) {
     try {
+      // if preferUnmuted requested, ensure video.muted is false only if autoplay likely allowed.
+      if (preferUnmuted) video.muted = false;
       await video.play();
-      console.log('Background video playing (autoplay succeeded).');
+      console.log('Background video playing (autoplay succeeded). muted=', video.muted);
+      return true;
     } catch (err) {
       console.warn('Autoplay blocked or failed:', err);
-      // video stays paused — that's OK on some browsers/devices
+      return false;
     }
   }
 
@@ -195,25 +290,56 @@
     return;
   }
 
-  // 2) For small devices, avoid forcing autoplay (saves data)
+  // 2) Prepare video attributes to maximize autoplay success on mobile:
+  //    - muted and playsinline are essential on many mobile browsers
+  video.muted = true;
+  if (!video.hasAttribute('playsinline')) video.setAttribute('playsinline', '');
+  // keep autoplay attribute if present; do not forcibly remove it
+  // ensure video is not using controls (if you don't want them)
+  // video.controls = false; // optional
+
+  // small-device detection (keeps autoplay allowed)
   const smallDevice = window.matchMedia && window.matchMedia('(max-width:560px)').matches;
   if (smallDevice) {
-    console.log('Small device detected — pausing background video to save bandwidth.');
-    video.pause();
-    // keep poster visible; do NOT remove autoplay attribute so users with desktop UA overrides still autoplay
-    return;
+    console.log('Small device detected — allowing autoplay (muted + playsinline).');
+  } else {
+    console.log('Desktop/large device detected — allowing autoplay.');
   }
 
-  // 3) If video element has a poster and is ready, attempt to play after DOM ready
+  // 3) Attempt to play after DOM ready / metadata loaded
   function onReadyTryPlay() {
-    // If metadata hasn't loaded, wait for 'loadedmetadata' to ensure dimensions/codec ready
-    if (video.readyState >= 2) return tryPlayVideo();
-    const onLoaded = () => { video.removeEventListener('loadedmetadata', onLoaded); tryPlayVideo(); };
-    video.addEventListener('loadedmetadata', onLoaded);
-    // also set a timeout fallback in case loadedmetadata doesn't fire
-    setTimeout(() => {
-      if (video.paused) tryPlayVideo();
-    }, 800);
+    // If metadata hasn't loaded, wait for 'loadedmetadata' to ensure readiness
+    const attempt = async () => {
+      // first try muted autoplay (highest chance of success)
+      const ok = await tryPlayVideo({preferUnmuted: false});
+      if (ok) return;
+
+      // autoplay blocked — if on small device, keep muted and show overlay to let user start playback
+      // Create an inline overlay that the user can tap to start playback (user gesture)
+      const parent = video.parentElement || document.body;
+      // ensure parent is positioned to allow absolute overlay
+      const prevPos = window.getComputedStyle(parent).position;
+      if (prevPos === 'static') parent.style.position = 'relative';
+
+      const overlay = createPlayOverlay();
+      parent.appendChild(overlay);
+
+      // Also try a second time with a short delay — sometimes browser allows play after a brief user interaction
+      setTimeout(async () => {
+        if (video.paused) {
+          const retry = await tryPlayVideo({preferUnmuted: false});
+          if (retry && overlay.parentElement) overlay.remove();
+        }
+      }, 600);
+    };
+
+    if (video.readyState >= 2) attempt();
+    else {
+      const onLoaded = () => { video.removeEventListener('loadedmetadata', onLoaded); attempt(); };
+      video.addEventListener('loadedmetadata', onLoaded);
+      // fallback attempt in case loadedmetadata doesn't fire timely
+      setTimeout(attempt, 900);
+    }
   }
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') onReadyTryPlay();
@@ -222,10 +348,23 @@
   // 4) If the video fails to load due to network issues, provide debugging info
   video.addEventListener('error', (e) => {
     console.error('Video element error:', e);
-    // Show a visual fallback if you want: add a CSS class, notify user, etc.
+    // you can add a visual fallback class here if needed
   });
 
-  // Optional: pause video when user scrolls far away to reduce CPU/battery
+  // 5) Optional: pause/resume based on visibility to save battery (use Visibility API)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      if (!video.paused) {
+        video.pause();
+        console.log('Document hidden — paused bg video.');
+      }
+    } else {
+      // attempt to resume (muted) when user returns
+      if (video.paused) tryPlayVideo();
+    }
+  });
+
+  // 6) Optional scroll-away optimization (keep but less aggressive)
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (!ticking) {
@@ -234,7 +373,7 @@
           video.pause();
           console.log('Paused bg video to save CPU (scrolled away).');
         } else if (window.scrollY <= window.innerHeight && video.paused) {
-          // try resume only if autoplay likely allowed
+          // user likely near the hero again — try resuming autoplay (muted)
           tryPlayVideo();
         }
         ticking = false;
@@ -242,6 +381,7 @@
       ticking = true;
     }
   });
+
 })();
 
 
