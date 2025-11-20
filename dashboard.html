@@ -190,6 +190,94 @@
 }
 
 
+
+
+/* ===== Chart sizing: fixed wrappers so charts don't stretch or push content ===== */
+.chart-wrap {          /* generic wrapper around <canvas> */
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;    /* prevents canvas from forcing overflow */
+}
+
+/* desktop/tall charts */
+.chart-lg .chart-wrap {
+  height: 320px;       /* large chart height on wide screens */
+  min-height: 240px;
+}
+
+/* small/side charts */
+.chart-sm .chart-wrap {
+  height: 220px;       /* smaller chart height */
+  min-height: 160px;
+}
+
+/* responsive mobile heights (reduce so cards don't become very tall) */
+@media (max-width: 900px) {
+  .chart-lg .chart-wrap { height: 260px; }
+  .chart-sm .chart-wrap { height: 180px; }
+}
+
+/* Make the canvas fill the wrapper, but do NOT set a global fixed px height on canvas */
+.chart-wrap canvas {
+  display: block !important;
+  width: 100% !important;      /* fill width */
+  height: 100% !important;     /* fill wrapper height */
+  max-width: 100% !important;
+  object-fit: contain;         /* keep content inside the box */
+}
+
+
+
+/* ===== FIX HORIZONTAL SCROLL ON DASHBOARD ===== */
+
+/* Stop any overflow inside dashboard */
+.dash {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
+/* Prevent any child from stretching wider than screen */
+.dash * {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Header items wrap so they never push layout sideways */
+@media (max-width: 900px) {
+  .dash__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 100% !important;
+  }
+
+  .dash__header > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Charts cannot exceed screen width */
+.chart-wrap,
+.chart-wrap canvas {
+  max-width: 100% !important;
+  overflow: hidden !important;
+}
+
+/* Sidebar on mobile must not expand page width */
+@media (max-width: 900px) {
+  .dash__sidebar {
+    max-width: 300px !important;
+    width: 80% !important;
+    left: 0 !important;
+    right: auto !important;
+  }
+}
+
+
+
+
   </style>
 </head>
 
@@ -245,17 +333,24 @@
     <!-- Charts -->
     <section class="card chart-lg fade-in show" style="animation-delay:.02s">
       <div class="card__head"><span class="card__title">Orders (Last 12 Months)</span><span class="chart-legend"><span style="color:var(--kraft)">● Orders</span><span style="color:var(--forest)">● Production</span></span></div>
-      <canvas id="chartLine" aria-label="Orders vs Production chart"></canvas>
+      <div class="chart-wrap">
+  <canvas id="chartLine" aria-label="Orders vs Production chart"></canvas>
+</div>
+
     </section>
 
     <section class="card chart-sm fade-in show" style="animation-delay:.04s">
       <div class="card__head"><span class="card__title">Material Mix</span><span>🎛️</span></div>
-      <canvas id="chartDough" aria-label="Material mix doughnut chart"></canvas>
+ <div class="chart-wrap">
+    <canvas id="chartDough" aria-label="Material mix doughnut chart" role="img"></canvas>
+  </div>
     </section>
 
     <section class="card chart-sm fade-in show" style="animation-delay:.06s">
       <div class="card__head"><span class="card__title">Weekly Production (m²)</span><span>📈</span></div>
-      <canvas id="chartBar" aria-label="Weekly Production bar chart"></canvas>
+<div class="chart-wrap">
+    <canvas id="chartBar" aria-label="Weekly Production bar chart" role="img"></canvas>
+  </div>
     </section>
 
     <!-- Table -->
@@ -324,45 +419,35 @@
 })();
 
 
-    // ===== Charts (Chart.js) - tailored for paper & packaging =====
-    (function(){
-      const rootStyles = getComputedStyle(document.body);
-      const text = rootStyles.getPropertyValue('--text').trim() || '#f3efe6';
-      const grid = 'rgba(255,255,255,.04)';
+const chartLine = new Chart(document.getElementById('chartLine'), {
+  type: 'line',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    datasets: [
+      { label:'Orders (k)', data:[8,10,11,13,15,18,17,19,21,23,24,26], tension:.32, fill:true, borderColor:'rgba(202,164,90,1)', backgroundColor:'rgba(202,164,90,0.12)', pointRadius:2 },
+      { label:'Production (m²)', data:[7,9,10,12,14,16,15,17,18,20,21,22], tension:.32, fill:true, borderColor:'rgba(47,122,69,1)', backgroundColor:'rgba(47,122,69,0.08)', pointRadius:2 }
+    ]
+  },
+  options: { responsive: true, maintainAspectRatio: false }
+});
 
-      // Orders (line) — show orders vs production (numbers scaled for demo)
-      new Chart(document.getElementById('chartLine'), {
-        type: 'line',
-        data: {
-          labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-          datasets: [
-            { label:'Orders (k)', data:[8,10,11,13,15,18,17,19,21,23,24,26], tension:.32, fill:true, borderColor:'rgba(202,164,90,1)', backgroundColor:'rgba(202,164,90,0.12)', pointRadius:2, pointBackgroundColor:'rgba(202,164,90,1)' },
-            { label:'Production (m²)', data:[7,9,10,12,14,16,15,17,18,20,21,22], tension:.32, fill:true, borderColor:'rgba(47,122,69,1)', backgroundColor:'rgba(47,122,69,0.08)', pointRadius:2, pointBackgroundColor:'rgba(47,122,69,1)' }
-          ]
-        },
-        options: {
-          responsive:true, maintainAspectRatio:false,
-          scales:{ x:{ grid:{ color:grid }, ticks:{ color:text } }, y:{ grid:{ color:grid }, ticks:{ color:text } } },
-          plugins:{ legend:{ labels:{ color:text } }, tooltip:{ intersect:false, mode:'index' } },
-          interaction: { mode: 'nearest', intersect: false }
-        }
-      });
+const chartDough = new Chart(document.getElementById('chartDough'), {
+  type:'doughnut',
+  data:{ labels:['Kraft','Corrugated','Coated','Recycled'], datasets:[{ data:[45,25,20,10], backgroundColor:['#caa45a','#a67b3a','#e6d1b0','#7ea979'] }] },
+  options:{ responsive:true, maintainAspectRatio:false, cutout:'62%' }
+});
 
-      // Doughnut: Material Mix (Kraft, Corrugated, Coated, Recycled)
-      new Chart(document.getElementById('chartDough'), {
-        type:'doughnut',
-        data:{ labels:['Kraft','Corrugated','Coated','Recycled'], datasets:[{ data:[45,25,20,10], backgroundColor:['#caa45a','#a67b3a','#e6d1b0','#7ea979'] }] },
-        options:{ plugins:{ legend:{ position:'bottom', labels:{ color:text } } }, cutout:'62%' }
-      });
+const chartBar = new Chart(document.getElementById('chartBar'), {
+  type:'bar',
+  data:{ labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], datasets:[{ label:'Production (m²)', data:[5600,6400,6100,6800,7400,8000,7200], backgroundColor:'#caa45a' }] },
+  options:{ responsive:true, maintainAspectRatio:false }
+});
 
-      // Bar: Weekly Production (sqm)
-      new Chart(document.getElementById('chartBar'), {
-        type:'bar',
-        data:{ labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], datasets:[{ label:'Production (m²)', data:[5600,6400,6100,6800,7400,8000,7200], backgroundColor:'#caa45a' }] },
-        options:{ responsive:true, scales:{ x:{ grid:{ display:false }, ticks:{ color:text } }, y:{ grid:{ color:grid }, ticks:{ color:text } } }, plugins:{ legend:{ display:false } } }
-      });
-    })();
-
+// keep references for resize
+const charts = [chartLine, chartDough, chartBar];
+window.addEventListener('resize', () =>
+  charts.forEach(c => c && c.resize && c.resize())
+);
     // ===== Export table to CSV =====
     const exportBtn = document.getElementById('export');
     if (exportBtn) exportBtn.addEventListener('click', ()=> {
