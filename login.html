@@ -285,142 +285,151 @@
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+  (function(){
+    // elements
+    const tabLogin = document.getElementById('tabLogin');
+    const tabSignup = document.getElementById('tabSignup');
+    const formLogin = document.getElementById('formLogin');
+    const formSignup = document.getElementById('formSignup');
+    const toSignup = document.getElementById('toSignup');
+    const toLogin = document.getElementById('toLogin');
 
-  <script>
-    (function(){
-      // elements
-      const tabLogin = document.getElementById('tabLogin');
-      const tabSignup = document.getElementById('tabSignup');
-      const formLogin = document.getElementById('formLogin');
-      const formSignup = document.getElementById('formSignup');
-      const toSignup = document.getElementById('toSignup');
-      const toLogin = document.getElementById('toLogin');
+    const loginEmail = document.getElementById('loginEmail');
+    const loginPwd = document.getElementById('loginPwd');
+    const loginEmailErr = document.getElementById('loginEmailErr');
+    const loginPwdErr = document.getElementById('loginPwdErr');
 
-      const loginEmail = document.getElementById('loginEmail');
-      const loginPwd = document.getElementById('loginPwd');
-      const loginEmailErr = document.getElementById('loginEmailErr');
-      const loginPwdErr = document.getElementById('loginPwdErr');
+    const suName = document.getElementById('suName');
+    const suEmail = document.getElementById('suEmail');
+    const suPwd = document.getElementById('suPwd');
+    const suPwd2 = document.getElementById('suPwd2');
+    const suPhone = document.getElementById('suPhone');
+    const agreeTos = document.getElementById('agreeTos');
 
-      const suName = document.getElementById('suName');
-      const suEmail = document.getElementById('suEmail');
-      const suPwd = document.getElementById('suPwd');
-      const suPwd2 = document.getElementById('suPwd2');
-      const suPhone = document.getElementById('suPhone');
-      const agreeTos = document.getElementById('agreeTos');
+    const suNameErr = document.getElementById('suNameErr');
+    const suEmailErr = document.getElementById('suEmailErr');
+    const suPwdErr = document.getElementById('suPwdErr');
+    const suPwd2Err = document.getElementById('suPwd2Err');
+    const suPhoneErr = document.getElementById('suPhoneErr');
+    const agreeErr = document.getElementById('agreeErr');
 
-      const suNameErr = document.getElementById('suNameErr');
-      const suEmailErr = document.getElementById('suEmailErr');
-      const suPwdErr = document.getElementById('suPwdErr');
-      const suPwd2Err = document.getElementById('suPwd2Err');
-      const suPhoneErr = document.getElementById('suPhoneErr');
-      const agreeErr = document.getElementById('agreeErr');
+    const pwdBar = document.getElementById('pwdBar');
 
-      const pwdBar = document.getElementById('pwdBar');
+    const modalForgot = document.getElementById('modalForgot');
+    const openForgot = document.getElementById('openForgot');
+    const closeForgot = document.getElementById('closeForgot');
+    const formForgot = document.getElementById('formForgot');
+    const fpEmail = document.getElementById('fpEmail');
+    const fpEmailErr = document.getElementById('fpEmailErr');
 
-      const modalForgot = document.getElementById('modalForgot');
-      const openForgot = document.getElementById('openForgot');
-      const closeForgot = document.getElementById('closeForgot');
-      const formForgot = document.getElementById('formForgot');
-      const fpEmail = document.getElementById('fpEmail');
-      const fpEmailErr = document.getElementById('fpEmailErr');
+    const toast = document.getElementById('toast');
 
-      const toast = document.getElementById('toast');
+    // utils
+    function showToast(msg){
+      // keep using for error/info only if you want
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(()=>toast.style.display='none', 3200);
+    }
 
-      // utils
-      function showToast(msg){ toast.textContent = msg; toast.style.display = 'block'; setTimeout(()=>toast.style.display='none', 3200); }
+    function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+    function isPhone(v){ return /^\+?[0-9 \-]{7,20}$/.test(v); }
 
-      function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-      function isPhone(v){ return /^\+?[0-9 \-]{7,20}$/.test(v); }
+    function passwordScore(p){
+      let score = 0;
+      if (p.length >= 8) score += 1;
+      if (/[A-Z]/.test(p)) score += 1;
+      if (/[0-9]/.test(p)) score += 1;
+      if (/[^A-Za-z0-9]/.test(p)) score += 1;
+      return Math.min(4, score);
+    }
 
-      function passwordScore(p){
-        let score = 0;
-        if (p.length >= 8) score += 1;
-        if (/[A-Z]/.test(p)) score += 1;
-        if (/[0-9]/.test(p)) score += 1;
-        if (/[^A-Za-z0-9]/.test(p)) score += 1;
-        return Math.min(4, score);
-      }
+    function setPwdBar(score){ const pct = (score/4)*100 + '%'; if (pwdBar) pwdBar.style.width = pct; }
 
-      function setPwdBar(score){ const pct = (score/4)*100 + '%'; pwdBar.style.width = pct; }
+    // tab switching
+    function showLogin(){ tabLogin.classList.add('active'); tabSignup.classList.remove('active'); formLogin.style.display='block'; formSignup.style.display='none'; }
+    function showSignup(){ tabSignup.classList.add('active'); tabLogin.classList.remove('active'); formSignup.style.display='block'; formLogin.style.display='none'; }
 
-      // tab switching
-      function showLogin(){ tabLogin.classList.add('active'); tabSignup.classList.remove('active'); formLogin.style.display='block'; formSignup.style.display='none'; }
-      function showSignup(){ tabSignup.classList.add('active'); tabLogin.classList.remove('active'); formSignup.style.display='block'; formLogin.style.display='none'; }
+    tabLogin.addEventListener('click', showLogin);
+    tabSignup.addEventListener('click', showSignup);
+    toSignup.addEventListener('click', showSignup);
+    toLogin.addEventListener('click', showLogin);
 
-      tabLogin.addEventListener('click', showLogin);
-      tabSignup.addEventListener('click', showSignup);
-      toSignup.addEventListener('click', showSignup);
-      toLogin.addEventListener('click', showLogin);
+    // OPTIONAL: If you want clicking the signup TAB/button to immediately redirect
+    // uncomment the next line (it will bypass showing the signup form)
+    // tabSignup.addEventListener('click', ()=> window.location.href = '404page.html');
 
-      // live password strength
+    // live password strength
+    if (suPwd) {
       suPwd.addEventListener('input', ()=>{ const s = passwordScore(suPwd.value); setPwdBar(s); });
+    }
 
-      // LOGIN validation
-      formLogin.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        let ok = true;
-        loginEmailErr.textContent = '';
-        loginPwdErr.textContent = '';
+    // LOGIN validation
+    formLogin.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      let ok = true;
+      loginEmailErr.textContent = '';
+      loginPwdErr.textContent = '';
 
-        if (!isEmail(loginEmail.value.trim())){ loginEmailErr.textContent = 'Please enter a valid email'; ok = false; }
-        if (loginPwd.value.trim().length < 6){ loginPwdErr.textContent = 'Password required (min 6)'; ok = false; }
+      if (!isEmail(loginEmail.value.trim())){ loginEmailErr.textContent = 'Please enter a valid email'; ok = false; }
+      if (loginPwd.value.trim().length < 6){ loginPwdErr.textContent = 'Password required (min 6)'; ok = false; }
 
-        if (!ok) return;
+      if (!ok) return; // stop, show errors
 
-        // NOTE: Replace with real API call
-        showToast('Signed in (demo) — redirecting...');
-        setTimeout(()=>{ console.log('LOGIN OK — send to server'); }, 600);
-      });
+      // VALIDATION PASSED -> redirect to 404page.html (no toast)
+      window.location.href = '404page.html';
+    });
 
-      // SIGNUP validation
-      formSignup.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        let ok = true;
-        suNameErr.textContent = '';
-        suEmailErr.textContent = '';
-        suPwdErr.textContent = '';
-        suPwd2Err.textContent = '';
-        suPhoneErr.textContent = '';
-        agreeErr.textContent = '';
+    // SIGNUP validation
+    formSignup.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      let ok = true;
+      suNameErr.textContent = '';
+      suEmailErr.textContent = '';
+      suPwdErr.textContent = '';
+      suPwd2Err.textContent = '';
+      suPhoneErr.textContent = '';
+      agreeErr.textContent = '';
 
-        if (!suName.value.trim() || suName.value.trim().length < 2){ suNameErr.textContent = 'Enter your full name'; ok = false; }
-        if (!isEmail(suEmail.value.trim())){ suEmailErr.textContent = 'Enter a valid email'; ok = false; }
+      if (!suName.value.trim() || suName.value.trim().length < 2){ suNameErr.textContent = 'Enter your full name'; ok = false; }
+      if (!isEmail(suEmail.value.trim())){ suEmailErr.textContent = 'Enter a valid email'; ok = false; }
 
-        const pwd = suPwd.value || '';
-        const pwd2 = suPwd2.value || '';
-        if (pwd.length < 8){ suPwdErr.textContent = 'Password must be at least 8 characters'; ok = false; }
-        if (pwd !== pwd2){ suPwd2Err.textContent = 'Passwords do not match'; ok = false; }
+      const pwd = suPwd.value || '';
+      const pwd2 = suPwd2.value || '';
+      if (pwd.length < 8){ suPwdErr.textContent = 'Password must be at least 8 characters'; ok = false; }
+      if (pwd !== pwd2){ suPwd2Err.textContent = 'Passwords do not match'; ok = false; }
 
-        if (suPhone.value.trim() && !isPhone(suPhone.value.trim())){ suPhoneErr.textContent = 'Enter a valid phone number'; ok = false; }
-        if (!agreeTos.checked){ agreeErr.textContent = 'You must accept terms'; ok = false; }
+      if (suPhone.value.trim() && !isPhone(suPhone.value.trim())){ suPhoneErr.textContent = 'Enter a valid phone number'; ok = false; }
+      if (!agreeTos.checked){ agreeErr.textContent = 'You must accept terms'; ok = false; }
 
-        if (!ok) return;
+      if (!ok) return; // validation failed
 
-        // NOTE: Replace with real API call
-        showToast('Account created (demo) — check email to verify.');
-        setTimeout(()=>{ console.log('SIGNUP OK — send to server'); }, 600);
-      });
+      // VALIDATION PASSED -> redirect to 404page.html (remove "check your mail" toast)
+      window.location.href = '404page.html';
+    });
 
-      // FORGOT modal
-      openForgot.addEventListener('click', ()=>{ modalForgot.style.display='flex'; modalForgot.setAttribute('aria-hidden','false'); fpEmail.focus(); });
-      closeForgot.addEventListener('click', ()=>{ modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value=''; fpEmailErr.textContent=''; });
-      modalForgot.addEventListener('click', (ev)=>{ if (ev.target === modalForgot) { modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); } });
+    // FORGOT modal
+    openForgot.addEventListener('click', ()=>{ modalForgot.style.display='flex'; modalForgot.setAttribute('aria-hidden','false'); fpEmail.focus(); });
+    closeForgot.addEventListener('click', ()=>{ modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value=''; fpEmailErr.textContent=''; });
+    modalForgot.addEventListener('click', (ev)=>{ if (ev.target === modalForgot) { modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); } });
 
-      formForgot.addEventListener('submit', (e)=>{
-        e.preventDefault(); fpEmailErr.textContent='';
-        if (!isEmail(fpEmail.value.trim())){ fpEmailErr.textContent = 'Enter a valid email'; return; }
-        // simulate sending
-        showToast('Password reset link sent (demo)');
-        modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value='';
-      });
+    formForgot.addEventListener('submit', (e)=>{
+      e.preventDefault(); fpEmailErr.textContent='';
+      if (!isEmail(fpEmail.value.trim())){ fpEmailErr.textContent = 'Enter a valid email'; return; }
+      // simulate sending
+      showToast('Password reset link sent (demo)');
+      modalForgot.style.display='none'; modalForgot.setAttribute('aria-hidden','true'); fpEmail.value='';
+    });
 
-      // small accessibility: press Enter on elements with role=tab
-      [tabLogin, tabSignup].forEach(t=> t.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') t.click(); }));
+    // small accessibility: press Enter on elements with role=tab
+    [tabLogin, tabSignup].forEach(t=> t.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') t.click(); }));
 
-      // initial state
-      showLogin();
+    // initial state
+    showLogin();
 
-    })();
-  </script>
+  })();
+</script>
+
 </body>
 </html>

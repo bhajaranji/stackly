@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+     <link rel="icon" href="assets/iamges/logo1.webp" type="image/png">
 
   <style>
     /* ===== SCOPE EVERYTHING UNDER .dash (no root collisions) ===== */
@@ -161,6 +162,33 @@
 
     /* small accessible focus states */
     a:focus, button:focus { outline: 3px solid rgba(202,164,90,.14); outline-offset: 3px; }
+
+
+    /* Mobile close button inside the sidebar */
+.mobile-close {
+  display: none; /* hidden by default on desktop */
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  z-index: 2055;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  color: var(--text);
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+
+/* Only show on mobile layouts (match your existing breakpoint) */
+@media (max-width: 900px) {
+  .mobile-close { display: flex; }
+}
+
 
   </style>
 </head>
@@ -352,47 +380,76 @@
     });
   </script>
 
-  <!-- ===== single mobile toggle script (no duplicates) ===== -->
-  <script>
-    (function(){
-      const header = document.querySelector('.dash__header');
-      const sidebar = document.querySelector('.dash__sidebar');
-      if (!header || !sidebar) return;
+  <!-- ===== enhanced mobile toggle script (adds in-sidebar close button) ===== -->
+<script>
+  (function(){
+    const header = document.querySelector('.dash__header');
+    const sidebar = document.querySelector('.dash__sidebar');
+    if (!header || !sidebar) return;
 
-      // create hamburger button with class (styled via CSS)
-      const btn = document.createElement('button');
-      btn.id = 'mobileToggle';
-      btn.className = 'mobile-toggle';
-      btn.setAttribute('aria-label','Open menu');
+    // create hamburger button with class (styled via CSS)
+    const btn = document.createElement('button');
+    btn.id = 'mobileToggle';
+    btn.className = 'mobile-toggle';
+    btn.setAttribute('aria-label','Open menu');
+    btn.innerHTML = '☰';
+    header.appendChild(btn);
+
+    // overlay (hidden by default)
+    const overlay = document.createElement('div');
+    overlay.className = 'mobile-overlay';
+    document.body.appendChild(overlay);
+
+    // create a close button inside the sidebar (visible only on mobile)
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'mobile-close';
+    closeBtn.setAttribute('aria-label', 'Close menu');
+    closeBtn.innerHTML = '✕';
+    sidebar.appendChild(closeBtn);
+
+    function openSidebar(){
+      sidebar.classList.add('open');
+      overlay.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+      // change hamburger to close glyph
+      btn.innerHTML = '✕';
+      btn.setAttribute('aria-label', 'Close menu');
+      // focus first interactive element for accessibility
+      setTimeout(() => {
+        const f = sidebar.querySelector('a, button, [tabindex]:not([tabindex="-1"])');
+        if (f) f.focus();
+      }, 120);
+    }
+    function closeSidebar(){
+      sidebar.classList.remove('open');
+      overlay.classList.remove('visible');
+      document.body.style.overflow = '';
+      // restore hamburger glyph
       btn.innerHTML = '☰';
-      header.appendChild(btn);
+      btn.setAttribute('aria-label', 'Open menu');
+      // return focus to toggle for keyboard users
+      setTimeout(()=> btn.focus(), 80);
+    }
 
-      // overlay (hidden by default)
-      const overlay = document.createElement('div');
-      overlay.className = 'mobile-overlay';
-      document.body.appendChild(overlay);
+    btn.addEventListener('click', (e)=> {
+      e.preventDefault();
+      sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
 
-      function openSidebar(){
-        sidebar.classList.add('open');
-        overlay.classList.add('visible');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeSidebar(){
-        sidebar.classList.remove('open');
-        overlay.classList.remove('visible');
-        document.body.style.overflow = '';
-      }
+    overlay.addEventListener('click', closeSidebar);
+    closeBtn.addEventListener('click', closeSidebar);
 
-      btn.addEventListener('click', (e)=> {
-        e.preventDefault();
-        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-      });
-      overlay.addEventListener('click', closeSidebar);
-      sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setTimeout(closeSidebar, 50)));
-      document.addEventListener('keydown', (e)=> { if(e.key === 'Escape') closeSidebar(); });
+    // close sidebar when a nav link is clicked (small delay for the visual)
+    sidebar.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setTimeout(closeSidebar, 50)));
 
-    })();
-  </script>
+    // allow Escape key to close sidebar
+    document.addEventListener('keydown', (e)=> {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+    });
+
+  })();
+</script>
+
 
 </body>
 </html>
