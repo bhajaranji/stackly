@@ -161,6 +161,53 @@ nav.nav-desktop{display:flex;align-items:center;gap:18px}
 /* focus */
 a:focus,button:focus{outline:3px solid rgba(43,95,45,0.14);outline-offset:2px}
 
+/* ===== FIX DROPDOWN HOVER BEHAVIOR (NO JS) ===== */
+
+/* Ensure parent list item has a stable hover area */
+.nav-desktop li {
+  position: relative;
+  padding-bottom: 0;   /* Remove bottom gap */
+  margin-bottom: 0;
+}
+
+/* Fix dropdown: remove gap, overlap upward */
+.nav-desktop .dropdown {
+  position: absolute;
+  top: 100%;                /* Start directly below the parent link */
+  margin-top: -8px;         /* Overlap upward to REMOVE the gap */
+  left: 0;
+  min-width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(16,24,32,0.08);
+  padding: 12px;
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2000;
+}
+
+/* Hover should OPEN dropdown instantly */
+.nav-desktop li:hover > .dropdown,
+.nav-desktop li:focus-within > .dropdown {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Keep parent highlight active when open */
+.nav-desktop li:hover > a,
+.nav-desktop li:focus-within > a {
+  background: rgba(46, 78, 63, 0.08);
+}
+
+/* Prevent clipping */
+.nav-desktop, .nav-desktop ul {
+  overflow: visible !important;
+}
+
+
 
 .site-footer,
 .pp-footer { /* allow both briefly; later remove the one you don't use */
