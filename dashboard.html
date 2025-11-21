@@ -366,11 +366,12 @@ html, body {
   </aside>
 
   <!-- ==== Header (local to dashboard) ==== -->
-  <header class="dash__header">
-<a href="404page.html" class="search">
-  <span>🔍</span>
-  <input type="text" placeholder="Search orders, SKUs, clients..." aria-label="Search" />
-</a>
+ <header class="dash__header">
+  <form action="404page.html" method="GET" class="search">
+    <span>🔍</span>
+    <input type="text" name="q" placeholder="Search orders, SKUs, clients..." aria-label="Search" />
+  </form>
+
 
   
     <a href="404page.html">
